@@ -1,0 +1,202 @@
+\chapter{The Soft Sensor -  BEO}
+\label{chap:appendix1}
+
+\section{Architecture of BEO}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1.0\textwidth]{images/Chap5/BEOArchitecture.pdf}
+  \caption{Architecture of BEO}
+  \label{App:fig01}    
+\end{figure}
+
+Figure \ref{App:fig01} shows our system architecture, namely BEO - Boiler Efficiency Optimization. The system includes several complex modules. We present these modules as follows.
+
+\subsection{Real-Time Monitoring} 
+
+This module is an OPC (OLE for Process Control) Client collecting automatically data from OPC Server via a local network. OPC is a software interface standard that allows Windows programs to communicate with industrial hardware devices\footnote{\url{http://www.opcdatahub.com/WhatIsOPC.html}}. In every duration, the tool gets parameter's values from OPC Server and the value of duration is defined by the user, usually 60s.
+
+\subsection{Data Pre-Processing} 
+
+The module has two main functions: (i) Reading raw operational data from several separate historical text files or receiving real-time data from the real-time monitoring module; then analyzing the data structure and storing the data into a unit database (SQL Server DBMS); (ii) Cleaning the database to make sure it has no errors, outliers, and noisy data. Each record in the database consists of control parameters, load of the boiler, and a corresponding boiler efficiency.
+
+\subsection{Data Clustering} 
+
+Since the system works in real-time, the operational data is enormous. Reducing the size of the operational data is significant in speeding up the system to meet its real-time requirement. Data clustering is to group similar records into the same cluster, and derives a knowledge base consisting of the centers of those clusters. 
+
+\subsection{Anomaly Detection}
+
+This module is responsible for detecting anomalies of the real boiler during operating. The module is integrated in Pre-Processing data Module to remove outliers. Moreover, the module detects some abnormalities caused by unknown reasons and warns the operators to determine timerly solutions.  
+
+\subsection{Efficiency Calculator}
+
+The boiler efficiency can be calculated by the boiler simulator module. Typically, boiler simulator only works on M important parameters that are chosen by experts. However, each tuple of the operating data is a set of N parameters and N is usually larger than M. Several formulas can calculate the boiler efficiency from full N parameters. Unfortunately, these formulas are very complex. Two methods are used in the BEO soft sensor to calculate the boiler efficiency \cite{boi:ref_11}.
+
+\begin{itemize}
+
+\item \textit{Direct Method:} The boiler efficiency is the ratio of the energy obtained from steam and the energy of the fuel in the boiler.
+\item \textit{Indirect Method} The boiler efficiency is the difference between energy loss and energy input.
+
+\end{itemize}
+
+\subsection{Boiler Efficiency Simulation}
+
+Combustion is considered as a process of time-oriented technology, and the equation of state combustion efficiency is a complex nonlinear equation where coefficients are not fixed. It is difficult to exactly find coefficients of that nonlinear equation. As a result, we need an approximate solution. Neural networks seem to be a simple and effective approximation scheme for this kind of problem. In BEO soft sensor, the boiler with the internal reaction equations is monitored as a black box with control parameters and an corresponding output called the boiler efficiency. Therefore, we need a boiler simulator for simulating the real boiler from the operational data. The boiler simulator determines the correlation between the control parameters and the boiler efficiency. The control parameters consisting of air flow, air pressure, water flow, etc. to operate the boiler. The boiler is simulated by a multi-variable equation $y = f(x_1, x_2, ..., x_n)$, where $x_i$ is a control parameter, $y$ is a boiler efficiency, and $f(.)$ is a suggested model, e.g., neural networks. This modeling of the boiler helps us to build a boiler simulation with technological features like a real boiler. Among many advanced techniques that can approximate the real boiler, such as fuzzy systems, support vector machines, etc., RFNN is chosen due to its straightforward idea and easy deployment.
+
+As presented in detail in Section \ref{chap:boilerefficiencyoptimization}, the Boiler Efficiency Simulation Module is implemented by RFNN with mean absolute relative error (MARE) approximately $2.04E-03$ and $2.97E-03$, in the training phase and the testing phase, respectively.
+
+\subsection{Boiler Efficiency Optimization}
+
+At the time of the boiler efficiency appears downtrends, this module detects in knowledge base and finds a tuple of control parameters that gives higher efficiency than current efficiency. The controllable parameters will be changed by the new values in the found tuple. After suggesting the new parameter values, the Boiler Efficiency Simulation Module predicts the boiler efficiency according to these new values. In the case of the predicting efficiency is lower than the current efficiency; the suggestion will be ignored. Conversely, this module will apply the new found parameters for the boiler with expecting an improved boiler efficiency. Process working of the module is illustrated in Figure \ref{App:fig02}, and it has several steps as follows.
+
+\begin{itemize}
+
+\item \textit{Step 1:} Reading data from OPC Server via the Real-Tiem Monitoring Module.
+\item \textit{Step 2:} Finding some similar tuples with the current control parameters that have higher efficiency than the current and have the same load.
+\item \textit{Step 3:} Checking whether the change of load is higher than a delta value. That the change is not higher a delta value indicates the load is stable and the module can adjust parameters to improve boiler efficiency. Conversely, that the change is higher a delta value indicates the load is not stable, the module ignores and continue monitoring.
+\item \textit{Step 4:} In the case of stable load, if the new similar tuples can give higher efficiency that is predicted by the Boiler Efficiency Simulation Module, these tuples will be applied to improve the boiler efficiency.
+
+\end{itemize}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{images/Appendix1/BoilerOptimization.pdf}
+  \caption{Real-time optimization work-flow}
+  \label{App:fig02}    
+\end{figure}
+
+\subsection{Boiler Controller}
+
+The same as the Real-Time Monitoring Module, the Boiler Controller Module is an OPC Client controlling the real boiler through OPC Server. According to some adjustments recommended by the Real-Time Boiler Efficiency Optimization Module, the Boiler Controller Module adjusts the control parameters of the real boiler to improve its efficiency.
+
+\subsection{Multi-Step-Ahead Real-Time Forecasting}
+
+As presented in \ref{chap:boilerefficiencyoptimization}, this module is responsible for forecasting the downtrends of boiler efficiency. In the case of down-trend appearances, this module will inform to the Real-Time Boiler Efficiency Optimization Module to proceed the adjustment of control parameters.
+
+\section{Benefit of BEO}
+
+We employed a statistical method called statistical inference for two samples \cite{boi:ref_14} to assess the efficiency of the BEO soft sensor to Phu My Fertilizer Plant. Note that, to calculate confidently, this method requires that the size of samples must be large so that Student's t-distribution comes close to a normal distribution. We collected the operational data with the duration of 1 sample/60s. 
+
+Data used for assessment was collected in 17 days with two separate periods: (i) 1st period: from November 02, 2013 to November 07, 2013, the size of samples is 5892 and the boiler load distributes from 76 ton/h to 83 ton/h. (ii) 2nd period: from November 08, 2013 to November 18, 2013, the size of samples is 8834 and boiler load distributes from 72 ton/h to 84 ton/h. We defined the minimum size of samples is 30 for each boiler load. During the time of collecting data, the boiler operation was in auto-mode and the boiler load is continuous. Therefore, we must rounded many values of boiler load to get one rounded value. For example, all boiler loads from 68.5 ton/h to 69.49 ton/h are rounded to 69 ton/h. After collecting data, we employed the statistical inference method to prove that the BEO soft sensor improve the performance of power consumption. 
+
+As mentioned in \cite{boi:ref_14}, Student's t-distribution is one of normal distribution families. In Student's t-distribution, mean of $n$ observed data is estimated as below.
+
+\begin{equation}
+\bar{x} = \frac{\sum_{i=1}^nx_i}{n},
+\end{equation}
+
+and standard deviation $\sigma$:
+
+\begin{equation}
+\sigma = \sqrt{\frac{\sum_{i=1}^n(x - \bar{x})}{n-1}}.
+\end{equation}
+
+We define some factors that are used in Tables \ref{App:table02} and \ref{App:table03}.
+
+\begin{itemize}
+\item During running the boiler with BEO, the mean of power consumption is $\bar{x}^{BEO}$.
+\item During running the boiler with BEO, the standard deviation of power consumption is $\sigma_{\bar{x}}^{BEO}$.
+\item During running the boiler without BEO, the mean of power consumption is $\bar{x}^{noBEO}$.
+\item During running the boiler without BEO, the standard deviation of power consumption is $\sigma_{\bar{x}}^{noBEO}$.
+\end{itemize}
+
+\begin{table}[H]
+\scriptsize
+  \begin{center}
+    \begin{tabular}{c c c c c c c}
+    \toprule
+    \multirow{2}{*}{Load} & \multicolumn{2}{c}{With BEO} & \multicolumn{2}{c}{Without BEO} & \\[0.2cm]
+    \cmidrule{2-7}
+     & $\bar{x}^{BEO}$ & $\sigma_{\bar{x}}^{BEO}$ & $\bar{x}^{noBEO}$ & $\sigma_{\bar{x}}^{noBEO}$ & Confidence \% & Quantity of Improvement \%\\
+    \midrule
+	76 & 2.73603 & 0.00853 & 2.83275 & 0.00683 & 100.00 & 3.41\\
+    77 & 2.73761 & 0.00422 & 2.77537 & 0.00695 & 100.00 & 1.36\\
+    78 & 2.72698 & 0.00250 & 2.74504 & 0.00213 & 99.99 & 0.66\\
+    79 & 2.73320 & 0.00129 & 2.73955 & 0.00101 & 99.98 & 0.23\\
+    80 & 2.73673 & 0.00110 & 2.74136 & 0.00066 & 100.00 & 0.17\\
+    81 & 2.73244 & 0.00144 & 2.74462 & 0.00077 & 100.00 & 0.44\\
+    82 & 2.73281 & 0.00169 & 2.74793 & 0.00126 & 100.00 & 0.55\\
+    83 & 2.73722 & 0.00236 & 2.74594 & 0.00240 & 99.52 & 0.32\\
+	\bottomrule
+	\end{tabular}
+    \caption{Data of improvement of power consumption from November 02, 2013 to November 07, 2013}
+    \label{App:table02} 
+  \end{center} 
+\end{table}
+
+\begin{table}[H]
+\scriptsize
+  \begin{center}
+    \begin{tabular}{c c c c c c c}
+    \toprule
+    \multirow{2}{*}{Load} & \multicolumn{2}{c}{Without BEO} & \multicolumn{2}{c}{No BEO} & \\[0.2cm]
+    \cmidrule{2-7}
+     & $\bar{x}^{BEO}$ & $\sigma_{\bar{x}}^{BEO}$ & $\bar{x}^{noBEO}$ & $\sigma_{\bar{x}}^{noBEO}$ & Confidence \% & Quantity of Improvement \%\\
+    \midrule
+	72 & 2.71527 & 0.003884 & 2.768653 & 0.00263 & 100.00 & 1.93\\
+	73 & 2.72383 & 0.002091 & 2.755741 & 0.00181 & 100.00 & 1.16\\
+	74 & 2.72477 & 0.001643 & 2.749370 & 0.00116 & 100.00 & 0.89\\
+	75 & 2.72900 & 0.001633 & 2.750293 & 0.00084 & 100.00 & 0.77\\
+	76 & 2.73108 & 0.001807 & 2.753405 & 0.00077 & 100.00 & 0.81\\
+	77 & 2.73184 & 0.002067 & 2.749418 & 0.00083 & 100.00 & 0.64\\
+	78 & 2.73470 & 0.001581 & 2.753100 & 0.00084 & 100.00 & 0.67\\
+	79 & 2.74096 & 0.001106 & 2.753691 & 0.00120 & 100.00 & 0.46\\
+	80 & 2.74455 & 0.001184 & 2.747897 & 0.00177 & 94.18 & 0.12\\
+	81 & 2.73922 & 0.001432 & 2.749539 & 0.00242 & 99.99 & 0.38\\
+	82 & 2.73677 & 0.001302 & 2.751834 & 0.00210 & 100.00 & 0.55\\
+	83 & 2.74342 & 0.001493 & 2.755530 & 0.00197 & 100.00 & 0.44\\
+	84 & 2.74808 & 0.001741 & 2.767773 & 0.00368 & 100.00 & 0.71\\
+	\bottomrule
+	\end{tabular}
+    \caption{Data of improvement of power consumption from November 08, 2013 to November 18, 2013}
+    \label{App:table03} 
+  \end{center} 
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{images/Appendix1/BEO_Ben_p1.pdf}
+  \caption{Plot of improvement of power consumption from November 02, 2013 to November 07, 2013}
+  \label{App:fig03}    
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{images/Appendix1/BEO_Ben_p2.pdf}
+  \caption{Plot of improvement of power consumption from November 08, 2013 to November 18, 2013}
+  \label{App:fig04}    
+\end{figure}
+
+\paragraph{Improvement of power consumption by boiler load.}
+
+Table \ref{App:table02} \& Figure \ref{App:fig03} show the improvement of power consumption with BEO and without BEO in the first period. Table \ref{App:table03} \& Figure \ref{App:fig04} show the improvement of power consumption with BEO and without BEO in the second period. The experimental results show that BEO improved the performance of power consumption with confidence larger 95\% at nearly all load. At 80 ton/h boiler load, BEO achieves the improvement of the performance of power consumption with confidence 94.18\%. The Figures \ref{App:fig03} \& \ref{App:fig04} show that BEO achieves good improvement in power consumption for boiler load below 78 ton/h and over 82 ton/h. Total improvement of power consumption in observed time (17 days) can be summarized as follows.
+
+\begin{itemize}
+\item The power consumption in total with BEO = 23167.32 MMBTU (one million British Thermal Unit)
+\item The power consumption in total with BEO (equivalent calculation) = 23288.63 MMBTU
+\end{itemize}
+
+The experimental results show that the power consumption reduced in total. It means that boiler with the support of BEO improved the performance of power consumption approximately 0.52\%.
+
+\paragraph{Estimated benefits by year of applying BEO.}
+
+Total steam production of boiler at Phu My Fertilizer Plant is approximately 600,000 tons in 2013. The cost of the energy to produce a ton of steam is 2.75 MMBTU/T in average (according to the statistical data of the factory). The average of benefit for 0.52\% improved boiler efficiency can be explained as Table \ref{App:table01}.
+
+\begin{table}[h!]
+\scriptsize
+  \begin{center}
+    \begin{tabular}{p{0.5cm} p{1.5cm} p{1.5cm} p{1.5cm} p{1.5cm} p{1.8cm} p{1.2cm} p{1.2cm}}
+    \toprule
+    \multirow{2}{*}{Year} & Energy to produce one ton of steam without BEO (MMBTU/h) & Improvement $\%$ & Energy decreasing (MMBTU/h) &  Energy to produce one ton of steam with BEO (MMBTU/h) & Fuel cost (USD/MMBTU) & Benefits per ton (USD) & Total benefits per years (USD) \\[0.2cm]
+    \midrule
+    2013 & 2.75 & 0.52 & 0.0143 & 2.7357 & 6.56 & 0.09381 & 56,286.00\\
+	2014 & 2.75 & 0.52 & 0.0143 & 2.7357 & 6.69 & 0.09567 & 57,402.00\\
+	\bottomrule		
+	\end{tabular}
+    \caption{Estimated Benefit of BEO}
+    \label{chap05:table01} 
+  \end{center} 
+\end{table}
+
+In conclusion, in reality, the average natural gas price is about 6.56 USD/MMBTU in 2013 and about 6.69 USD/MMBTU in 2014, the total benefit estimated is about 57,000.00 USD per year. The benefits achieved prove the BEO soft sensor is effective for the boiler operation.
+

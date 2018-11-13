@@ -1,0 +1,104 @@
+\chapter{Conclusion and Perspectives}
+\label{conclusion}
+
+\section{Conclusion}
+
+In Vietnam, agriculture is one of the major fields. It recently contributed approximately 15-20$\%$ to the national GDP. Rice exports contributed about 1.8 billion USD in 2015. Therefore, problems involving agriculture attract plenty of attention from scientists, managers, and even the government in Vietnam. However, scant significant research, especially regarding applications of computer science to hydrology and fertilizer production, have been deployed successfully into practice during the past few years. Water resources and fertilizer are the most important elements influencing the productivity of rice plants. Thus it is necessary to promote research involving water resources and fertilizer production and apply the results to practice.
+
+Response to this practical demand, in this thesis we study artificial neural networks and related hybrid methods. Then we apply the studies to practical and urgent problems affecting Vietnamese agriculture: river runoff prediction and boiler efficiency optimization. River runoff prediction belongs to the hydrology field, whereas boiler efficiency optimization involves fertilizer production. We attempt to solve these two completely different problems not only in theory but also in practice. One of our solutions has been deployed successfully. Among several viable methods, we chose artificial neural networks as the key one because of the straightforward idea and easy deployment. We addressed some drawbacks of artificial neural networks by combining them with fuzzy systems, evolutionary algorithms (genetic algorithm), chaotic expressions, and clustering algorithms. Depending on the different objectives of sub-problems, various hybrid methods are used. Table \ref{chap7:table01} shows our hybrid methods, their corresponding applications and publications in this thesis.
+
+{\renewcommand{\arraystretch}{1.5}
+\begin{table}
+  \begin{center}
+    \begin{tabular}{| p{3.0 cm} | p{3.0cm} | p{3.5cm} | p{2.5cm} |}
+    \hline
+    Problems & Sub-Problems & Methods & Publications \\
+    \hline
+	\multirow{2}{3.0 cm}{Srepok runoff prediction} & Short-term prediction 
+	& 	
+	RFNN
+	
+	RFNN-KM-Euclid
+	
+	RFNN-KM-DTW
+	
+	RFNN-DB-DTW 	
+	& 
+	[\ref{mypub03}], [\ref{mypub07}] \\
+	\cline{2-4}
+	& Long-term prediction & 
+	RFNN
+
+	RFNN-GA
+	
+	SWAT & 
+	[\ref{mypub02}], [\ref{mypub05}], [\ref{mypub06}] \\
+	\hline
+	\multirow{2}{3.0 cm}{Boiler efficiency optimization} & Boiler efficiency simulation 
+	& 
+	RFNN
+	& [\ref{mypub01}] \\
+	\cline{2-4}
+	& MSA real time boiler efficiency forecasting  
+	& 
+	RFNN
+	
+	SE-RFNN
+	
+	RTRL-RFNN 
+	& 
+	[\ref{mypub04}] \\
+	\hline
+	\end{tabular}
+    \caption{Statistic of proposed methods, corresponding problems and publications}
+     \label{chap7:table01} 
+  \end{center} 
+\end{table}
+
+\paragraph{River Runoff Prediction.}
+
+We divide the task of river runoff prediction into two cases: short-term and long-term. For short-term prediction, the experimental results show that a mixture of RFNNs that utilizes DBSCAN and DTW for clustering and distance-measuring, respectively, is the best combination. The performance of RFNN-DB-DTW encourages further practical deployment. For short-term prediction, SWAT, RFNN and a hybrid of RFNN and Genetic Algorithm are used. Based on the experimental results, RFNN and RFNN-GA clearly outperformed SWAT; among the three methods, RFNN-GA is the best method. Like RFNN-DB-DTW, RFNN-GA can definitely be applied for practical deployment. 
+
+In Vietnam, there are many large rivers and some of them play a central role in people's livelihoods and in production, e.g., the MeKong River in southern Vietnam, the Srepok River in the Central Highland of Vietnam, and the Hong River in northern Vietnam. Due to the sloping terrain, the Srepok runoff has large margins; it is very high in the rainy season and very low (almost out of water) in the sunny season. Moreover, there are several natural abnormalities that often occur in the Srepok basin, e.g., storms, droughts, landslides. Therefore, the Srepok runoff contains several anomalies. In contrast, the MeKong basin and the Hong basin are plains (flat terrain) and have few natural abnormalities. Thus Srepok runoff prediction is more difficult than MeKong or Hong runoff prediction. 
+
+However, the experimental results of the Srepok runoff prediction indicate that we can solve this problem. In fact, the proposed methods to predict the Srepok runoff can be applied to other rivers such as the MeKong River or the Hong River.    
+
+\paragraph{Boiler Efficiency Optimization.} 
+
+We used RFNN and some hybrids of RFFN to build a soft sensor called BEO for Phu My Fertilizer Plant. RFNN and associated methods such as RFNN-SE and RTRL-RFNN are proposed to implement two important modules of the soft sensor: Boiler Efficiency Simulation and Multi-Step-Ahead Real-Time Boiler Efficiency Forecasting. We deployed the soft sensor without the MSA Real-Time Boiler Efficiency Forecasting Module in 2013-2014; the soft sensor brought a benefit to Phu My Fertilizer Plant of approximately 55,000 USD per year. The experimental results of the MSA Real-Time Boiler Efficiency Forecasting Module were remarkable, and this module will be plugged into the new version of BEO. However, it is necessary to verify this new benefit of BEO by deploying it at Phu My Fertilizer Plant. Because of the strict policy of the plant, we are waiting for a suitable time to deploy and assess BEO. 
+
+\section{Perspectives}
+
+\paragraph{Climate Change and River Runoff Prediction.}
+
+River runoff prediction does not significant benefit if it is stand-alone. In \cite{swatref01}, we proposed an information system for integrating, storing, and analyzing many kinds of data involving climate change in the Srepok basin, e.g., climate data, water resources, soil resources, etc. The data schema of the information system called SRClim is illustrated in Figure \ref{chap07:fig01}. SRClim was created in 2013 and has been developing ever since. The objective for SRClim is that it must integrate all necessary data involving climate change of the Srepok basin. Furthermore, SRClim must ensure high levels of the data's availability, security, consistency, analysis, visualization, etc. Therefore, we will plug the function of river runoff prediction into SRClim. 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1.0\textwidth]{images/Chap7/SRClim.pdf}
+  \caption{The data schema of SRClim}
+  \label{chap07:fig01}    
+\end{figure}
+
+Moreover, SRClim will be extended to connect with all hydrology stations and climate stations via a virtual private network (VPN) that will permit SRClim to collect data automatically and in real time from these stations. In this context, the function of multi-step-ahead real-time river runoff forecasting is also necessary for SCRlim; we can utilize SE-RFNN or RTRL-RFNN to implement the function.
+
+In addition, we will verify our proposed methods for other rivers such as the MeKong River or the Hong River. We collected Hong runoff data from 1960 to 2006. Furthermore, we will also research other advanced methods such as deep learning. Utilizing deep learning, particularly deep belief networks, is appropriate for the task of river runoff prediction (the results were published in [\ref{mypub07}]). In further research, we will conduct more experiments with many settings of the deep learning model, and with many different datasets such as those of the Srepok runoff and the Hong runoff.
+
+\paragraph{Boiler Efficiency Optimization.}
+
+As mentioned above, it is necessary to verify the improved benefit of the new version of BEO by deploying it at Phu My Fertilizer Plant. Because of the strict policy of the plant, we are waiting for a suitable time to deploy and assess BEO. Based on theoretical analysis, we have a strong chance of success. In addition, we need to develop the function of anomaly detection that detects and removes noise (anomalies). It is an important function that we first focused on at the beginning of the project. Due to a dearth of computer science knowledge and experience with boilers, the function was not deployed successfully. Although the anomalies rarely appear, they do impact the overall performance of the soft sensor.  
+
+\section{Publications}
+
+In conclusion, this thesis addressed some practical and urgent problems in Vietnam by proposing some methods that improve upon artificial neural networks. The experimental results prove that our proposed methods are appropriate for tackling the problems and can be deployed in practice. The proposed methods and their experimental results have been presented and published in high-quality international conferences and journals. The publications are listed as follows.
+
+\begin{enumerate}
+\item \label{mypub01} Hieu N. Duong, Hien T. Nguyen, Vaclav Snasel and et al. \textit{Optimizing Boiler Efficiency by Data Mining Techniques: A Case Study}. In Proc. of International Conference on Information Resources Management, 2014. 
+\item \label{mypub02} Hieu N. Duong, Hien T. Nguyen, Vaclav Snasel and et al. \textit{Applying Recurrent Fuzzy Neural Network to Predict the Runoff of Srepok River}. In Proc. of 13th IFIP TC8 International Conference, CISIM, pages 55-66, 2014. 
+\item \label{mypub03} Hieu N. Duong, Hien T. Nguyen, Vaclav Snasel. \textit{A Hybrid Approach For Predicting River Runoff}. In Proc. of The Second Euro-China Conference on Intelligent Data Analysis and Applications, 2015. 
+\item \label{mypub04} Hieu N. Duong, Hien T. Nguyen, Vaclav Snasel and et al. \textit{A Hybrid Approaches For Forecasting Real Time Multi-Step-Ahead Boiler Efficiency}. In Proc. of ACM International Conference on Ubiquitous Information Management and Communication, 2016. (was selected as one of remarkable papers to improve and submit for ETRI Journal indexed in SCIE)
+\item \label{mypub05} Hieu N. Duong, Hien T. Nguyen, Vaclav Snasel and et al. \textit{Predicting Monthly River Runoff Using Recurrent Neural Fuzzy Networks and Genetic Algorithm}. In Proc. of International Conference on Information and Convergence Technology for Smart Society, 2016.
+\item \label{mypub06} Hieu N. Duong, Hien Thanh Nguyen, Vaclav Snasel, Sanghyuk Lee. \textit{A comparative study of SWAT, RFNN and RFNN-GA for predicting river runoff}. Indian Journal of Science and Technology indexed in Scopus, ISI, v.9(16), 2016. (accepted)
+\item \label{mypub07} Nguyen Cao Tri, Hieu N. Duong, Tran Van Hoai, Vaclav Snasel. \textit{Predicting Daily River Runoff Using Deep Belief Networks}. In Proc. of International Conference on Information and Convergence Technology for Smart Society, 2016.
+\end{enumerate}
+

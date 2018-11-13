@@ -1,0 +1,27 @@
+\chapter{GIẢI PHÁP ĐỀ XUẤT}
+\label{chap:caseFarming}
+\paragraph{Chương 3} sẽ giới thiệu về giải pháp đề xuất của nhóm để giải quyết bài toán nhận diện trái trái bưởi.
+
+
+\section{Phân tích}
+Bài toán nhận diện và đếm vật thể là một vấn đề không xa lạ, đã có nhiều nghiên cứu chỉ ra lời giải cho bài toán này.
+\subsection{Sử dụng phương pháp Segmentation}
+Trong nghiên cứu của Cohen \cite{cohen2010estimation}, nhận diện các vật thể được giải quyết bằng phương pháp phân loại từng điểm ảnh (pixel), sau đó gom lại nhưng điểm ảnh có khả năng cao là vật thể và từ đó phân biệt từng vật thể với nhau.
+
+Quá trình này tốn khá nhiều công sức, đồng thời chưa thể xây dựng một bộ nhận diện vật thể "end-to-end", mà phải qua nhiều quá trình huấn luyện khác nhau. Không những bất lợi như vậy, phương pháp này vân chưa hiệu quả khi lớp vật thể nhận diện có quá nhiều hình dạng và màu sắc khác nhau, đặc biệt là phương pháp này bị ảnh hưởng mạnh bởi độ sáng và bóng râm trong ảnh.
+
+\subsection{Sử dụng YOLOv2}
+Được giới thiệu gần đây, mô hình này có thể huấn luyện để phân loại và xác định vị trí vật thể với tốc độ nhanh và độ chính xác cao, YOLO được xem là một giải pháp để giải quyết bài toán nhận diện vật thể thời gian thực.
+
+YOLO mặc dù có tốc độ huấn luyện và chạy mô hình nhanh nhưng YOLO sử dụng phương pháp chia hình đầu vào thành các ô để dự đoán kết quả ô đó có vật thể hay không nên mỗi ô chỉ có thể dự đoán được một lớp vật thể, việc này tạo nên những hạn chế rất lớn đối với bài toán nhận diện trái cây, đặc biệt là những trái nằm gần nhau.
+
+Mô hình YOLO không sử dụng các đặc trưng được chuyển giao từ mô hình được huấn luyện sẵn, cho nên việc nhận diện đặc trưng mới, bất thường so với dữ liệu huấn luyện của YOLO chưa thực sự tốt.
+
+\section{Giải pháp}
+Để giải quyết bài toán, đặc biệt là vấn đề nhận diện được trái bưởi ở các loại ánh sáng, bóng râm và đồng thời phân biệt được những trái ở gần nhau, nhóm đã quyết định sử dụng mô hình Faster R-CNN.
+
+Faster R-CNN không những giải quyết được vấn đề về màu sắc, độ sáng của các loại trái cây, bởi vì đặc trưng của nó được trích xuất từ những lớp mạng tích chập. Đồng thời những lớp mạng tích chập này được chuyển giao trọng số từ mạng VGG-16 nên khả năng trích xuất ra đặc trưng tốt. Không những vậy, nhờ mạng RPN được tích hợp trong nó đã giúp cho Faster R-CNN có thể phát hiện được những trái ở gần nhau, đồng thời biết được và loại bỏ những bounding box nào đang cùng đánh dấu một trái.
+
+Nhược điểm của Faster R-CNN là chạy còn chưa thực sự nhanh (khoảng 0.3 giây một hình), tuy nhiên đối với bài toán cần giải của nhóm, việc chạy được giải thuật theo thời gian thực là chưa thực sự quá cần thiết.
+
+Bên cạnh việc sử dụng giải thuật này, nhóm còn kết hợp với sử dụng threshold (ngưỡng) để đánh giá xem trái nhận diện được có thực sự là trái đúng không, đồng thời kết hợp với một bộ phân loại được xây dựng từ những lớp mạng tích chập để phân loại trái nhận diện được có thực sự là trái đúng hay là lá hoặc các vật thể khác.
