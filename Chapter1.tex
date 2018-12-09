@@ -5,9 +5,16 @@
 
 \section{Thesis statement}
 \subsection{Goal}
+The goal of this thesis is to accomplish to the following tasks:
+\begin{itemize}
+	\item Create an interface to interact with users. In the scope of this thesis, users of the system are inhabitants of a neighbor
+	\item Create data collection points with proposing crowd-sourcing methods. Collected data can be in form of images and videos form contributors such as residents of neighbors, security camera.
+	\item Analyze collected data using methods which will be proposed in the following chapters, and come up with meaningful information such as warnings or notifications to users of the system.
+\end{itemize} 
+
+
 \subsection{Stages}
 Nhận diện vật thể không phải là một chủ đề mới trong lĩnh vực thị giác máy tính. Mô hình mạng nơ-ron tích chập (Convolutional Neural Network) đã mở ra nhiều hướng đi cho bài toán học có giám sát (Supervised Learning) và đã chứng minh sức mạnh của nó đối với dữ liệu huấn luyện lớn. Điểm mạnh của mô hình mạng tích chập là có thể được sử dụng để để huấn luyện một bộ xử lí “end to end”, nghĩa là nó có thể nhận dữ liệu đầu vào dưới dạng gốc như là một bức ảnh và đưa ra được kết quả phân loại của bức ảnh đó. Mặc dù tốt như vậy nhưng nó cũng tồn tại một điểm yếu lớn, đó chính là cần một lượng dữ liệu đầu vào lớn để được vào huấn luyện cho bộ học và việc gán nhãn cho dữ liệu huấn luyện rất mất thời gian và công sức nếu muốn có được một tập dữ liệu đa dạng và chính xác. Vì vậy việc chuẩn bị, sàn lọc, xử lí dữ liệu đầu vào là rất cần thiết đối với một giải thuật dựa trên mạng nơ-ron tích chập.
-
 
 Nhận diện trái cây không phải là một chủ đề mới, đã có rất nhiều nghiên cứu liên quan về bài toán này \cite{bargoti2017image} \cite{sa2016deepfruits}. Một trong những phương pháp nhận diện trái cây đã được đề xuất trước đây trong bài báo của Cohen \cite{cohen2010estimation}. Hình ảnh họ sử dụng được chụp bởi camera theo chuẩn màu CCD. Đầu tiên, họ dùng một bộ phân loại K-nearest-neighbors (KNN) để xác định xem những điểm ảnh (pixel) nào là "táo" và những điểm ảnh nào là "không-phải-táo", những vật thể che mất quả táo như cành, lá được đánh dấu lại để loại bỏ ra khỏi quá trình huấn luyện. Sau đó đánh dấu bề mặt  của quả táo bằng cách cho nhận diện những vùng mà họ gọi là "seed area". Seed area là tập hợp những điểm ảnh có khả năng cao là táo. Sau đó những vùng seed area này được mở rộng ra để liên kết những vùng ảnh quá sáng hoặc quá tối nằm giữa hai seed area, từ đó tạo thành một vùng seed area hoàn chỉnh. Cuối cùng, họ phân tích các hình dạng của seed area và khoanh vùng được quả táo từ những đường nét của mỗi seed area. Tuy nhiên phương pháp này của họ vẫn chưa hiệu quả khi quả có quá nhiều hình dạng và màu khác nhau, nó cờn bị ảnh hưởng mạnh bởi độ sáng, bóng râm.
 
@@ -26,6 +33,7 @@ Tuy nhiên, đa số các nghiên cứu hiện nay đều hướng tới kết q
 \end{itemize} 
 
 \section{Thesis scope}
+This thesis focus on building the system 
 Đóng góp một phương án để cải thiện độ chính xác, tăng số trái nhận diện được trong một ảnh, bằng cách kết hợp với một bộ phân loại nhằm phân biệt trái cây với nền, như vậy số vật thể phân loại sai sẽ giảm, đồng thời tỉ lệ nhận diện đúng số lượng trái sẽ tăng lên.
 
 \section{Report overview}
