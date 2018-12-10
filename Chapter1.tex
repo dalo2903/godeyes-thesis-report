@@ -1,9 +1,9 @@
 \chapter{INTRODUCTION}
 \label{introduction}
 \section{Motivation}
-Along with the development of technology, there comes a tremendous amount of data. According to the statistic, users of Facebook have uploaded 250 billion photos, and uploads 350 million new images each day \footnote{Source: \url{https://www.businessinsider.com/facebook-350-million-photos-each-day-2013-9}}. In 2016, 47 \% of Vietnamese population use the Internet (World bank). This explosion of data enable the opportunity to analyze and extract valued information.
+Along with the development of technology, data is generated with a tremendous volume. According to the statistic, Facebook users upload 250 billion photos, and 350 million new images each day \footnote{Source: \url{https://www.businessinsider.com/facebook-350-million-photos-each-day-2013-9}}. In 2016, 47 \% of Vietnamese population have access to the Internet (World bank). This explosion of data enable the opportunity to analyze and extract valuable information.
 
-Neural network is one of the most effective technique to derive information from data. There are 3 reasons that neural networks are wildly successful in this age: increase dataset size, increase of computational resource and advancement of algorithms.
+Neural network is one of the most effective technique to derive information from data. Neural networks successfully thrives in this age thanks to three factors: increase dataset's size, increase of computational resource and advancement of algorithms.
 
 Those reasons 
  
@@ -16,6 +16,20 @@ The goal of this thesis is to accomplish to the following tasks:
 	\item Analyze collected data using methods which will be proposed in the following chapters, and come up with meaningful information such as warnings or notifications to users of the system.
 \end{itemize} 
 
+The goal of this thesis is to build a system to collect and analyze image/video data using crowd-sourcing model and deep learning techniques for social security. The system require these features:
+\begin{itemize}
+	\item Using crowd-sourcing technique to collect image/video from users.
+	\item Collected data are saved into a database.
+	\item Extract valuable information from collected data using deep learning.
+	\item Extracted information is also saved to database and used for security matter
+\end{itemize} 
+The main task of the project are:
+\begin{itemize}
+	\item Create an user interface to interact with users. The interface allows users to upload image/video and provide as much as information about the data to the system.
+	\item Design a database which is able to save data, information about data, extracted information from data,...
+	\item Design a deep learning model to extract information from data.
+	\item Using extracted information to notify users about security problem.
+\end{itemize} 
 
 \subsection{Stages}
 Nhận diện vật thể không phải là một chủ đề mới trong lĩnh vực thị giác máy tính. Mô hình mạng nơ-ron tích chập (Convolutional Neural Network) đã mở ra nhiều hướng đi cho bài toán học có giám sát (Supervised Learning) và đã chứng minh sức mạnh của nó đối với dữ liệu huấn luyện lớn. Điểm mạnh của mô hình mạng tích chập là có thể được sử dụng để để huấn luyện một bộ xử lí “end to end”, nghĩa là nó có thể nhận dữ liệu đầu vào dưới dạng gốc như là một bức ảnh và đưa ra được kết quả phân loại của bức ảnh đó. Mặc dù tốt như vậy nhưng nó cũng tồn tại một điểm yếu lớn, đó chính là cần một lượng dữ liệu đầu vào lớn để được vào huấn luyện cho bộ học và việc gán nhãn cho dữ liệu huấn luyện rất mất thời gian và công sức nếu muốn có được một tập dữ liệu đa dạng và chính xác. Vì vậy việc chuẩn bị, sàn lọc, xử lí dữ liệu đầu vào là rất cần thiết đối với một giải thuật dựa trên mạng nơ-ron tích chập.
