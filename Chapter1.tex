@@ -32,23 +32,16 @@ The main task of the project are:
 \end{itemize} 
 
 \subsection{Stages}
-Nhận diện vật thể không phải là một chủ đề mới trong lĩnh vực thị giác máy tính. Mô hình mạng nơ-ron tích chập (Convolutional Neural Network) đã mở ra nhiều hướng đi cho bài toán học có giám sát (Supervised Learning) và đã chứng minh sức mạnh của nó đối với dữ liệu huấn luyện lớn. Điểm mạnh của mô hình mạng tích chập là có thể được sử dụng để để huấn luyện một bộ xử lí “end to end”, nghĩa là nó có thể nhận dữ liệu đầu vào dưới dạng gốc như là một bức ảnh và đưa ra được kết quả phân loại của bức ảnh đó. Mặc dù tốt như vậy nhưng nó cũng tồn tại một điểm yếu lớn, đó chính là cần một lượng dữ liệu đầu vào lớn để được vào huấn luyện cho bộ học và việc gán nhãn cho dữ liệu huấn luyện rất mất thời gian và công sức nếu muốn có được một tập dữ liệu đa dạng và chính xác. Vì vậy việc chuẩn bị, sàn lọc, xử lí dữ liệu đầu vào là rất cần thiết đối với một giải thuật dựa trên mạng nơ-ron tích chập.
-
-Nhận diện trái cây không phải là một chủ đề mới, đã có rất nhiều nghiên cứu liên quan về bài toán này \cite{bargoti2017image} \cite{sa2016deepfruits}. Một trong những phương pháp nhận diện trái cây đã được đề xuất trước đây trong bài báo của Cohen \cite{cohen2010estimation}. Hình ảnh họ sử dụng được chụp bởi camera theo chuẩn màu CCD. Đầu tiên, họ dùng một bộ phân loại K-nearest-neighbors (KNN) để xác định xem những điểm ảnh (pixel) nào là "táo" và những điểm ảnh nào là "không-phải-táo", những vật thể che mất quả táo như cành, lá được đánh dấu lại để loại bỏ ra khỏi quá trình huấn luyện. Sau đó đánh dấu bề mặt  của quả táo bằng cách cho nhận diện những vùng mà họ gọi là "seed area". Seed area là tập hợp những điểm ảnh có khả năng cao là táo. Sau đó những vùng seed area này được mở rộng ra để liên kết những vùng ảnh quá sáng hoặc quá tối nằm giữa hai seed area, từ đó tạo thành một vùng seed area hoàn chỉnh. Cuối cùng, họ phân tích các hình dạng của seed area và khoanh vùng được quả táo từ những đường nét của mỗi seed area. Tuy nhiên phương pháp này của họ vẫn chưa hiệu quả khi quả có quá nhiều hình dạng và màu khác nhau, nó cờn bị ảnh hưởng mạnh bởi độ sáng, bóng râm.
-
-Nhiều nghiên cứu đều cho thấy vấn đề của quá trình nhận diện vật thể đó chính là công tác phân đoạn (segmentation), phải phân biệt rõ giữa vùng có vật thể và vùng nền chứa vật thể. Nhóm của Yamamoto \cite{yamamoto2014plant} đã sử dụng phương pháp phân đoạn hình ảnh dựa trên màu sắc để áp dụng cho học các đặc trưng trên ảnh. Mạng nơ-ron tích chập cũng có ưu điểm rõ ràng, đó chính là không cần phải trích xuất đặc trưng một cách thủ công. Các đặc trưng được trích xuất thông qua mạng tích chập được sử dụng vào quá trình nhận diện ảnh, có thể phân tích hình ảnh để lấy những đặc trưng low-level để giảm kích thước không gian nhận diện nhằm xác định vùng quan tâm (Region of Interests - RoIs) đồng thời khai thác đặc trưng high-level áp dụng vào quá trình phân loại.
-
-Mô hình mạng R-CNN (Region based Convolutional Neural Network) cũng được đề ra nhằm giải quyết bài toán nhận diện. Những vùng quan tâm (RoIs) được tạo ra từ giải thuật Selective Search, sau đó được đưa qua mạng tích chập để được phân loại, đồng thời nó còn được sử dụng để tính toán hồi quy tìm ra bounding box. Faster R-CNN là mô hình tích hợp giữa các công việc là tìm vùng quan tâm, phân loại vật thể và tính toán hồi quy để tìm ra bounding box. Nhờ như vậy nên việc nhận diện vật thể trở nên nhanh hơn và hiệu quả hơn. Không những vậy, mô hình Faster R-CNN cho thấy một kết quả khả quan có thể áp dụng vào thực tế cho bài toán nhận diện trái cây \cite{bargoti2017deep}.
-
-Tuy nhiên, đa số các nghiên cứu hiện nay đều hướng tới kết quả nhận diện được nhiều loại trái cây, đa phần là những loại trái cây ở khu vực nước ngoài, vì vậy việc áp dụng với các loại trái cây ở Việt Nam cũng rất cần được quan tâm. Do đó nhóm sẽ tập trung vào nhận diện, đánh giá những trái có tính chất như vậy, tiêu biểu là trái bưởi. Bài báo cáo này trình bày giai đoạn đầu tiên trong việc Xác định năng suất cây trồng bằng mạng học sâu, đó chính là nhận diện vị trí và phân loại trái cây. Để đạt được kết quả tốt nhất, nhóm thống nhất chọn mô hình mạng tích chập để dễ dành trích xuất đặc trưng từ  dữ liệu hình ảnh và framework Faster R-CNN, đã được cải tiến để giảm thiểu tối đa chi phí với một mạng rất sâu.
-
-Ở phần sau, nhóm sẽ trình bày những nội dung sau:
+With specified tasks, the thesis is divided into 6 main stages:
 \begin{itemize}
-	\item Chương 2: Cơ sở lí thuyết
-	\item Chương 3: Giải pháp đề xướng
-	\item Chương 4: Ứng dụng Faster R-CNN vào trong nhận diện trái bưởi
-	\item Chương 5: Kết luận và hướng phát triển, trình bày thêm về bộ phân loại áp dụng vào mô hình
+	\item Stage 1: Study and research crowd-sourcing methods, background theory of machine learning in general and deep learning in particular. Especially, research deep learning models appropriate to extract information from image/video
+	\item Stage 2: Implement a module to handle image. 
+	\item Stage 3: Design an applicable database.
+	\item Stage 4: Implement a interface to interact with user.
+	\item Stage 5: Implement a module to handle video
+	\item Stage 6: Complete the system by connecting interface, image handling module, video handling module together. Output from image/video handling module is used to notify user about security problem through the interface.
 \end{itemize} 
+In proposal thesis, stage 1 and 2 of the project are done. Remaining stages are finished in thesis.  
 \section{Scientific and Practical contributions}
 \subsection{Scientific contributions}
 Develop a system to collect data and allow user to interact with it through posting and notifications. \\
@@ -57,8 +50,28 @@ In addition, those classifying models are deployed with performance in mind usin
 \subsection{Practical contributions}
 The thesis proposes a system to improve security of neighborhoods. Such system can be beneficial to the residents as it assure their safety.
 \section{Thesis scope}
-This thesis focus on building the system at a scope a neighborhood. 
-Đóng góp một phương án để cải thiện độ chính xác, tăng số trái nhận diện được trong một ảnh, bằng cách kết hợp với một bộ phân loại nhằm phân biệt trái cây với nền, như vậy số vật thể phân loại sai sẽ giảm, đồng thời tỉ lệ nhận diện đúng số lượng trái sẽ tăng lên.
-
-
+Currently, building a system to enhance security for a whole city is impractical due to limited resources. The thesis focuses on building the system to raise security within a scope of a neighborhood. The scope can be freely expanded with additional resources in the future.
 \section{Report overview}
++\begin{table}[H]
+\scriptsize
+  \begin{center}
+    \begin{tabular}{c c c c c c c}
+    \toprule
+    \multirow{2}{*}{Load} & \multicolumn{2}{c}{With BEO} & \multicolumn{2}{c}{Without BEO} & \\[0.2cm]
+    \cmidrule{2-7}
+     & $\bar{x}^{BEO}$ & $\sigma_{\bar{x}}^{BEO}$ & $\bar{x}^{noBEO}$ & $\sigma_{\bar{x}}^{noBEO}$ & Confidence \% & Quantity of Improvement \%\\
+    \midrule
+	76 & 2.73603 & 0.00853 & 2.83275 & 0.00683 & 100.00 & 3.41\\
+    77 & 2.73761 & 0.00422 & 2.77537 & 0.00695 & 100.00 & 1.36\\
+    78 & 2.72698 & 0.00250 & 2.74504 & 0.00213 & 99.99 & 0.66\\
+    79 & 2.73320 & 0.00129 & 2.73955 & 0.00101 & 99.98 & 0.23\\
+    80 & 2.73673 & 0.00110 & 2.74136 & 0.00066 & 100.00 & 0.17\\
+    81 & 2.73244 & 0.00144 & 2.74462 & 0.00077 & 100.00 & 0.44\\
+    82 & 2.73281 & 0.00169 & 2.74793 & 0.00126 & 100.00 & 0.55\\
+    83 & 2.73722 & 0.00236 & 2.74594 & 0.00240 & 99.52 & 0.32\\
+	\bottomrule
+	\end{tabular}
+    \caption{Data of improvement of power consumption from November 02, 2013 to November 07, 2013}
+    \label{App:table02} 
+  \end{center} 
+\end{table}
