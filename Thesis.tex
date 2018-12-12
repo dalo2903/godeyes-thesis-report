@@ -48,11 +48,11 @@ Vũ Minh Trí, Võ Tuấn Kiệt, Phạm Hồng Thái, Đinh Duy Kha, Nguyễn K
 \cleardoublepage
 
 %%%%%%%%%%%%%%%%%%% mục lục %%%%%%%%%%%%%%%%%%%
-\renewcommand{\contentsname}{TABLE OF CONTENTS}
-\renewcommand{\listfigurename}{TABLE OF FIGURES}
-\renewcommand{\listtablename}{TABLE OF TABLES}
-\renewcommand{\figurename}{Hình}
-\renewcommand{\tablename}{Bảng}
+% \renewcommand{\contentsname}{MỤC LỤC}
+% \renewcommand{\listfigurename}{MỤC LỤC HÌNH}
+% \renewcommand{\listtablename}{MỤC LỤC BẢNG}
+% \renewcommand{\figurename}{Hình}
+% \renewcommand{\tablename}{Bảng}
 
 \newcommand{\footcaption}[1]{\caption[#1]{#1\footnotemark.}}
 
@@ -114,7 +114,13 @@ Vũ Minh Trí, Võ Tuấn Kiệt, Phạm Hồng Thái, Đinh Duy Kha, Nguyễn K
 
 \cleardoublepage
 
-\renewcommand\bibname{REFERENCES}
+\appendix
+
+\include{AppendixA}
+
+\cleardoublepage
+
+% \renewcommand\bibname{TÀI LIỆU THAM KHẢO}
 \bibliographystyle{ThesisStyle}
 \bibliography{Thesis}
 
