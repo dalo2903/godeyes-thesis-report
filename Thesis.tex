@@ -1,5 +1,10 @@
 \documentclass[a4paper,12pt,oneside]{ThesisStyle}
 
+\usepackage[toc,page]{appendix}
+
+\newcommand{\nocontentsline}[3]{}
+\newcommand{\tocless}[2]{\bgroup\let\addcontentsline=\nocontentsline#1{#2}\egroup}
+
 \include{formatAndDefs}
 
 \begin{document}
