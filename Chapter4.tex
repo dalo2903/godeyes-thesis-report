@@ -6,6 +6,8 @@
 \section{Design}
 \subsection{Whole system design}
 \subsection{Crowd-sourcing system design}
+\subsubsection{Database}
+The project database divides into two different parts: \textbf{Cloud storage} and a \textbf{NoSQL database}. Why it requires such a complex system? The primary target is to reduce website loading time. Let take an example, if files are stored directly on the crowd-sourcing server. When many users request a file simultaneously, the server with limited bandwidth will cause delay. “53\% of mobile site visitors leave a page that takes longer than three seconds to load” – \href{https://think.storage.googleapis.com/docs/mobile-page-speed-new-industry-benchmarks.pdf}{Google}. What if these files stored on cloud storage? The client will be served by the cloud storage provider, which has higher availability.
 \subsection{Analysis system design}
 \section{Implementation}
 \subsection{Crowd-sourcing system implementation}
