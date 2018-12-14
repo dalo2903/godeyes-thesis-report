@@ -33,10 +33,23 @@ Therefore, crowdsourcing can be considered as a process evolving through the fol
 Model View Controller (MVC) is a software architecture pattern, commonly used to implement user interfaces: it is therefore a popular choice for architecting web apps. In general, it separates out the application logic into three separate parts, promoting modularity and ease of collaboration and reuse. It also makes applications more flexible and welcoming to iterations.
 
 \section{Neural network}
-\subsection{Artificial Neural Network (RNN)}
+
+\subsection{Artificial Neural Network (ANN)}
+The human brain consists of many computational units called neuron. The \textbf{Artificial neural network (ANN)} is vaguely inspired by that structure. An ANN is a collection of connected nodes called the artificial neurons. Each artificial neuron is a computational unit with inputs and an output. A connection between two artificial neurons is called an ‘edge’. Artificial neurons and edges will have a ‘weight’ value to adjust the learning process. Increasing or decreasing the weight value will affect the strength of the signal between two neurons. A typical artificial neuron will take each input, multiply it with the corresponding weight, take the sum of its input and apply some non-linear function to get the output. Many connections of artificial neuron form a neural network, where the output of a neuron is the input of another artificial neuron. Typically, an artificial neuron network will have many layers. If the weight is set correctly, the ANN can be used to estimate numerous complex mathematical problems.
+Figure 2 represents a simple artificial neural network, where each circle is an artificial neuron, inward and outward arrows are the inputs and outputs of that neuron. The first layer where there is no input is called the “input layer”. Similarly, the last layer where there is no output is called the ‘output layer’. Layers that are either input or output are called “hidden layers”. In the figure, every neuron of one layer is connected to all neuron in the next layer, so it every layer is a “fully-connected layer”.
+\begin{center}
+  \begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\columnwidth]{images/chap2/neural_net.png}
+  \footcaption{A 2-layer Neural Network (one hidden layer of 4 neurons (or units) and one output layer with 2 neurons), and three inputs.}
+  \label{chap2:neural_net}
+  \end{figure}
+\end{center}
+\footnotetext{Source: \url:{ https://devblogs.nvidia.com/mocha-jl-deep-learning-julia/}}
+
 \subsection{Convolution Neural Network (CNN)}
 
-\subsection{Artificial Neural Network (RNN)}
+\subsection{Recurrent Neural Network (RNN)}
 Human understanding does not come from scratch for every new input. When a man is reading a paragraph, his understanding of each word is based on his knowledge of previous words. That is why a human brain is persistent.\\
 Traditional neural networks cannot do the task above. For example, if a traditional network wants to classify a frame in a video, it cannot use its reasoning of previous frames to help with the result of the current frame.\\
 \textbf{Recurrent Neural Networks (RNN)} fix this issue by having loops within them, thus allowing information to be persistent. The remaining of this section is about the basics of RNN and \textbf{Long Short-Term Memory Network (LSTM)}, a variation of RNN designed to avoid the long-term dependencies problem of RNNs.
