@@ -25,8 +25,22 @@ As stated in \ref{chap:solution}, this project would build a social media websit
 
 
 \subsection{Non-functional Requirement}
+In the scope of a thesis, the system has to acquire these requirements to perform processes that are stable and efficient for the user:
+\begin{itemize}
+	\item Reliability: The System is able to have 90\% uptime of Internet connection. It should have OAuth services via Google/Facebook(account kit) for authentication.
+	\item Scalability: The website is able to handle many concurrent connections and manage a large amount of posts and store into NoSQL database .
+	\item Usability: The website uses modern UI developed in HTML5. The user can use that UI easily to navigate between each page. It also has a fresh and well-designed interface for user to interact with
+	
+\end{itemize} 
 \subsection{Use Cases}
-
+\begin{center}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.75\columnwidth]{images/chap4/usecase.png}
+		\caption{Use case diagram}
+		\label{chap4:user_case_diagram}
+	\end{figure}
+\end{center}
 \subsection{System overview}
 Figure \ref{chap3:system_overview_basic} shows a concise overview of how the system operates. Users interact with the website through front-end. The input of users can come in the form of images, videos or label contribution. Back-end receives input and stores in the database. Concurrently, inputs are sent to analysis server . Outputs from analysis server are sent back to back-end and then stored in database. The back-end is also responsible for obtaining appropriate contents from the database to display to users through front-end.
 
