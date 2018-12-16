@@ -23,5 +23,27 @@ Because of mentioned factors, this thesis proposes building a \textbf{Social med
 \section{Extracting information from data}
 
 \subsection{Image}
+
+Data received by the system will include images and videos. %%Kha làm
+ 
+There are many ways to recognize faces through APIs such as Kairos, Amazon Rekognition, Microsoft Face API, Google Cloud Vision, and IDM Watson Visual Recognition, and these are their features:
+\begin{center}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\columnwidth]{images/chap3/face_api.png}
+		\footcaption{Feature of all recent famouse face api}
+		\label{chap3:face_api_now}
+	\end{figure}
+\end{center}
+\footnotetext{Source: \url:{https://www.kairos.com/blog/face-recognition-kairos-vs-microsoft-vs-google-vs-amazon-vs-opencv}}
+\begin{itemize}
+	\item  Kairos: offers a wide variety of image recognition solutions through their API. Their API endpoints include identifying gender, age, emotional depth, facial recognition in both photo and video, and more.
+	\item Amazon Rekognition: This facial recognition API is fully integrated into the Amazon Web Service ecosystem. Using this API will make it easy to build applications that make use of other AWS products.
+	\item Google Cloud Vision: By being integrated into the Google Cloud Platform, this API will be a breeze to integrate into applications that are already using other Google Cloud Platform products and services.
+\end{itemize}
+
+However, with the limitations of the thesis and the applicability to fulfill demands of this research, Microsoft Face API is choosen. There are many advantage of Microsoft Face API such as large amount of user identification, high accuracy and lower cost of usage than the whole API remaining at the time of the investigation
+
+
 \subsection{Video}
 
