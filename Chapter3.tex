@@ -20,9 +20,7 @@ However, how can people be encouraged to provide their knowledge and information
 \end{center}
 \footnotetext{Source: \url:{http://gs.statcounter.com/social-media-stats/all/viet-nam}}
 Because of mentioned factors, this thesis proposes building a \textbf{Social media website for security} where users can interact with each other, as well as provide their data to the system via posting.
-\section{Extracting information from data}
-
-\subsection{Image}
+\section{Extracting information from images}
 
 Data received by the system will include images and videos. %%Kha làm
  
@@ -45,7 +43,7 @@ There are many ways to recognize faces through APIs such as Kairos, Amazon Rekog
 However, with the limitations of the thesis and the applicability to fulfill demands of this research, Microsoft Face API is choosen. There are many advantage of Microsoft Face API such as large amount of user identification, high accuracy and lower cost of usage than the whole API remaining at the time of the investigation
 
 
-\subsection{Video}
+\section{Extracting information from videos}
 For the video analyzing problem, this thesis proposes using a video classification model to find out if there are suspicious behaviors within a video. This model processes videos by passing frames through a Convolutional Neural Network to extract features, then pass the output to a Recurrent Neural Network using LSTM cells, similar to the approach of \cite{DBLP:journals/corr/DonahueHGRVSD14} and \cite{}. This model was trained and test using UCF-101 dataset\footnotetext{Source: url:{http://crcv.ucf.edu/data/UCF101.php}} - A standard dataset commonly used for benchmarking action recognition models - and achieved a moderate result.
 \subsection{Proposed Architecture}
 \subsubsection{CNN architecture for feature extraction}
@@ -62,12 +60,11 @@ For the CNN layer of the proposal model, a VGG16 \cite{DBLP:journals/corr/Simony
 \footnotetext{Source: \url:{https://blog.heuritech.com/2016/02/29/a-brief-report-of-the-heuritech-deep-learning-meetup-5/}}
 \subsubsection{LSTM for sequence learning}
 Output of VGG16 is passed through LSTM cells for prediction.
-Lost function
 \subsection{Dataset}
 \subsection{Evaluating}
-\subsubsection{Preprocessing}
-\subsubsection{Hyperparameter}
-\subsubsection{Training method}
+\subsection{Preprocessing}
+\subsection{Hyperparameter}
+\subsection{Training method}
 \subsection{Result}
 
 

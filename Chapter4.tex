@@ -3,8 +3,27 @@
 This chapter describes the implementation of the system which consists of two subsystems: A social media website and an analysis server. In \textit{Requirement analysis and System overview} subsection, everything is briefly described as a whole. In three last sections, structure and details of two subsystems and the database are defined more comprehensively.
 
 \section{Requirement specification}
-A requirement ana
-\subsection{Functional Requirement}
+A requirements analysis is essential to any system. In this section, this thesis defines functional as well as non-function requirements for the system. Use cases and a system overview is also outlined in the following subsections.
+\subsection{Types of users}
+As with any sophisticated system, the proposed system has many types of user. Those type of users are:
+
+\begin{itemize}
+    \item \textbf{Guest users}: Users that have not verify their account by authentication methods.
+    \item \textbf{Verified users}: Users that are verified with the system by authentication methods.
+    \item \textbf{Moderators}: Supervisors of the system. This title is given to people who are responsible for managing the system.
+\end{itemize}
+\subsection{Functional Requirements}
+As stated in \ref{chap:solution}, this project would build a social media website for security. Such a website must have functions of a typical social media as well as additional functions for security. Those functions would include:
+\begin{itemize}	
+    \item Verified users and Guest users can view posts by other users. 
+    \item Verified users could make posts with images or videos and includes location and time information in their posts. The website stores posts and image/videos in databases and analyze them through analyzing modules.
+    \item Verified users could contribute to the system by labeling videos. Labels of videos are stored in the database and are used to train video classification modules.
+    \item Verified users could subscribe to a location to get notifications about the suspicious videos from that location.
+    \item When suspicious videos are detected, notifications are sent to Users subscribed to nearby locations.
+    \item The system can recognize faces from images and logs their occurrences to the database.
+\end{itemize}
+
+
 \subsection{Non-functional Requirement}
 \subsection{Use Cases}
 
