@@ -48,14 +48,164 @@ Figure 2 represents a simple artificial neural network, where each circle is an 
 \footnotetext{Source: \url:{ https://devblogs.nvidia.com/mocha-jl-deep-learning-julia/}}
 
 \subsection{Convolution Neural Network (CNN)}
+Simple architecture for Convolution Neural Network could be [INPUT - CONV - RELU - POOL - FC]. In more detail:\\
+Input: [width-heigth-channel] for example in CIFAR -10 classifications, the input is [32x32x3] which hold the raw pixel values of the image, in this case, an image of width 32, height 32, and with three color channels Red, Blue, Green ( [32x32x3])\\
+CONV layer is the most important layer, will compute the output of neurons that are connected to local regions in the input, the returned result could be [32x32x12] if we decided to use 12 filters\\
+RELU layer (Rectified linear unit) will apply an elements wise activation function (it is also the most commonly used activation function in deep learning models). The function returns 0 if it receives any negative input, but for any positive value x, it returns x back. F(x) = max(0,x)\\
+POOL (Pooling) layer will perform a downsampling operation along the spatial dimensions (Width, Height), result in volume such as [16 x 16 x 12]\\
+FC (Fully-connected) layer will compute the score of classes, resulting in a volume of size [1 x 1 x number of class] in Cifar-10, it returns [1x1x10]\\
+By this way, CNN transforms the original image layer by layer from raw pixel values to the final class score. Note that some layers contain parameters, and others do not. For instance, CONV and FC layers contain not only the activation but also weight and the biases of the neurons. On the other hand, the RELU/POOL layers will implement a fixed function. The parameters in the CONV/FC layers will be trained with the gradient descent algorithm so that the class scores that the CNN computes are consistent with the labels in training set for each image.\\
+Convolution layer is the core building block of a Convolution Network that does the most critical computations in the Network.
+\begin{center}
+  \begin{figure}[H]
+  \centering
+  \includegraphics[width=1\columnwidth]{images/chap2/Intro_CNN.png}
+  \caption{Social media usage of Vietnamese is at all time high. Nearly 73\% of the population is using use Facebook}
+  \label{chap2:CNN_intro}
+  \end{figure}
+\end{center}
 
+Overview:\\ 
+The convolution layer's parameter consists of a set of learnable filters. Every filter is small spatially [ Width x Height], but extends through the full depth of the input volume (in standard image, the depth is equal 3). For example, a typical filter on the first layer of a CNN might have a size [5x5x3] ( 5 pixels width and height, and depth = 3 ). In the calculating process, we slide each filter across the width and height of the input and compute dot-product between input and filter in every position. The result of dot-product is a 2-dimensional matrix called activation map of a filter. With layer has 12 filters, each of them produces one activation map, then we stack these maps along the depth dimension and produce the output volume.
+ 
+Local Connectivity:\\
+When processing input which high-dimensional such as images, connect neurons to all previous neurons like Fully-connected layer is impractical, a number of parameters of the network must learn is massive (exploding hyperparameters). Alternately, each neuron is connected to only a local region of the input volume,the limit region of this connectivity is a hyperparameter called receptive field of the neuron (equivalently this is the size of the filter). The connections are local in space (along with width and height), but always full along the entire of the depth of the input volume.
+\begin{center}
+  \begin{figure}[H]
+  \centering
+  \includegraphics[width=1\columnwidth]{images/chap2/LocalConnectivity.png}
+  \caption{Social media usage of Vietnamese is at all time high. Nearly 73\% of the population is using use Facebook}
+  \label{chap2:LocalConnectivity}
+  \end{figure}
+\end{center}
+
+Output volume: There is three hyperparameters affect the output volume: the depth, stride, and zero-padding.\\
+Depth: Depth of output volume is corresponds to the number of filters used in the network. Each filter learning to look for something different in the input. For instance, with input is a raw image. First Conv Layer can learn a way to detect some primary attribute like edge, color or blobs … Set of neurons that are all looking at the same region of the input are called depth column (sometimes called fiber).\\
+Stride: stride is the step of filter over input. If stride is 1, a filter is moved 1 pixel per step, identical to stride equal 2 or 3. Therefore, this will produce smaller output volumes spatially ( smaller in Width and Height)\\
+Zero-Padding: Zero-padding is the number of line of Zero around the input volume, applying zero-padding allow us to control Height and Width of output volume (Commonly, it is used to preserve the spatial size of the input and output volume)\\
+Output volume can be computed by using input volume size (W), the receptive field size of the Convolution Layer neurons (F), the stride value (S), and the amount of zero padding used (P) on the border. The formula for calculating how many neurons "fit" is given by:
+\begin{center}
+\[ \scalebox{1.5}{$\frac{W_{1} - F + 2P }{S} + 1$} \]
+\end{center}
+For example, with input (W) = 7x7, filter (F) = 3x3, stride (F) = 1, Zero-padding 1, the output will be 5x5
+
+\begin{center}
+  \begin{figure}[H]
+  \centering
+  \includegraphics[width=1\columnwidth]{images/chap2/Output_volume_WSP.png}
+  \caption{Social media usage of Vietnamese is at all time high. Nearly 73\% of the population is using use Facebook}
+  \label{chap2:WSP}
+  \end{figure}
+\end{center}
+Summary Convolution Layer:\\
+Accept a volume size $W_{1}$ x $H_{1}$ x $D_{1}$ as input
+Requires four hyperparameters:\\
+Number of filter K\\
+Their spatial extent F \\
+The stride S\\
+The amount of zero padding P\\
+Return an output with volume $W_{2}$ x $H_{2}$ x $D_{2}$\\
+$W_{2} = \frac{W_{1} - F + 2P }{S} + 1$\\
+$H_{2} = \frac{H_{1} - F + 2P }{S} + 1$\\
+$D_{2} = K$
+Pooling Layer: \\
+Pooling Layer's function is to progressively reduce the spatial size of the representation to reduce the number of parameters and computation in the network, and control overfitting too. Pooling Layer operates independently on every depth slice of the input and resizes it spatially, using MAX, AVERAGE, SUM … operation. The most common form is a pooling with MAX operation, filters of size 2x2 applied with a stride of 2, it will downsample every depth slice in the input by two along both width and height (depth is remaining).\\
+\begin{center}
+  \begin{figure}[H]
+  \centering
+  \includegraphics[width=1\columnwidth]{images/chap2/Pooling.png}
+  \caption{Max Pooling and Average Pooling}
+  \label{chap2:WSP}
+  \end{figure}
+\end{center}
+
+Summary Pooling layer:\\
+Accept a volume of size $W_{1}$ x $H_{1}$ x $D_{1}$\\
+Require two hyperparameters\\
+Their Spatial extent F \\
+Stride S\\
+Produces a volume of size $W_{2}$ x $H_{2}$ x $D_{2}$
+$W_{2} = \frac{W_{1} - F }{S} + 1$\\
+$H_{2} = \frac{H_{1} - F }{S} + 1$\\
+$D_{2} = D_{1}$\\
+No parameter, because it computes a fixed function of the input\\
+Zero-Padding is unusable in pooling layer
+
+Fully-Connected Layer:
+Same as Fully Connected in ANN, neurons in a fully connected layer have full connections to all activations in the previous layer. 
+
+CNN architecture:
+LeNet (1998): Yann LeCun developed LeNet first successful applications of Convolutional Network in the 1990s. LeNet is used to reading zip code, digits.
+\begin{center}
+  \begin{figure}[H]
+  \centering
+  \includegraphics[width=1\columnwidth]{images/chap2/LeNet.png}
+  \caption{LeNet Architecture}
+  \label{chap2:WSP}
+  \end{figure}
+\end{center}
+AlexNet (2012): The first work that popularized Convolutional Networks in Computer Vision was the AlexNEt, developed by Alex Krizhevsky. The AlexNet got the first prize in ImageNet ILSVRC challenge 2012 and significantly outperformed the second (top 5 error of 16\% compared to runner-up with 26\% error).  
+\begin{center}
+  \begin{figure}[H]
+  \centering
+  \includegraphics[width=1\columnwidth]{images/chap2/AlexNet.png}
+  \caption{AlexNet Architecture}
+  \label{chap2:WSP}
+  \end{figure}
+\end{center}
+GoogLeNet (Inception - 2014): The ILSVRC 2014 winner was a Convolutional Network from Szegedy from Google. Its the main contribution was the development of an Inception Module that dramatically reduced the number of parameters in the network (4 million, compared to AlexNet with 60M). Besides that, Average Pooling instead of Fully Connected at the top layer of the model, eliminating a large number of parameters that do not seem to matter much.
+\begin{center}
+  \begin{figure}[H]
+  \centering
+  \includegraphics[width=1\columnwidth]{images/chap2/GoogleNet1.png}
+  \caption{GoogleNet1 Architecture}
+  \label{chap2:WSP}
+  \end{figure}
+\end{center}
+VGGNet (2014): The runner-up in ILSVRC 2014 is invented by VGG (Visual Geometry Group) from the University of Oxford. Its main contribution was in showing that depth of the network is a critical component for good performance. 
+\begin{center}
+  \begin{figure}[H]
+  \centering
+  \includegraphics[width=1\columnwidth]{images/chap2/VGG_arch.png}
+  \caption{VGG Architecture}
+  \label{chap2:WSP}
+  \end{figure}
+\end{center}
+ResNet(2015): at the ILSVRC 2015, the so-called Residual Neural Network (ResNet) by Kaiming He introduced architecture with “skip connections” and features heavy batch normalization. Such skip connections are also known as gated units or gated recurrent units and have a strong similarity to recent successful elements applied in RNNs, this technique able to train a Neural Network with 152 layers while still having lower complexity than VGGNet. It achieves a top-5 error rate of 3.57\% which beats human-level performance on this dataset.
+\begin{center}
+  \begin{figure}[H]
+  \centering
+  \includegraphics[width=1\columnwidth]{images/chap2/ResNet_Plain_Vs_Res.png}
+  \caption{ResNet Architecture}
+  \label{chap2:WSP}
+  \end{figure}
+\end{center}
 \subsection{Recurrent Neural Network (RNN)}
 Human understanding does not come from scratch for every new input. When a man is reading a paragraph, his understanding of each word is based on his knowledge of previous words. That is why a human brain is persistent.\\
 Traditional neural networks cannot do the task above. For example, if a traditional network wants to classify a frame in a video, it cannot use its reasoning of previous frames to help with the result of the current frame.\\
 \textbf{Recurrent Neural Networks (RNN)} fix this issue by having loops within them, thus allowing information to be persistent. The remaining of this section is about the basics of RNN and \textbf{Long Short-Term Memory Network (LSTM)}, a variation of RNN designed to avoid the long-term dependencies problem of RNNs.
+
+
 \subsubsection{RNN}
-\textbf{Recurrent Neural Network} is a type of neural network effective for processing sequential data.
+\textbf{Recurrent Neural Network} is a type of neural network effective for processing sequential data.Recurrent Neural Network (RNN) was first introduced by Rumelhart et al. In 1986 as a family of neural networks suitable for processing of chain data. Unlike others neural networks, which can only handle input of a given size, RNN can handle any input of any length, and it is possible to model the dependency of the latter component. With preceding components in the output. First, the RNN stores a hidden state vector that is updated at each processing step (timestep) based on the value of this vector at the pre-processing stage and the value of the input component at this step. Second, the rules for hidden status updates, expressed through a set of corresponding functions and weights, are shared between processing steps. These features allow the RNN network to be generalizable even to any size input chain and have achieved the best results in processing string data such as text and sound.
+
+Let x = $[x_{0}, x_{1}, ..., x_{n}]$ be an input sequence of n + 1 components with each component $x_{t}$ (t = 0..n) is a vector of a certain size. Let ht, yt denote the latent state and output of RNN in step t. An original RNN (Vanilla RNN) is represented by the following mathematical formula:
+\begin{align}
+h_{o} &= \sigma_{h}(W_{xh}x_{t})\\
+h_{t} &= \sigma_{h}(W_{hh}h_{t-1} + W_{xh}x_{t})\\
+y_{t} &= \sigma_{t}(W_{hy}h_{t})
+\end{align}
+
+In the above formula, $W_{hh}, W_{xh}$ and $W_{hy}$ are respectively the weight matrices between $h_{t-1}$ and $h_{t}, x_{t} and h_{t}, h_{t} and y_{t}$. $\sigma_{h}$ and $\sigma_{y}$ are activation functions, where the $\tanh$ function is usually used for $\sigma_{h}$.
 \subsubsection{LSTM}
+\begin{align}
+i &= \sigma ( W_{xi}x_{t} + W _{hi}h _{t-1} + b _{i}) \\
+f &= \sigma(W_{xf}x_{t} + W_{hf}h_{t-1} + b_{f}) \\
+o &= \sigma(W_{xo}x_{t} + W_{ho}h_{t-1} + b_{o})	\\
+g &= \tanh (W_{xg}x_{t} + W_{hg}h_{t-1} + b_{g})	\\
+c_{t} &= c_{t-1} \circ f+ g \circ I	\\
+h_{t} &= \tanh(c_{t}) \circ o
+\end{align}
 
 \section{Face recognition}
 \section{Action recognition}
