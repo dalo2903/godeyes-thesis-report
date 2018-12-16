@@ -23,5 +23,54 @@ Because of mentioned factors, this thesis proposes building a \textbf{Social med
 \section{Extracting information from data}
 
 \subsection{Image}
+
+Data received by the system will include images and videos. %%Kha làm
+ 
+There are many ways to recognize faces through APIs such as Kairos, Amazon Rekognition, Microsoft Face API, Google Cloud Vision, and IDM Watson Visual Recognition, and these are their features:
+\begin{center}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\columnwidth]{images/chap3/face_api.png}
+		\footcaption{Feature of all recent famouse face api}
+		\label{chap3:face_api_now}
+	\end{figure}
+\end{center}
+\footnotetext{Source: \url:{https://www.kairos.com/blog/face-recognition-kairos-vs-microsoft-vs-google-vs-amazon-vs-opencv}}
+\begin{itemize}
+	\item  Kairos: offers a wide variety of image recognition solutions through their API. Their API endpoints include identifying gender, age, emotional depth, facial recognition in both photo and video, and more.
+	\item Amazon Rekognition: This facial recognition API is fully integrated into the Amazon Web Service ecosystem. Using this API will make it easy to build applications that make use of other AWS products.
+	\item Google Cloud Vision: By being integrated into the Google Cloud Platform, this API will be a breeze to integrate into applications that are already using other Google Cloud Platform products and services.
+\end{itemize}
+
+However, with the limitations of the thesis and the applicability to fulfill demands of this research, Microsoft Face API is choosen. There are many advantage of Microsoft Face API such as large amount of user identification, high accuracy and lower cost of usage than the whole API remaining at the time of the investigation
+
+
 \subsection{Video}
+For the video analyzing problem, this thesis proposes using a video classification model to find out if there are suspicious behaviors within a video. This model processes videos by passing frames through a Convolutional Neural Network to extract features, then pass the output to a Recurrent Neural Network using LSTM cells, similar to the approach of \cite{DBLP:journals/corr/DonahueHGRVSD14} and \cite{}. This model was trained and test using UCF-101 dataset\footnotetext{Source: url:{http://crcv.ucf.edu/data/UCF101.php}} - A standard dataset commonly used for benchmarking action recognition models - and achieved a moderate result.
+\subsection{Proposed Architecture}
+\subsubsection{CNN architecture for feature extraction}
+In \cite{DBLP:journals/corr/ZhouKLOT14}, the authors suggest that pretrained CNNs are incredibly effective in extracting feature for other classification tasks.
+For the CNN layer of the proposal model, a VGG16 \cite{DBLP:journals/corr/SimonyanZ14a} architecture pretrained on ImageNet \footnotetext{Source: \url:{http://www.image-net.org/challenges/LSVRC/}} is chosen to extract features from video frames. Figure \ref{chap3:vgg16_architecture} shows the architecture of this model. Input of VGG16 is an 224x224x3 RGB image. The image is then pass through a stack of convolutional layers. All of hidden layers are equipped with a ReLU.  
+\begin{center}
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=1\columnwidth]{images/chap3/vgg16_architecture.png}
+    \footcaption{}
+    \label{chap3:vgg16_architecture}
+    \end{figure}
+\end{center}
+\footnotetext{Source: \url:{https://blog.heuritech.com/2016/02/29/a-brief-report-of-the-heuritech-deep-learning-meetup-5/}}
+\subsubsection{LSTM for sequence learning}
+Output of VGG16 is passed through LSTM cells for prediction.
+Lost function
+\subsection{Dataset}
+\subsection{Evaluating}
+\subsubsection{Preprocessing}
+\subsubsection{Hyperparameter}
+\subsubsection{Training method}
+\subsection{Result}
+
+
+
+
 
