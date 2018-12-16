@@ -86,18 +86,22 @@ For example, with input (W) = 7x7, filter (F) = 3x3, stride (F) = 1, Zero-paddin
   \label{chap2:WSP}
   \end{figure}
 \end{center}
-Summary Convolution Layer:\\
-Accept a volume size $W_{1}$ x $H_{1}$ x $D_{1}$ as input
-Requires four hyperparameters:\\
-Number of filter K\\
-Their spatial extent F \\
-The stride S\\
-The amount of zero padding P\\
-Return an output with volume $W_{2}$ x $H_{2}$ x $D_{2}$\\
-$W_{2} = \frac{W_{1} - F + 2P }{S} + 1$\\
-$H_{2} = \frac{H_{1} - F + 2P }{S} + 1$\\
-$D_{2} = K$
-Pooling Layer: \\
+Summary Convolution Layer:
+\begin{itemize}
+	\item Accept a volume size $W_{1}$ x $H_{1}$ x $D_{1}$ as input
+	\item Requires four hyperparameters:
+	\item Number of filter K
+	\item Their spatial extent F 
+	\item The stride S
+	\item The amount of zero padding P
+	\item Return an output with volume $W_{2}$ x $H_{2}$ x $D_{2}$ with:
+	\begin{align*}
+		W_{2} &= \frac{W_{1} - F + 2P }{S} + 1 \\
+		H_{2} &= \frac{H_{1} - F + 2P }{S} + 1 \\
+		D_{2} &= K
+	\end{align*}
+\end{itemize}
+Pooling Layer:\\
 Pooling Layer's function is to progressively reduce the spatial size of the representation to reduce the number of parameters and computation in the network, and control overfitting too. Pooling Layer operates independently on every depth slice of the input and resizes it spatially, using MAX, AVERAGE, SUM … operation. The most common form is a pooling with MAX operation, filters of size 2x2 applied with a stride of 2, it will downsample every depth slice in the input by two along both width and height (depth is remaining).\\
 \begin{center}
   \begin{figure}[H]
@@ -108,17 +112,23 @@ Pooling Layer's function is to progressively reduce the spatial size of the repr
   \end{figure}
 \end{center}
 
-Summary Pooling layer:\\
-Accept a volume of size $W_{1}$ x $H_{1}$ x $D_{1}$\\
-Require two hyperparameters\\
-Their Spatial extent F \\
-Stride S\\
-Produces a volume of size $W_{2}$ x $H_{2}$ x $D_{2}$
-$W_{2} = \frac{W_{1} - F }{S} + 1$\\
-$H_{2} = \frac{H_{1} - F }{S} + 1$\\
-$D_{2} = D_{1}$\\
-No parameter, because it computes a fixed function of the input\\
-Zero-Padding is unusable in pooling layer
+Summary Pooling layer:
+\begin{itemize}
+	\item Accept a volume size $W_{1}$ x $H_{1}$ x $D_{1}$ as input
+	\item Require two hyperparameters:
+	\item Their spatial extent F 
+	\item The stride S
+	\item Produces a volume of size $W_{2}$ x $H_{2}$ x $D_{2}$ with:
+	\begin{align*}
+	W_{2} &= \frac{W_{1} - F }{S} + 1\\
+	H_{2} &= \frac{H_{1} - F }{S} + 1\\
+	D_{2} &= D_{1}
+	\end{align*}
+	\item No parameter, because it computes a fixed function of the input\\
+	\item Zero-Padding is unusable in pooling layer
+\end{itemize}
+
+
 
 Fully-Connected Layer:
 Same as Fully Connected in ANN, neurons in a fully connected layer have full connections to all activations in the previous layer. 
