@@ -114,6 +114,46 @@ There are a total of 8 collections in the database: User, Visual data, Location,
     \caption{Role collection}
     \end{figure}
 \end{center}
+\cleardoublepage
+\subsubsection{Relationships}
+\begin{table}[H]
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Children field}                                      & \textbf{Parent field}     \\ \hline
+Location.subscribers.{[}0{]}                        & User.\_id        \\ \hline
+Notification.to                                     & User.\_id        \\ \hline
+Notification.records.{[}0{]}                        & Record.\_id      \\ \hline
+Notification.data                                   & Visual Data.\_id \\ \hline
+Notification.location                               & Location.\_id    \\ \hline
+Person.userCreated                                  & User.\_id        \\ \hline
+Person.datas.{[}0{]}                                & Visual Data.\_id \\ \hline
+Person.location                                     & Location.\_id    \\ \hline
+Post.userCreated                                    & User.\_id        \\ \hline
+Post.datas.{[}0{]}                                  & Visual Data.\_id \\ \hline
+Post.location                                       & Location.\_id    \\ \hline
+Post.reported.{[}0{]}                               & User.\_id        \\ \hline
+Record.data                                         & Visual data.\_id \\ \hline
+Record.location                                     & Location.\_id    \\ \hline
+Record.personId                                     & Person.\_id      \\ \hline
+User.personId                                       & Person.\_id      \\ \hline
+User.address                                        & Location.\_id    \\ \hline
+User.subscribed.{[}0{]}                             & Location.\_id    \\ \hline
+Visual Data.labels.{[}0{]}.user                     & User.\_id        \\ \hline
+Visual Data.identifyResult.persons.{[}0{]}.personId & Person.\_id      \\ \hline
+Visual Data.location                                & Location.\_id    \\ \hline
+User.role                                           & Role.type        \\ \hline
+\end{tabular}
+\end{table}
+\cleardoublepage
+Example:
+\begin{table}[H]
+\begin{tabular}{|l|l|}
+\hline
+Children field               & Parent field \\ \hline
+Location.subscribers.{[}0{]} & User.\_id    \\ \hline
+\end{tabular}
+\end{table}
+The element of the field \textit{subscribers}(array) of collection \textbf{Location} references field \textit{\_id} of collection \textbf{User}.
 \section{Social media website}
 \subsection{Front-end}
 \subsection{Back-end}
