@@ -23,4 +23,31 @@ Because of mentioned factors, this thesis proposes building a \textbf{Social med
 \section{Extracting information from data}
 \subsection{Image}
 \subsection{Video}
+For the video analyzing problem, this thesis proposes using a video classification model to find out if there are suspicious behaviors within a video. This model processes videos by passing frames through a Convolutional Neural Network to extract features, then pass the output to a Recurrent Neural Network using LSTM cells, similar to the approach of \cite{DBLP:journals/corr/DonahueHGRVSD14} and \cite{}. This model was trained and test using UCF-101 dataset\footnotetext{Source: url:{http://crcv.ucf.edu/data/UCF101.php}} - A standard dataset commonly used for benchmarking action recognition models - and achieved a moderate result.
+\subsection{Proposed Architecture}
+\subsubsection{CNN architecture for feature extraction}
+In \cite{DBLP:journals/corr/ZhouKLOT14}, the authors suggest that pretrained CNNs are incredibly effective in extracting feature for other classification tasks.
+For the CNN layer of the proposal model, a VGG16 \cite{DBLP:journals/corr/SimonyanZ14a} architecture pretrained on ImageNet \footnotetext{Source: \url:{http://www.image-net.org/challenges/LSVRC/}} is chosen to extract features from video frames. Figure \ref{chap3:vgg16_architecture} shows the architecture of this model. Input of VGG16 is an 224x224x3 RGB image. The image is then pass through a stack of convolutional layers. All of hidden layers are equipped with a ReLU.  
+\begin{center}
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=1\columnwidth]{images/chap3/vgg16_architecture.png}
+    \footcaption{}
+    \label{chap3:vgg16_architecture}
+    \end{figure}
+\end{center}
+\footnotetext{Source: \url:{https://blog.heuritech.com/2016/02/29/a-brief-report-of-the-heuritech-deep-learning-meetup-5/}}
+\subsubsection{LSTM for sequence learning}
+Output of VGG16 is passed through LSTM cells for prediction.
+Lost function
+\subsection{Dataset}
+\subsection{Evaluating}
+\subsubsection{Preprocessing}
+\subsubsection{Hyperparameter}
+\subsubsection{Training method}
+\subsection{Result}
+
+
+
+
 
