@@ -24,17 +24,30 @@ Model View Controller (MVC) is a software architecture pattern, commonly used to
 \section{Neural network}
 
 \subsection{Artificial Neural Network (ANN)}
-The human brain consists of many computational units called neuron. The \textbf{Artificial neural network (ANN)} is vaguely inspired by that structure. An ANN is a collection of connected nodes called the artificial neurons. Each artificial neuron is a computational unit with inputs and an output. A connection between two artificial neurons is called an ‘edge’. Artificial neurons and edges will have a ‘weight’ value to adjust the learning process. Increasing or decreasing the weight value will affect the strength of the signal between two neurons. A typical artificial neuron will take each input, multiply it with the corresponding weight, take the sum of its input and apply some non-linear function to get the output. Many connections of artificial neuron form a neural network, where the output of a neuron is the input of another artificial neuron. Typically, an artificial neuron network will have many layers. If the weight is set correctly, the ANN can be used to estimate numerous complex mathematical problems.
-Figure 2 represents a simple artificial neural network, where each circle is an artificial neuron, inward and outward arrows are the inputs and outputs of that neuron. The first layer where there is no input is called the “input layer”. Similarly, the last layer where there is no output is called the ‘output layer’. Layers that are either input or output are called “hidden layers”. In the figure, every neuron of one layer is connected to all neuron in the next layer, so it every layer is a “fully-connected layer”.
+The human brain consists of many computational units called neuron. The \textbf{Artificial neural network (ANN)} is vaguely inspired by that structure. An ANN is a collection of connected nodes called the artificial neurons. Each artificial neuron is a computational unit with inputs and an output.
 \begin{center}
-  \begin{figure}[H]
-  \centering
-  \includegraphics[width=0.75\columnwidth]{images/chap2/neural_net.png}
-  \footcaption{A 2-layer Neural Network (one hidden layer of 4 neurons (or units) and one output layer with 2 neurons), and three inputs.}
-  \label{chap2:neural_net}
-  \end{figure}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.75\columnwidth]{images/chap2/NeuralNetwork.jpg}
+		\footcaption{A 2-layer Neural Network (one hidden layer of 4 neurons (or units) and one output layer with 2 neurons), and three inputs.}
+		\label{chap2:neural_net}
+	\end{figure}
 \end{center}
 \footnotetext{Source: \url:{ https://devblogs.nvidia.com/mocha-jl-deep-learning-julia/}}
+
+Figure \ref{chap2:neural_net} represents a simple artificial neural network, where each circle is an artificial neuron, inward and outward arrows are the inputs and outputs of that neuron. The first layer where there is no input is called the “input layer”. Similarly, the last layer where there is no output is called the ‘output layer’. Layers that are either input or output are called “hidden layers”. In the figure, every neuron of one layer is connected to all neuron in the next layer, so it every layer is a “fully-connected layer”. A Network which only have Fully-connected layer(s) is also called as Multi Layer Perceptron (MLP). A connection between two artificial neurons is called an ‘edge’. Artificial neurons and edges will have a ‘weight’ value \boldmath$W$ to adjust the learning process. Increasing or decreasing the weight value will affect the strength of the signal between two neurons. A typical artificial neuron will take each input, multiply it with the corresponding weight \boldmath$W$, take the sum of its input and apply some non-linear function (activation function \boldmath$\varphi$ to get the output. Many connections of artificial neuron form a neural network, where the output of a neuron is the input of another artificial neuron. Typically, an artificial neuron network will have many layers. If the weight is set correctly, the ANN can be used to estimate numerous complex mathematical problems.
+
+\begin{center}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.75\columnwidth]{images/chap2/ANN_detail.png}
+		\footcaption{Detail of processing in ANN}
+		\label{chap2:neural_net_detail}
+		
+	\end{figure}
+\end{center}
+
+
 
 \subsection{Convolution Neural Network (CNN)}
 Simple architecture for Convolution Neural Network could be [INPUT - CONV - RELU - POOL - FC]. In more detail:\\
@@ -131,7 +144,7 @@ Summary Pooling layer:
 
 
 Fully-Connected Layer:
-Same as Fully Connected in ANN, neurons in a fully connected layer have full connections to all activations in the previous layer. 
+Same as Fully Connected in ANN, neurons in a fully connected layer have full connections to all activation functions in the previous layer. 
 
 CNN architecture:
 LeNet (1998): Yann LeCun developed LeNet first successful applications of Convolutional Network in the 1990s. LeNet is used to reading zip code, digits.
@@ -185,18 +198,20 @@ Traditional neural networks cannot do the task above. For example, if a traditio
 \textbf{Recurrent Neural Networks (RNN)} fix this issue by having loops within them, thus allowing information to be persistent. The remaining of this section is about the basics of RNN and \textbf{Long Short-Term Memory Network (LSTM)}, a variation of RNN designed to avoid the long-term dependencies problem of RNNs.
 
 
-\subsubsection{RNN}
-\textbf{Recurrent Neural Network} is a type of neural network effective for processing sequential data.Recurrent Neural Network (RNN) was first introduced by Rumelhart et al. In 1986 as a family of neural networks suitable for processing of chain data. Unlike others neural networks, which can only handle input of a given size, RNN can handle any input of any length, and it is possible to model the dependency of the latter component. With preceding components in the output. First, the RNN stores a hidden state vector that is updated at each processing step (timestep) based on the value of this vector at the pre-processing stage and the value of the input component at this step. Second, the rules for hidden status updates, expressed through a set of corresponding functions and weights, are shared between processing steps. These features allow the RNN network to be generalizable even to any size input chain and have achieved the best results in processing string data such as text and sound.
+\subsubsection{Recurrent Neural Network - RNN}
+\textbf{Recurrent Neural Network} is a type of neural network effective for processing sequential data. Recurrent Neural Network (RNN) was first introduced by Rumelhart et al. In 1986 as a family of neural networks suitable for processing of chain data. Unlike others neural networks, which can only handle input of a given size, RNN can handle any input of any length, and it is possible to model the dependency of the latter component. With preceding components in the output. First, the RNN stores a hidden state vector that is updated at each processing step (timestep) based on the value of this vector at the pre-processing stage and the value of the input component at this step. Second, the rules for hidden status updates, expressed through a set of corresponding functions and weights, are shared between processing steps. These features allow the RNN network to be generalizable even to any size input chain and have achieved the best results in processing string data such as text and sound.
 
-Let x = $[x_{0}, x_{1}, ..., x_{n}]$ be an input sequence of n + 1 components with each component $x_{t}$ (t = 0..n) is a vector of a certain size. Let ht, yt denote the latent state and output of RNN in step t. An original RNN (Vanilla RNN) is represented by the following mathematical formula:
+Let x = $[x_{0}, x_{1}, ..., x_{n}]$ be an input sequence of $n + 1$ components with each component $x_{t}$ $(t = 0..n)$ is a vector of a certain size. Let $h_{t}$, $y_{t}$ denote the latent state and output of RNN in step t. An original RNN (Vanilla RNN) is represented by the following mathematical formula:
 \begin{align}
 h_{o} &= \sigma_{h}(W_{xh}x_{t})\\
 h_{t} &= \sigma_{h}(W_{hh}h_{t-1} + W_{xh}x_{t})\\
 y_{t} &= \sigma_{t}(W_{hy}h_{t})
 \end{align}
 
-In the above formula, $W_{hh}, W_{xh}$ and $W_{hy}$ are respectively the weight matrices between $h_{t-1}$ and $h_{t}, x_{t} and h_{t}, h_{t} and y_{t}$. $\sigma_{h}$ and $\sigma_{y}$ are activation functions, where the $\tanh$ function is usually used for $\sigma_{h}$.
-\subsubsection{LSTM}
+In the above formula, $W_{hh}, W_{xh}$ and $W_{hy}$ are respectively the weight matrices between $h_{t-1}$ and $h_{t}, x_{t}$ and $h_{t}, h_{t}$ and $y_{t}$. $\sigma_{h}$ and $\sigma_{y}$ are activation functions, where the $\tanh$ function is usually used for $\sigma_{h}$.
+\subsubsection{Long Short-Term Memory - LSTM}
+\textbf{Long Short-Term Memory (LSTM)} was first introduced in 1997 by Hochreiter and Schmidhuber. LSTM is designed to handle Vanishing/Exploding Gradients problem through a method known as a gating mechanism. To understand what a gateway is, first look at how the LSTM works. Vector hidden state in LSTM network is calculated through the following formula:
+
 \begin{align}
 i &= \sigma ( W_{xi}x_{t} + W _{hi}h _{t-1} + b _{i}) \\
 f &= \sigma(W_{xf}x_{t} + W_{hf}h_{t-1} + b_{f}) \\
@@ -205,6 +220,33 @@ g &= \tanh (W_{xg}x_{t} + W_{hg}h_{t-1} + b_{g})	\\
 c_{t} &= c_{t-1} \circ f+ g \circ I	\\
 h_{t} &= \tanh(c_{t}) \circ o
 \end{align}
+\begin{center}
+  \begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\columnwidth]{images/chap2/LSTM.png}
+  \caption{Long Short-Term Memory cell \cite{DBLP:journals/corr/DonahueHGRVSD14}}
+  \label{chap2:WSP}
+  \end{figure}
+\end{center}
+In the above formulas:
+
+$i$, $f$ and $o$ are respectively called \textbf{input gate}, \textbf{forget gate} and \textbf{output gate}. These gate have the same formula that is based on the input $x_{t}$ at the current step and the $h_{t-1}$ state of the previous step, but has different weighting matrices. These values are called $Gate$ because they have a trigger function of \textbf{Sigmoid} so that the value is always in the range [0, 1]. Moreover, by executing \textbf{Hadamard multiplication} (by multiplying the respective elements of the two matrices of the same size) between this and another vector of the same size, we determine the amount of information that this vector allows to pass through. The \textbf{input gate} specifies the amount of new information that is passed, this new information is calculated from the input component of the current step and the hidden state of the previous step. The \textbf{forget gate} specifies the amount of information the hidden state of the previous step is allowed to pass through. Finally, the \textbf{output gate} determines the amount of information from the inner state that is taken to the next step and the higher layers in the model. All ports are equal in size to the size of the hidden state vector.
+\begin{center}
+  \begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\columnwidth]{images/chap2/Hadamard.png}
+  \caption{Hadamard multiplication}
+  \label{chap2:WSP}
+  \end{figure}
+\end{center}
+$g$ contains the combination of the hidden state of the previous step and the input component of the current step. In the pure RNN (Vanilla RNN), $g$ will be considered a new hidden state of the model. In the LSTM, the input gate will determine how much information from $g$ is used in the new hidden state.
+
+$c_{t}$ is the internal memory of one unit. This is the memory combination between the memory value in the 
+previous step $c_{t-1}$, multiplied by the \textbf{forget gate} and the value of $g$ multiplied by the input gate. So we can understand how internal memory is calculated by determining how much memory information is retained and how much information is added.
+
+With the value of internal memory ($c_{t}$), we calculate the hidden state vector value by performing the \textbf{Hadamard multiplication} to the output gate ($o$) because not all of the internal memory values are related to the back-end layers, model or hidden state value of the next step
+
+
 
 \section{Face recognition}
 \section{Action recognition}
