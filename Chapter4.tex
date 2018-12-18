@@ -197,8 +197,23 @@ The element of the field \textit{subscribers}(array) of collection \textbf{Locat
 The project requires two systems for analysis: A face recognition system and a video classifier system. The facial recognition system takes pictures of human faces as input and returns their identification. The video classifier system analyzes videos to find out actions in them. The remaining of this section describes in detail about the two analysis system.
 \subsection{Face recognition module}
 \subsection{Video classifier module}
-Video classifying is not a new task in the field of Deep learning.
-	
+\subsubsection{Deploying classifier system}
+After training the model and saving the weights, to use the model for prediction, this thesis proposes building an HTTP server and provide an API for other components to send requests and receive the result. \\
+Flask framework is used to implement this HTTP server because of its fast performance and is written in Python which helps communication with Keras APIs easier.
+\begin{center}
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=1\columnwidth]{images/chap4/server_sequence.png}
+    \caption{Sequence diagram of the HTTP server}
+    \end{figure}
+\end{center}
 \section{Technologies}
 \subsection{Node.js and npm}
 Node.js (Node) is a JavaScript runtime built on Chrome's V8 JavaScript engine (cite). Node supports executing JavaScript on server-side. Ryan Dahl was created Node.js in 2009. Node.js Foundation is in charge of the development of Node.js. After nine years since its release, the latest LTS version of Node.js is 10.14.2 (includes npm 6.4.1). “Node.js operates on a single thread, using non-blocking I/O calls, allowing it to support tens of thousands (cite) of concurrent connections held in the event loop.” Although JavaScript is single-threaded, thanks to the Event loop, Node.js can implement asynchronous I/O operations. The Event loop will transfer operations to the system kernel. “Since most modern kernels are multi-threaded, they can handle multiple operations executing in the background. When one of these operations completes, the kernel tells Node.js so that the appropriate callback may be added to the poll queue to executed eventually”. By utilizes non-blocking I/O, Node.js skips the waiting time for I/O calls, which is much higher than processing time.
+\subsection{Keras}
+Keras is a high-level framework for building Deep learning model build on top of Tensorflow or Theano library.\\
+Keras provides APIs that are more friendly for new learner compared to Tensorflow. Besides that, Keras also has useful functions for preprocessing data.
+\subsection{Gunicorn}
+Gunicorn is a Python Web Server Gateway Interface (WSGI) HTTP server. A WSGI recieve requests from web servers and foward them to Python applications.
+Gunicorn helps separating the operation between web servers and applications, making applications more portable. Moreover, Gunicorn provides features for deployment such as maximum of requests for each worker, number of workers, making it useful for this thesis.
+
