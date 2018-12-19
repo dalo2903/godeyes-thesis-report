@@ -65,6 +65,16 @@ In the scope of a thesis, the system has to acquire these requirements to perfor
 
 Specifically, users create post with image/video to provide data to back-end. Post also contains other information such as author, location, time. Back-end save all information from post and then deliver data to relevant module to analyze. When suspicious activity detected after analyzing, back-end notify users who subscribe to the exact location and users who subscribe to locations that are in a diameter of 1 kilometer from that location.
 
+\section{Technologies}
+\subsection{Node.js and Node Package Manager (npm)}
+Node.js (Node) is a JavaScript runtime built on Chrome's V8 JavaScript engine (cite). Node supports executing JavaScript on server-side. Ryan Dahl was created Node.js in 2009. Node.js Foundation is in charge of the development of Node.js. After nine years since its release, the latest LTS version of Node.js is 10.14.2 (includes npm 6.4.1). “Node.js operates on a single thread, using non-blocking I/O calls, allowing it to support tens of thousands (cite) of concurrent connections held in the event loop.” Although JavaScript is single-threaded, thanks to the Event loop, Node.js can implement asynchronous I/O operations. The Event loop will transfer operations to the system kernel. “Since most modern kernels are multi-threaded, they can handle multiple operations executing in the background. When one of these operations completes, the kernel tells Node.js so that the appropriate callback may be added to the poll queue to executed eventually”. By utilizes non-blocking I/O, Node.js skips the waiting time for I/O calls, which is much higher than processing time.
+\subsection{Keras}
+Keras is a high-level framework for building Deep learning model build on top of Tensorflow or Theano library.\\
+Keras provides APIs that are more friendly for new learner compared to Tensorflow. Besides that, Keras also has useful functions for preprocessing data.
+\subsection{Gunicorn}
+Gunicorn is a Python Web Server Gateway Interface (WSGI) HTTP server. A WSGI recieve requests from web servers and foward them to Python applications.
+Gunicorn helps separating the operation between web servers and applications, making applications more portable. Moreover, Gunicorn provides features for deployment such as maximum of requests for each worker, number of workers, making it useful for this thesis.
+
 \section{Database}
 The project database divides into two different parts: \textbf{Cloud storage} for visual data such as image/video and a \textbf{NoSQL database} for other information. The primary target is to reduce website loading time. Let take an example, if files are stored directly on the back-end server. When many users request a file simultaneously, the server with limited bandwidth will cause delay. “53\% of mobile site visitors leave a page that takes longer than three seconds to load” – \href{https://think.storage.googleapis.com/docs/mobile-page-speed-new-industry-benchmarks.pdf}{Google}. If these files stored on cloud storage, the client will be served by the cloud storage provider, which has higher availability.
 \subsection{Cloud storage}
@@ -375,12 +385,3 @@ The classifier system was deployed using Google Compute Service. This service al
     \end{figure}
 \end{center}
 
-\section{Technologies}
-\subsection{Node.js and Node Package Manager (npm)}
-Node.js (Node) is a JavaScript runtime built on Chrome's V8 JavaScript engine (cite). Node supports executing JavaScript on server-side. Ryan Dahl was created Node.js in 2009. Node.js Foundation is in charge of the development of Node.js. After nine years since its release, the latest LTS version of Node.js is 10.14.2 (includes npm 6.4.1). “Node.js operates on a single thread, using non-blocking I/O calls, allowing it to support tens of thousands (cite) of concurrent connections held in the event loop.” Although JavaScript is single-threaded, thanks to the Event loop, Node.js can implement asynchronous I/O operations. The Event loop will transfer operations to the system kernel. “Since most modern kernels are multi-threaded, they can handle multiple operations executing in the background. When one of these operations completes, the kernel tells Node.js so that the appropriate callback may be added to the poll queue to executed eventually”. By utilizes non-blocking I/O, Node.js skips the waiting time for I/O calls, which is much higher than processing time.
-\subsection{Keras}
-Keras is a high-level framework for building Deep learning model build on top of Tensorflow or Theano library.\\
-Keras provides APIs that are more friendly for new learner compared to Tensorflow. Besides that, Keras also has useful functions for preprocessing data.
-\subsection{Gunicorn}
-Gunicorn is a Python Web Server Gateway Interface (WSGI) HTTP server. A WSGI recieve requests from web servers and foward them to Python applications.
-Gunicorn helps separating the operation between web servers and applications, making applications more portable. Moreover, Gunicorn provides features for deployment such as maximum of requests for each worker, number of workers, making it useful for this thesis.
