@@ -52,6 +52,63 @@ In the scope of a thesis, the system has to acquire these requirements to perfor
 		\label{chap4:user_case_diagram}
 	\end{figure}
 \end{center}
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+% \usepackage[normalem]{ulem}
+% \useunder{\uline}{\ul}{}
+\begin{table}[]
+\begin{tabular}{|P{5cm}|L{10cm}|}
+		\hline
+	Name							&   UC01 - Log in website     \\ \hline
+	Description 	 				&   Users will be prompted to login with their account information before they can use the system.   \\ \hline
+	Actor 							&  User and Moderator       \\ \hline
+\multirow{3}{*}{Preconditions} 		&\tabitem The user has an website account \\ \
+									&\tabitem The user is trying to log in with their account \\ \
+									&\tabitem The user is not already logged in with website  \\ \hline
+\multirow{2}{*}{Postconditions}	 	&\tabitem The user is logged in to the system     \\ 
+									&\tabitem The user has access to the functions of the
+									system\\ \hline
+\multirow{9}{*}{Path} 				&\tabitem Primary path:    \\
+									& 1.User accesses the URL \\ 
+									& 1.1 The system prompts the user for their 
+									account sign up. \\
+									& 1.2 The user enters their username and
+									password. \\
+									& 1.3 The system authenticates the  login
+									with website \\
+									& 1.4 The user gains access to the systems
+									functionality \\ \cline{2-2} 
+									&\tabitem Alternate path  \\
+									& 2. Invalid account user or banned \\
+									& 2.1 User already logged in with website \\ \hline
+	\end{tabular}
+\end{table}
+\begin{table}[]
+
+	\begin{tabular}{|P{5cm}|L{10cm}|}
+		\hline
+		Name						&   UC02 - View all posts in website     \\ \hline
+		Description 	 			&   Users can view detail in posts   \\ \hline
+		Actor 						&  	User and Moderator       \\ \hline
+		Preconditions 				& 	System check the role of the user to provide the following function 						 \\ \hline
+		Postconditions	 			&							 \\ \hline 
+\multirow{9}{*}{Path} 						&\tabitem Primary path:    \\
+									& 1.Unverified-user press to title of the post \\ 
+									& 1.1 The system inquire the user for their roles
+									account . \\
+									& 1.2 The user can see information of post and commend \\
+									& 2. Verified-user and Moderator press to title of the post \\
+									& 2.1 The system inquire the user for their roles
+									account . \\
+									& 2.2 Verified-user and Moderator can use feature as commend and report post \\ \cline{2-2} 
+									&\tabitem Alternate path  \\
+									& 3. View post by tab My Posts in Profile user\\ \hline
+	\end{tabular}
+\end{table}
+\subsection{System overview}
+Figure \ref{chap3:system_overview_basic} shows a concise overview of how the system operates. Users interact with the website through front-end. The input of users can come in the form of images, videos or label contribution. Back-end receives input and stores in the database. Concurrently, inputs are sent to analysis server . Outputs from analysis server are sent back to back-end and then stored in database. The back-end is also responsible for obtaining appropriate contents from the database to display to users through front-end.
 
 \subsubsection{Main function of the system: Notify users about suspicious activity using data from posts.}
 
