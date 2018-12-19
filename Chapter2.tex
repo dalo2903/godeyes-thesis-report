@@ -16,11 +16,6 @@ Therefore, crowdsourcing can be considered as a process evolving through the fol
   
   On the other hand, participants in a crowdsourcing process gain several benefits. They acquire new skills. They perceive the “seeking to the best solution” process as a challenge to achieve, and they also gain new knowledge. In some cases, they can also “incorporate that experience in the seeking of better employment or in the goal of establishing oneself in freelance work as an entrepreneur” \cite{doi101177}. Crowdsourcing is a model appropriate for the utilization of collective talents by aggregating collective intelligence and knowledge and also by increasing the ingenuity of the crowd. This may result in innovative solutions by reducing the cost and time a traditional problem solving process usually requires \cite{doi101177}
 
-\section{MVC model}
-%% chưa parapharse https://developer.mozilla.org/en-US/docs/Web/Apps/Fundamentals/Modern_web_app_architecture/MVC_architecture %%
-\subsection{Definition}
-Model View Controller (MVC) is a software architecture pattern, commonly used to implement user interfaces: it is therefore a popular choice for architecting web apps. In general, it separates out the application logic into three separate parts, promoting modularity and ease of collaboration and reuse. It also makes applications more flexible and welcoming to iterations.
-
 \section{Neural network}
 
 \subsection{Artificial Neural Network (ANN)}
@@ -69,7 +64,7 @@ Convolution layer is the core building block of a Convolution Network that does 
 
 Overview:\\ 
 The convolution layer's parameter consists of a set of learnable filters. Every filter is small spatially [ Width x Height], but extends through the full depth of the input volume (in standard image, the depth is equal 3). For example, a typical filter on the first layer of a CNN might have a size [5x5x3] ( 5 pixels width and height, and depth = 3 ). In the calculating process, we slide each filter across the width and height of the input and compute dot-product between input and filter in every position. The result of dot-product is a 2-dimensional matrix called activation map of a filter. With layer has 12 filters, each of them produces one activation map, then we stack these maps along the depth dimension and produce the output volume.
- 
+ 
 Local Connectivity:\\
 When processing input which high-dimensional such as images, connect neurons to all previous neurons like Fully-connected layer is impractical, a number of parameters of the network must learn is massive (exploding hyperparameters). Alternately, each neuron is connected to only a local region of the input volume,the limit region of this connectivity is a hyperparameter called receptive field of the neuron (equivalently this is the size of the filter). The connections are local in space (along with width and height), but always full along the entire of the depth of the input volume.
 \begin{center}
@@ -248,6 +243,6 @@ With the value of internal memory ($c_{t}$), we calculate the hidden state vecto
 
 
 
-\section{Face recognition}
-\section{Action recognition}
-\section{Cloud computing}
+%\section{Face recognition}
+%\section{Action recognition}
+%\section{Cloud computing}
