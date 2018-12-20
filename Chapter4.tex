@@ -107,9 +107,6 @@ In the scope of a thesis, the system has to acquire these requirements to perfor
 									& 3. View post by tab My Posts in Profile user\\ \hline
 	\end{tabular}
 \end{table}
-\subsection{System overview}
-Figure \ref{chap3:system_overview_basic} shows a concise overview of how the system operates. Users interact with the website through front-end. The input of users can come in the form of images, videos or label contribution. Back-end receives input and stores in the database. Concurrently, inputs are sent to analysis server . Outputs from analysis server are sent back to back-end and then stored in database. The back-end is also responsible for obtaining appropriate contents from the database to display to users through front-end.
-
 \subsubsection{Main function of the system: Notify users about suspicious activity using data from posts.}
 
 \begin{center}
@@ -131,6 +128,10 @@ Keras provides APIs that are more friendly for new learner compared to Tensorflo
 \subsection{Gunicorn}
 Gunicorn is a Python Web Server Gateway Interface (WSGI) HTTP server. A WSGI recieve requests from web servers and foward them to Python applications.
 Gunicorn helps separating the operation between web servers and applications, making applications more portable. Moreover, Gunicorn provides features for deployment such as maximum of requests for each worker, number of workers, making it useful for this thesis.
+\subsection{Javascript}
+\subsection{Python}
+\subsection{AngularJs}
+\subsection{Bootstrap}
 
 \section{Database}
 The project database divides into two different parts: \textbf{Cloud storage} for visual data such as image/video and a \textbf{NoSQL database} for other information. The primary target is to reduce website loading time. Let take an example, if files are stored directly on the back-end server. When many users request a file simultaneously, the server with limited bandwidth will cause delay. “53\% of mobile site visitors leave a page that takes longer than three seconds to load” – \href{https://think.storage.googleapis.com/docs/mobile-page-speed-new-industry-benchmarks.pdf}{Google}. If these files stored on cloud storage, the client will be served by the cloud storage provider, which has higher availability.
