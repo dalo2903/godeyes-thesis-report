@@ -63,7 +63,7 @@ In the scope of a thesis, the system has to acquire these requirements to perfor
 		\hline
 	Name							&   UC01 - Log in website     \\ \hline
 	Description 	 				&   Users will be prompted to login with their account information before they can use the system.   \\ \hline
-	Actor 							&  User and Moderator       \\ \hline
+	Actor 							&  User and Admin       \\ \hline
 \multirow{3}{*}{Preconditions} 		&\tabitem The user has an website account \\ \
 									&\tabitem The user is trying to log in with their account \\ \
 									&\tabitem The user is not already logged in with website  \\ \hline
@@ -86,27 +86,82 @@ In the scope of a thesis, the system has to acquire these requirements to perfor
 	\end{tabular}
 \end{table}
 \begin{table}[]
-
 	\begin{tabular}{|P{5cm}|L{10cm}|}
 		\hline
 		Name						&   UC02 - View all posts in website     \\ \hline
 		Description 	 			&   Users can view detail in posts   \\ \hline
-		Actor 						&  	User and Moderator       \\ \hline
+		Actor 						&  	User and Admin       \\ \hline
 		Preconditions 				& 	System check the role of the user to provide the following function 						 \\ \hline
 		Postconditions	 			&							 \\ \hline 
 \multirow{9}{*}{Path} 						&\tabitem Primary path:    \\
 									& 1.Unverified-user press to title of the post \\ 
-									& 1.1 The system inquire the user for their roles
+									& 1.1 The system inquires the user for their roles
 									account . \\
 									& 1.2 The user can see information of post and commend \\
 									& 2. Verified-user and Moderator press to title of the post \\
-									& 2.1 The system inquire the user for their roles
+									& 2.1 The system checks the user for their roles
 									account . \\
 									& 2.2 Verified-user and Moderator can use feature as commend and report post \\ \cline{2-2} 
 									&\tabitem Alternate path  \\
 									& 3. View post by tab My Posts in Profile user\\ \hline
 	\end{tabular}
 \end{table}
+\begin{table}[]
+	\begin{tabular}{|P{5cm}|L{10cm}|}
+		\hline
+		Name						&   UC03 - Create new post in website       \\ \hline
+		Description 	 			&   Users can create new data for everyone to view on website's new feed \\ \hline
+		Actor 						&  	Verified-user and Admin       \\ \hline
+		Preconditions 				& 	The system checks user’s phone number whether is verified  						 \\ \hline
+\multirow{3}{*}{Postconditions} 	&	\tabitem Server stores data to database \\
+									&	\tabitem Create new location on website for user to subscribe\\
+									&   \tabitem Send a request api to video classification service to analyze data and get a result to notify user					 \\ \hline 
+									
+\multirow{4}{*}{Path} 				&\tabitem Primary path:    \\
+									& 1.Verified-user and Admin access post creation's URL    \\ 
+									& 1.1 The system inquires the user for their roles 
+									account and user’s phone number. \\
+									& 1.2 The user fills in post's title,  pictures/video, location when user capture that data  \\  \hline
+	\end{tabular}
+\end{table}
+\begin{table}[]
+	\begin{tabular}{|P{5cm}|L{10cm}|}
+		\hline
+		Name						&   UC04 -Contribute label of videos         \\ \hline
+		Description 	 			&   Users can update label of all videos exist on website \\ \hline
+		Actor 						&  	Verified-user and Admin       \\ \hline
+		Preconditions 				& 	The system checks user’s phone number whether is verified  	 \\ \hline	
+\multirow{2}{*}{Postconditions} 	&	\tabitem Server updates the user's vote \\
+									&   \tabitem Server stores id of the user \\ \hline 									
+\multirow{4}{*}{Path} 				&	\tabitem Primary path:    \\
+									& 1.Verified-user and Admin access post labeling's URL    \\ 
+									& 1.1 The system inquires the user for their roles 
+									account and user’s phone number. \\
+									& 1.2 The user clicks available label button \\  \hline
+	\end{tabular}
+\end{table}
+\begin{table}[]
+	\begin{tabular}{|P{5cm}|L{10cm}|}
+		\hline
+		Name						&   UC05 -Delete post on website         \\ \hline
+		Description 	 			&   Users can delete their videos  \\ \hline
+		Actor 						&  	Verified-user and Admin       \\ \hline
+		Preconditions 				& 	The system checks role of the user  	 \\ \hline	
+\multirow{2}{*}{Postconditions} 	&	\tabitem Server delete information in database \\
+									&   \tabitem Server delete image/video in cloud storage \\ \hline 									
+\multirow{9}{*}{Path} 				&	\tabitem Primary path:    \\
+									& 1.Verified-user access profile of user URL    \\ 
+									& 1.1 The system inquires the user for their roles 
+		account. \\
+									& 1.2 The user clicks on "My Posts" tab \\ 
+									& 1.3 The user clicks on "Delete" button \\
+									& 2.The moderator access admin's page\\
+									& 2.1. The system check authorization of admin \\
+									& 2.2  The admin clicks on "Reported Posts" tab \\
+									& 2.3. The admin clicks "Delete Post" button\\ \hline
+	\end{tabular}
+\end{table}
+
 \subsection{System overview}
 Figure \ref{chap3:system_overview_basic} shows a concise overview of how the system operates. Users interact with the website through front-end. The input of users can come in the form of images, videos or label contribution. Back-end receives input and stores in the database. Concurrently, inputs are sent to analysis server . Outputs from analysis server are sent back to back-end and then stored in database. The back-end is also responsible for obtaining appropriate contents from the database to display to users through front-end.
 
@@ -131,11 +186,24 @@ Keras provides APIs that are more friendly for new learner compared to Tensorflo
 \subsection{Gunicorn}
 Gunicorn is a Python Web Server Gateway Interface (WSGI) HTTP server. A WSGI recieve requests from web servers and foward them to Python applications.
 Gunicorn helps separating the operation between web servers and applications, making applications more portable. Moreover, Gunicorn provides features for deployment such as maximum of requests for each worker, number of workers, making it useful for this thesis.
-
+\subsection{Javascript}
+\subsection{Python}
+\subsection{AngularJs}
+\subsection{Bootstrap}
+\subsection{Heroku}
 \section{Database}
 The project database divides into two different parts: \textbf{Cloud storage} for visual data such as image/video and a \textbf{NoSQL database} for other information. The primary target is to reduce website loading time. Let take an example, if files are stored directly on the back-end server. When many users request a file simultaneously, the server with limited bandwidth will cause delay. “53\% of mobile site visitors leave a page that takes longer than three seconds to load” – \href{https://think.storage.googleapis.com/docs/mobile-page-speed-new-industry-benchmarks.pdf}{Google}. If these files stored on cloud storage, the client will be served by the cloud storage provider, which has higher availability.
 \subsection{Cloud storage}
-
+Google is stepping up as a reliable cloud storage provider. Google Cloud Storage is a service within the Google Cloud Platform. It provides unified object storage. 
+Google Cloud Storage is chosen for its advantages:
+\begin{itemize}
+\item Good documentation: hundreds of pages in total, including a detailed API Reference guide.
+\item Good prices: around 0,020 USD per GB/month with the Regional class and 0,007 USD per GB/month with the Coldline class, cheaper compared to other cloud storage provider.
+\item Different storage classes for each necessity: Regional (frequent use), Nearline (infrequent use) and Coldline (long-term storage).
+\item Many regions available to store data: North America, South America, Europe, Asia and Australia.
+\item One of the best free layers in the industry. \$300 free credit to get started with any Google Cloud Platform product during the first year. Afterwards, 5 GB of Storage free to use forever.
+\end{itemize}
+Objects needed to be stored are image and video. Before being stored, data is renamed to a unique ID for later retrieval. Additionally, image is resized to reduce capacity for better performance. 
 \subsection{NoSQL database}
 NoSQL databases were created in response to the limitations of traditional relational database technology. When compared against relational databases, NoSQL databases are more scalable and provide superior performance, and their data model addresses several shortcomings of the the relational model.
 
@@ -145,7 +213,7 @@ Large volumes of structured, semi-structured, and unstructured data
 Agile sprints, quick iteration, and frequent code pushes
 Object-oriented programming that is easy to use and flexible
 Efficient, scale-out architecture instead of expensive, monolithic architecture
-Hence, \textbf{MongoDB} is used to implement the database in this project
+Hence, \textbf{MongoDB} is used to implement the database in this project. To host the MongoDB database, \textbf{mlab} is put to use. \textbf{mLab} is a fully managed cloud database service that hosts MongoDB databases.
 \subsubsection{Database overview}
 Figure \ref{chap4:database_overview} displays the structure of the database which includes collections and relationships between them.
 There are a total of 8 collections in the database: User, Visual data, Location, Notification, Person, Post, Record, Role. 
@@ -282,6 +350,7 @@ To implement the website, Model-View-Controller (MVC) pattern is used for its ad
 \item SEO friendly Development platform.
 \end{itemize}
 In the MVC development, controller receives all requests for the application and then control the model to prepare any necessary information for the view. The view uses that data prepared by the controller to bring the final output.
+Bootstrap is also applied to enable responsiveness. Responsive web design is a website which automatically adjust itself to look good on all devices, from small phones to large desktops.
 \subsection{Front-end}
 \subsubsection{Overview}
 \begin{center}
@@ -411,6 +480,13 @@ In MVC pattern, the Controller receives user input, manipulates Model, and then 
 The project requires two systems for analysis: A face recognition system and a video classifier system. The facial recognition system takes pictures of human faces as input and returns their identification. The video classifier system analyzes videos to find out actions in them. The remaining of this section describes in detail about the two analysis system.
 \subsection{Face recognition module}
 The facial recognition module uses Microsoft Azure Face API as its core. “Azure Face API is a cognitive service that provides algorithms for detecting, recognizing, and analyzing human faces in images.” (cite + paraphase)
+\begin{center}
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=1\columnwidth]{images/chap4/face-api-homepage.PNG}
+    \caption{Microsoft Azure Face API hompage}
+    \end{figure}
+\end{center}
 There is two way to use Azure Face Service: client Face SDK and Azure Face REST API. This thesis applies the second one. Both ways require a Face API subscription key in order to communicate with Microsoft Cognitive Server. This thesis applies the second one. The Face endpoint URL will be in the following format:
 \begin{center}
 \textit{https://[location].api.cognitive.microsoft.com/face/v1.0}
@@ -420,14 +496,21 @@ Let take a look of some basic concepts for Face API from its \textit{Glossary} (
 \begin{itemize}
 \item Face: is a result of a detected face, contains a unified identity (Face ID), face location in an image (Face Rectangle), and optional face attributes. Face ID will expire in 24 hours after detection call.
 \item Persisted Face: similar to Face, but is persisted and will not expire.
-\item Person: is an object which includes its identity (Person ID), a bunch of Persisted Face, and other related data.
-\item Person Group: is a set of Persons and is the unit of Identification.
-\item Person Group - Create:
-\item Person Group - Train:
-\item Person Group Person – Create:
-\item Person Group Person – Add Face:
+\item Person: is an object which includes its identity (Person ID), a bunch of Persisted Face of that person, and other related data.
+\item Person Group: is a set of Persons and is the unit of Identification. A Person Group must be specified in order to identify a face. Each face will be recognized independently. Before the Identification, the Person Group should be trained successfully.
+\begin{center}
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=1\columnwidth]{images/chap4/face-api-person-group.jpg}
+    \caption{An example of Person Group}
+    \end{figure}
+\end{center}
+\item Person Group - Create: This API will create a new Person Group with a unique Person Group ID, name, and user-provided user data (optional). This Person Group will contain uploaded person data, including face images and face recognition features.
+\item Person Group - Train: In order to perform a face identification from a Person Group, that Person Group should be trained by calling this API. This API will pre-process the Person Group to ensure Identification performance.
+\item Person Group Person – Create: This API will create a Person in a Person Group. It requires Person Name and Person Group ID. If a Person created successfully, it would return a new Person ID.
+\item Person Group Person – Add Face: This API adds a Face image for a Person in a Person Group. It will return a Persisted Face ID after added. This Persisted Face will be used later for Identification or Verification request.
 \item Face - Detect: This API accepts image (in binary data or image’s URL) as input, detects human faces in that picture; returns face coordinates and attributes. It can detect up to 64 faces in a photo, and best for frontal and near-frontal faces. Each detected face will be assigned a unique Face ID and will be used in Face - Identify.
-\item Face - Identify:
+\item Face - Identify: This API takes an array of Face ID (query faces), compute similarities with all Faces in that Person Group. After that, it returns identified results, which is a set of Persons with confidence.
 \end{itemize}
 \subsection{Video classifier module}
 \subsubsection{Deploying the video classifier system}
