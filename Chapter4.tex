@@ -411,6 +411,13 @@ In MVC pattern, the Controller receives user input, manipulates Model, and then 
 The project requires two systems for analysis: A face recognition system and a video classifier system. The facial recognition system takes pictures of human faces as input and returns their identification. The video classifier system analyzes videos to find out actions in them. The remaining of this section describes in detail about the two analysis system.
 \subsection{Face recognition module}
 The facial recognition module uses Microsoft Azure Face API as its core. “Azure Face API is a cognitive service that provides algorithms for detecting, recognizing, and analyzing human faces in images.” (cite + paraphase)
+\begin{center}
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=1\columnwidth]{images/chap4/face-api-homepage.PNG}
+    \caption{Microsoft Azure Face API hompage}
+    \end{figure}
+\end{center}
 There is two way to use Azure Face Service: client Face SDK and Azure Face REST API. This thesis applies the second one. Both ways require a Face API subscription key in order to communicate with Microsoft Cognitive Server. This thesis applies the second one. The Face endpoint URL will be in the following format:
 \begin{center}
 \textit{https://[location].api.cognitive.microsoft.com/face/v1.0}
@@ -420,14 +427,21 @@ Let take a look of some basic concepts for Face API from its \textit{Glossary} (
 \begin{itemize}
 \item Face: is a result of a detected face, contains a unified identity (Face ID), face location in an image (Face Rectangle), and optional face attributes. Face ID will expire in 24 hours after detection call.
 \item Persisted Face: similar to Face, but is persisted and will not expire.
-\item Person: is an object which includes its identity (Person ID), a bunch of Persisted Face, and other related data.
-\item Person Group: is a set of Persons and is the unit of Identification.
-\item Person Group - Create:
-\item Person Group - Train:
-\item Person Group Person – Create:
-\item Person Group Person – Add Face:
+\item Person: is an object which includes its identity (Person ID), a bunch of Persisted Face of that person, and other related data.
+\item Person Group: is a set of Persons and is the unit of Identification. A Person Group must be specified in order to identify a face. Each face will be recognized independently. Before the Identification, the Person Group should be trained successfully.
+\begin{center}
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=1\columnwidth]{images/chap4/face-api-person-group.jpg}
+    \caption{An example of Person Group}
+    \end{figure}
+\end{center}
+\item Person Group - Create: This API will create a new Person Group with a unique Person Group ID, name, and user-provided user data (optional). This Person Group will contain uploaded person data, including face images and face recognition features.
+\item Person Group - Train: In order to perform a face identification from a Person Group, that Person Group should be trained by calling this API. This API will pre-process the Person Group to ensure Identification performance.
+\item Person Group Person – Create: This API will create a Person in a Person Group. It requires Person Name and Person Group ID. If a Person created successfully, it would return a new Person ID.
+\item Person Group Person – Add Face: This API adds a Face image for a Person in a Person Group. It will return a Persisted Face ID after added. This Persisted Face will be used later for Identification or Verification request.
 \item Face - Detect: This API accepts image (in binary data or image’s URL) as input, detects human faces in that picture; returns face coordinates and attributes. It can detect up to 64 faces in a photo, and best for frontal and near-frontal faces. Each detected face will be assigned a unique Face ID and will be used in Face - Identify.
-\item Face - Identify:
+\item Face - Identify: This API takes an array of Face ID (query faces), compute similarities with all Faces in that Person Group. After that, it returns identified results, which is a set of Persons with confidence.
 \end{itemize}
 \subsection{Video classifier module}
 \subsubsection{Deploying the video classifier system}
