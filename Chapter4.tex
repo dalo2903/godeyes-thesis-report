@@ -63,7 +63,7 @@ In the scope of a thesis, the system has to acquire these requirements to perfor
 		\hline
 	Name							&   UC01 - Log in website     \\ \hline
 	Description 	 				&   Users will be prompted to login with their account information before they can use the system.   \\ \hline
-	Actor 							&  User and Moderator       \\ \hline
+	Actor 							&  User and Admin       \\ \hline
 \multirow{3}{*}{Preconditions} 		&\tabitem The user has an website account \\ \
 									&\tabitem The user is trying to log in with their account \\ \
 									&\tabitem The user is not already logged in with website  \\ \hline
@@ -86,27 +86,82 @@ In the scope of a thesis, the system has to acquire these requirements to perfor
 	\end{tabular}
 \end{table}
 \begin{table}[]
-
 	\begin{tabular}{|P{5cm}|L{10cm}|}
 		\hline
 		Name						&   UC02 - View all posts in website     \\ \hline
 		Description 	 			&   Users can view detail in posts   \\ \hline
-		Actor 						&  	User and Moderator       \\ \hline
+		Actor 						&  	User and Admin       \\ \hline
 		Preconditions 				& 	System check the role of the user to provide the following function 						 \\ \hline
 		Postconditions	 			&							 \\ \hline 
 \multirow{9}{*}{Path} 						&\tabitem Primary path:    \\
 									& 1.Unverified-user press to title of the post \\ 
-									& 1.1 The system inquire the user for their roles
+									& 1.1 The system inquires the user for their roles
 									account . \\
 									& 1.2 The user can see information of post and commend \\
 									& 2. Verified-user and Moderator press to title of the post \\
-									& 2.1 The system inquire the user for their roles
+									& 2.1 The system checks the user for their roles
 									account . \\
 									& 2.2 Verified-user and Moderator can use feature as commend and report post \\ \cline{2-2} 
 									&\tabitem Alternate path  \\
 									& 3. View post by tab My Posts in Profile user\\ \hline
 	\end{tabular}
 \end{table}
+\begin{table}[]
+	\begin{tabular}{|P{5cm}|L{10cm}|}
+		\hline
+		Name						&   UC03 - Create new post in website       \\ \hline
+		Description 	 			&   Users can create new data for everyone to view on website's new feed \\ \hline
+		Actor 						&  	Verified-user and Admin       \\ \hline
+		Preconditions 				& 	The system checks user’s phone number whether is verified  						 \\ \hline
+\multirow{3}{*}{Postconditions} 	&	\tabitem Server stores data to database \\
+									&	\tabitem Create new location on website for user to subscribe\\
+									&   \tabitem Send a request api to video classification service to analyze data and get a result to notify user					 \\ \hline 
+									
+\multirow{4}{*}{Path} 				&\tabitem Primary path:    \\
+									& 1.Verified-user and Admin access post creation's URL    \\ 
+									& 1.1 The system inquires the user for their roles 
+									account and user’s phone number. \\
+									& 1.2 The user fills in post's title,  pictures/video, location when user capture that data  \\  \hline
+	\end{tabular}
+\end{table}
+\begin{table}[]
+	\begin{tabular}{|P{5cm}|L{10cm}|}
+		\hline
+		Name						&   UC04 -Contribute label of videos         \\ \hline
+		Description 	 			&   Users can update label of all videos exist on website \\ \hline
+		Actor 						&  	Verified-user and Admin       \\ \hline
+		Preconditions 				& 	The system checks user’s phone number whether is verified  	 \\ \hline	
+\multirow{2}{*}{Postconditions} 	&	\tabitem Server updates the user's vote \\
+									&   \tabitem Server stores id of the user \\ \hline 									
+\multirow{4}{*}{Path} 				&	\tabitem Primary path:    \\
+									& 1.Verified-user and Admin access post labeling's URL    \\ 
+									& 1.1 The system inquires the user for their roles 
+									account and user’s phone number. \\
+									& 1.2 The user clicks available label button \\  \hline
+	\end{tabular}
+\end{table}
+\begin{table}[]
+	\begin{tabular}{|P{5cm}|L{10cm}|}
+		\hline
+		Name						&   UC05 -Delete post on website         \\ \hline
+		Description 	 			&   Users can delete their videos  \\ \hline
+		Actor 						&  	Verified-user and Admin       \\ \hline
+		Preconditions 				& 	The system checks role of the user  	 \\ \hline	
+\multirow{2}{*}{Postconditions} 	&	\tabitem Server delete information in database \\
+									&   \tabitem Server delete image/video in cloud storage \\ \hline 									
+\multirow{9}{*}{Path} 				&	\tabitem Primary path:    \\
+									& 1.Verified-user access profile of user URL    \\ 
+									& 1.1 The system inquires the user for their roles 
+		account. \\
+									& 1.2 The user clicks on "My Posts" tab \\ 
+									& 1.3 The user clicks on "Delete" button \\
+									& 2.The moderator access admin's page\\
+									& 2.1. The system check authorization of admin \\
+									& 2.2  The admin clicks on "Reported Posts" tab \\
+									& 2.3. The admin clicks "Delete Post" button\\ \hline
+	\end{tabular}
+\end{table}
+
 \subsection{System overview}
 Figure \ref{chap3:system_overview_basic} shows a concise overview of how the system operates. Users interact with the website through front-end. The input of users can come in the form of images, videos or label contribution. Back-end receives input and stores in the database. Concurrently, inputs are sent to analysis server . Outputs from analysis server are sent back to back-end and then stored in database. The back-end is also responsible for obtaining appropriate contents from the database to display to users through front-end.
 
