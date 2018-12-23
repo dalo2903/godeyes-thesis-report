@@ -499,10 +499,10 @@ In MVC pattern, the Controller receives user input, manipulates Model, and then 
 	\item Email Controller: One way to interact with users is sending emails. This controller sends email using SendGrid, an email delivery service.
 	\item Face Controller: The core of Face Recognition Module is Microsoft Azure Face API, a cognitive service that provides algorithms for recognizing human faces in images (cite). Face Controller contains a bunch of function to request Microsoft Azure Face API.
 	\item Identify Controller: 
-	\item Location Controller: 
-	\item Notification Controller
-	\item Person Controller
-	\item Post Controller
+	\item Location Controller: This controller contains two parts: location and location subscriber. The location part manipulates location. It controls in which condition a location will be created. Each user has a list of subscriber location and will get notified of suspicious warning.
+	\item Notification Controller: handle the way notification sent to users and what notification has been seen by the user.
+	\item Person Controller: This controller takes responsibility for managing Person and synchronizing with Person of Microsoft Azure Face API.
+	\item Post Controller: is one of the essential controllers in this system. This controller together with Upload Controller, manage the flow of post creating.
 	\item Record Controller
 	\item Upload Controller
 	\item User Controller
