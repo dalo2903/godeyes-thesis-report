@@ -2,7 +2,7 @@
 \section{Prerequisite}
 \tocless\subsection{Node.js}
 \begin{enumerate}
-	\item Download Node.js installer from \href{https://nodejs.org/en/download/}{its official download page}
+	\item Download Node.js installer from its official download page (\href{https://nodejs.org/en/download/}{https://nodejs.org/en/download/})
 	      \begin{center}
 	      	\begin{figure}[H]
 	      		\centering
@@ -32,7 +32,7 @@
 \end{enumerate}
 \tocless\subsection{Google Cloud Platform}
 \begin{enumerate}
-	\item Create an account and a new project on \textit{Google Cloud Platform} from \href{https://cloud.google.com/}{here}
+	\item Create an account and a new project on \textit{Google Cloud Platform} from \href{https://cloud.google.com/}{https://cloud.google.com/}
 	      \begin{center}
 	      	\begin{figure}[H]
 	      		\centering
@@ -71,11 +71,52 @@
 	      	\end{figure}
 	      \end{center}
 	      \footnotetext{Source: \url{https://cloud.google.com/}}
-	\item Following instruction in \href{https://cloud.google.com/iam/docs/creating-managing-service-accounts#creating_a_service_account}{this page} to create a \textit{Service Account} 
-	\item Following instruction in \href{https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource}{this page} to grant role \textit{Storage Admin} for created \textit{Service Account}
-	\item Following instruction in \href{https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys}{this page} to create a \textit{Service Account key}. Download and keep 
+	\item Following instruction in \href{https://cloud.google.com/iam/docs/creating-managing-service-accounts#creating_a_service_account}{https://cloud.google.com/iam/docs/creating-managing-service-accounts\#creating\_a\_service\_account} to create a \textit{Service Account} 
+	\item Following instruction in \href{https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource}{https://cloud.google.com/iam/docs/granting-roles-to-service-accounts\#granting\_access\_to\_a\_service\_account\_for\_a\_resource} to grant role \textit{Storage Admin} for created \textit{Service Account}
+	\item Following instruction in \href{https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys}{https://cloud.google.com/iam/docs/creating-managing-service-account-keys\#creating\_service\_account\_keys} to create a \textit{Service Account key}. Download and keep it locally.
 \end{enumerate}
 
+\tocless\subsection{mLab}
+\begin{enumerate}
+\item Access \href{https://mlab.com/signup/}{https://mlab.com/signup/} and sign up an account
+\item Click \textit{Create new} to create a new deployment
+\item Click \textit{Users} and select \textit{Add database user}
+\end{enumerate}
+
+\tocless\subsection{Microsoft Cognitive Services}
+\begin{enumerate}
+\item Access \href{https://azure.microsoft.com/en-us/free}{https://azure.microsoft.com/en-us/free} and create an Azure account. For more detail, please follow this instruction \href{https://docs.microsoft.com/en-us/azure/cognitive-services/cognitive-services-apis-create-account}{https://docs.microsoft.com/en-us/azure/cognitive-services/cognitive-services-apis-create-account}
+\item Create and subscribe to  Azure Cognitive Services: Face
+\item Grab API keys
+\end{enumerate}
+
+\tocless\subsection{Facebook Account Kit}
+\begin{enumerate}
+\item Follow this documentation from \href{https://developers.facebook.com/docs/accountkit/webjs}{https://developers.facebook.com/docs/accountkit/webjs} to integrate Facebook Account Kit for Web. A Facebook Developer account is required.
+\item After successfully integrated, Account Kit will appear below application name.
+\item Access Account Kit Settings in application dashboard for more advanced configuration
+\end{enumerate}
+
+\tocless\subsection{SendGrid}
+\begin{enumerate}
+\item Access SendGrid’s homepage at \href{https://sendgrid.com/}{https://sendgrid.com/} and sign up an account
+\item Get a SendGrid API key from \href{https://app.sendgrid.com/settings/api_keys}{https://app.sendgrid.com/settings/api\_keys}
+\item Follow the instruction from The Official SendGrid Led, Community Driven Node.js API Library: \href{https://github.com/sendgrid/sendgrid-nodejs}{https://github.com/sendgrid/sendgrid-nodejs}
+\end{enumerate}
+
+\tocless\subsection{Google Maps API: Places Library}
+\begin{enumerate}
+\item Follow this tutorial (\href{https://developers.google.com/maps/documentation/javascript/tutorial}{https://developers.google.com/maps/documentation/javascript/tutorial}) to integrate Google Maps JavaScript API
+\item Get a Google Maps API key from \href{https://developers.google.com/maps/documentation/javascript/get-api-key}{https://developers.google.com/maps/documentation/javascript/get-api-key}
+\item Access \href{https://developers.google.com/maps/documentation/javascript/places}{https://developers.google.com/maps/documentation/javascript/places} for more detail about Places Library
+\end{enumerate}
+
+\tocless\subsection{Google OAuth 2.0 Authentication}
+\begin{enumerate}
+\item Follow this documentation (\href{http://www.passportjs.org/docs/google#oauth-2-0}{http://www.passportjs.org/docs/google\#oauth-2-0}) to integrate Google OAuth 2.0 Authentication
+\item Follow this guide (\href{https://developers.google.com/adwords/api/docs/guides/authentication#webapp}{https://developers.google.com/adwords/api/docs/guides/authentication\#webapp}) to create a client ID and client secret for Google OAuth 2.0 Authentication
+\item Go to Google API Console (\href{https://console.cloud.google.com/apis/dashboard}{https://console.cloud.google.com/apis/dashboard}) to manage Credentials (\href{https://console.cloud.google.com/apis/credentials}{https://console.cloud.google.com/apis/credentials}). For advanced configuration, select the just created OAuth 2.0 client ID
+\end{enumerate}
 \section{Source code}
 \chapter{User manual}
 \section{Verifying account}
