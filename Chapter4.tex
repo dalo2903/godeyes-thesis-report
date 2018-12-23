@@ -498,15 +498,15 @@ In MVC pattern, the Controller receives user input, manipulates Model, and then 
 	\item Dataset Collector: downloads dataset (a collection of labeled videos) as the input for the training process.
 	\item Email Controller: One way to interact with users is sending emails. This controller sends email about a notification via SendGrid, an email delivery service.
 	\item Face Controller: The core of Face Recognition Module is Microsoft Azure Face API, a cognitive service that provides algorithms for recognizing human faces in images (cite). Face Controller contains a collection of functions to request Microsoft Azure Face API.
-	\item Identify Controller: 
+	\item Identify Controller: (Kha)
 	\item Location Controller: This controller has two purposes: manipulate location and location subscriber. It controls in which condition a location will be created. Additionally, Each location has a list of subscriber who  will be notified about suspicious activity.
 	\item Notification Controller:  take care of creating notification and send to correct users; Checking status of notification whether it has been seen by the user.
 	\item Person Controller: This controller takes responsibility for managing Person and synchronizing with Person of Microsoft Azure Face API.
 	\item Post Controller: is one of the essential controllers in this system. This controller together with Upload Controller, manage the flow of post creating.
-	\item Record Controller
-	\item Upload Controller
+	\item Record Controller: (Kha)
+	\item Upload Controller: When a user creates a post, this controller takes a picture, or video then uploads to Google Cloud Storage and finally returns public URL of that resource.
 	\item User Controller
-	\item Visual Data Controller
+	\item Visual Data Controller: For each image or video uploaded to the Google Cloud Storage, this controller will create a comparable visual data with related data (location, public URL, …). Verified users can be able to decide whether a video is suspicious or not. This controller also take the identified result of visual data after analyzed by Microsoft Azure Face API.
 	      
 \end{itemize}
 \section{Visual data analysis modules}
