@@ -494,13 +494,13 @@ There is also an "Add person" button to add new person with name for system to i
 \subsection{Back-end}
 In MVC pattern, the Controller receives user input, manipulates Model, and then responds to the user (cite). Following is the list of implemented controllers in this thesis.
 \begin{itemize}
-	\item Authentication Controller: manages the flow of user sign in and sign up. A user can choose either traditional or social login. With the classical way, the user has to provide his/her email and password. If the user prefers social login, this website currently supports sign in via Facebook and Google+.
+	\item Authentication Controller: manages the flow of user sign in and sign up. A user can choose either to login with traditional account or social account. With the classical way, the user has to provide his/her email and password. If the user prefers social login, the website currently supports sign in via Facebook and Google+.
 	\item Dataset Collector: downloads dataset (a collection of labeled videos) as the input for the training process.
-	\item Email Controller: One way to interact with users is sending emails. This controller sends email using SendGrid, an email delivery service.
-	\item Face Controller: The core of Face Recognition Module is Microsoft Azure Face API, a cognitive service that provides algorithms for recognizing human faces in images (cite). Face Controller contains a bunch of function to request Microsoft Azure Face API.
+	\item Email Controller: One way to interact with users is sending emails. This controller sends email about a notification via SendGrid, an email delivery service.
+	\item Face Controller: The core of Face Recognition Module is Microsoft Azure Face API, a cognitive service that provides algorithms for recognizing human faces in images (cite). Face Controller contains a collection of functions to request Microsoft Azure Face API.
 	\item Identify Controller: 
-	\item Location Controller: This controller contains two parts: location and location subscriber. The location part manipulates location. It controls in which condition a location will be created. Each user has a list of subscriber location and will get notified of suspicious warning.
-	\item Notification Controller: handle the way notification sent to users and what notification has been seen by the user.
+	\item Location Controller: This controller has two purposes: manipulate location and location subscriber. It controls in which condition a location will be created. Additionally, Each location has a list of subscriber who  will be notified about suspicious activity.
+	\item Notification Controller:  take care of creating notification and send to correct users; Checking status of notification whether it has been seen by the user.
 	\item Person Controller: This controller takes responsibility for managing Person and synchronizing with Person of Microsoft Azure Face API.
 	\item Post Controller: is one of the essential controllers in this system. This controller together with Upload Controller, manage the flow of post creating.
 	\item Record Controller
