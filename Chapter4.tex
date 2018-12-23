@@ -162,9 +162,6 @@ In the scope of a thesis, the system has to acquire these requirements to perfor
 	\end{tabular}
 \end{table}
 
-\subsection{System overview}
-Figure \ref{chap3:system_overview_basic} shows a concise overview of how the system operates. Users interact with the website through front-end. The input of users can come in the form of images, videos or label contribution. Back-end receives input and stores in the database. Concurrently, inputs are sent to analysis server . Outputs from analysis server are sent back to back-end and then stored in database. The back-end is also responsible for obtaining appropriate contents from the database to display to users through front-end.
-
 \subsubsection{Main function of the system: Notify users about suspicious activity using data from posts.}
 
 \begin{center}
@@ -190,7 +187,16 @@ Gunicorn helps separating the operation between web servers and applications, ma
 \section{Database}
 The project database divides into two different parts: \textbf{Cloud storage} for visual data such as image/video and a \textbf{NoSQL database} for other information. The primary target is to reduce website loading time. Let take an example, if files are stored directly on the back-end server. When many users request a file simultaneously, the server with limited bandwidth will cause delay. “53\% of mobile site visitors leave a page that takes longer than three seconds to load” – \href{https://think.storage.googleapis.com/docs/mobile-page-speed-new-industry-benchmarks.pdf}{Google}. If these files stored on cloud storage, the client will be served by the cloud storage provider, which has higher availability.
 \subsection{Cloud storage}
-
+Google is stepping up as a reliable cloud storage provider. Google Cloud Storage is a service within the Google Cloud Platform. It provides unified object storage. 
+Google Cloud Storage is chosen for its advantages:
+\begin{itemize}
+\item Good documentation: hundreds of pages in total, including a detailed API Reference guide.
+\item Good prices: around 0,020 USD per GB/month with the Regional class and 0,007 USD per GB/month with the Coldline class, cheaper compared to other cloud storage provider.
+\item Different storage classes for each necessity: Regional (frequent use), Nearline (infrequent use) and Coldline (long-term storage).
+\item Many regions available to store data: North America, South America, Europe, Asia and Australia.
+\item One of the best free layers in the industry. \$300 free credit to get started with any Google Cloud Platform product during the first year. Afterwards, 5 GB of Storage free to use forever.
+\end{itemize}
+Objects needed to be stored are image and video. Before being stored, data is renamed to a unique ID for later retrieval. Additionally, image is resized to reduce capacity for better performance.
 \subsection{NoSQL database}
 NoSQL databases were created in response to the limitations of traditional relational database technology. When compared against relational databases, NoSQL databases are more scalable and provide superior performance, and their data model addresses several shortcomings of the the relational model.
 
@@ -353,76 +359,108 @@ In the MVC development, controller receives all requests for the application and
 \begin{center}
     \begin{figure}[H]
     \centering
-    \includegraphics[width=0.16\columnwidth]{images/chap4/sitemap.png}
+    \includegraphics[width=5cm,height=20cm]{images/chap4/sitemap.png}
     \caption{Sitemap}
     \end{figure}
 \end{center}
 \subsubsection{Views}
-\textbf{Header}
+	\textbf{Header}
 \\
 Header is a navigation bar which is displayed in every views. Navigation bar only contains "About us", "Sign in", "Sign up" buttons by default.
-\begin{center}
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=1\columnwidth]{images/chap4/header_not_login.png}
-    \caption{Default navigation bar.}
-    \end{figure}
-\end{center}
-
+\begin{figure}[!htb]
+\minipage{0.325\textwidth}
+  \includegraphics[width=\linewidth]{images/chap4/header_not_login_mb.jpg}
+\endminipage\hfill
+\minipage{0.05\textwidth}
+\endminipage\hfill
+\minipage{0.625\textwidth}
+  \includegraphics[width=\linewidth]{images/chap4/header_not_login.png}
+\endminipage
+\end{figure}
+\cleardoublepage
 Logging in add additional buttons such as "Create post", "Label videos",  "Profile", "Log out" and a notification dropdown represented by a bell icon to the bar. In case of having unseen notifications, the bell icon will have an orange-red color.
-\begin{center}
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=1\columnwidth]{images/chap4/header.png}
-    \caption{Navigation bar when logged in.}
-    \end{figure}
-\end{center}
+\\
+\begin{figure}[!htb]
+\minipage{0.325\textwidth}
+  \includegraphics[width=\linewidth]{images/chap4/header_mb.jpg}
+\endminipage\hfill
+\minipage{0.05\textwidth}
+\endminipage\hfill
+\minipage{0.625\textwidth}
+  \includegraphics[width=\linewidth]{images/chap4/header.png}
+\endminipage
+\end{figure}
+\cleardoublepage
 \textbf{Homepage}
 \\
 News feed which are posts from everyone is visible in the middle of the homepage. A post is displayed with title, author, time, location and visual data. Additionally, there is a sidebar with popular locations. Clicking a location from the sidebar leads to another view that show only posts from that location. Blank space is reserved for advertising to earn income in the future.
-\begin{center}
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=1\columnwidth]{images/chap4/homepage.png}
-    \end{figure}
-\end{center}
+\begin{figure}[!htb]
+\minipage{0.325\textwidth}
+  \includegraphics[width=\linewidth]{images/chap4/homepage_mb.jpg}
+\endminipage\hfill
+\minipage{0.05\textwidth}
+\endminipage\hfill
+\minipage{0.625\textwidth}
+  \includegraphics[width=\linewidth]{images/chap4/homepage.png}
+\endminipage
+\end{figure}
+\cleardoublepage
 \textbf{Sign in}
 \\
 Sign in form also has buttons for users to login with Google and Facebook account.
-\begin{center}
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=1\columnwidth]{images/chap4/login_form.png}
-    \end{figure}
-\end{center}
+\begin{figure}[!htb]
+\minipage{0.325\textwidth}
+  \includegraphics[width=\linewidth]{images/chap4/signin_mb.jpg}
+\endminipage\hfill
+\minipage{0.05\textwidth}
+\endminipage\hfill
+\minipage{0.625\textwidth}
+  \includegraphics[width=\linewidth]{images/chap4/signin.png}
+\endminipage
+\end{figure}
+\cleardoublepage
 \textbf{Sign up}
 \\
 Sign up form has general rules when using the website. Rule violation will result in banning violator's account.
-\begin{center}
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=1\columnwidth]{images/chap4/signup_form.png}
-    \end{figure}
-\end{center}
+\begin{figure}[!htb]
+\minipage{0.325\textwidth}
+  \includegraphics[width=\linewidth]{images/chap4/signup_mb.jpg}
+\endminipage\hfill
+\minipage{0.05\textwidth}
+\endminipage\hfill
+\minipage{0.625\textwidth}
+  \includegraphics[width=\linewidth]{images/chap4/signup_form.png}
+\endminipage
+\end{figure}
+\cleardoublepage
 \textbf{Label video}
 \\
 Label video view contains a list of videos and two buttons "Suspicious" and "Not suspicious" for users to label. A user can only label a video once. Labeled videos are use to \textbf{xem lại}
-\begin{center}
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=1\columnwidth]{images/chap4/label_video.png}
-    \end{figure}
-\end{center}
+\begin{figure}[!htb]
+\minipage{0.325\textwidth}
+  \includegraphics[width=\linewidth]{images/chap4/label_mb.jpg}
+\endminipage\hfill
+\minipage{0.05\textwidth}
+\endminipage\hfill
+\minipage{0.625\textwidth}
+  \includegraphics[width=\linewidth]{images/chap4/label_video.png}
+\endminipage
+\end{figure}
+\cleardoublepage
 \textbf{Create post}
 \\
 Create post form includes title, a file selector to select image/video, an embedded Google map to select location. After creating post, location of created post is available for other users to subscribe.
-
-\begin{center}
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=1\columnwidth]{images/chap4/create_post.png}
-    \end{figure}
-\end{center}
+\begin{figure}[!htb]
+\minipage{0.325\textwidth}
+  \includegraphics[width=\linewidth]{images/chap4/create_post_mb.jpg}
+\endminipage\hfill
+\minipage{0.05\textwidth}
+\endminipage\hfill
+\minipage{0.625\textwidth}
+  \includegraphics[width=\linewidth]{images/chap4/create_post.png}
+\endminipage
+\end{figure}
+\cleardoublepage
 \textbf{Profile}
 \\
 Profile view contains user's basic info and mobile phone field for verification. Besides, it also has 4 tabs:  
@@ -432,12 +470,17 @@ Profile view contains user's basic info and mobile phone field for verification.
 \item Subscribed locations: To unsubscribe a location.
 \item All locations: To subscribe to a new location.
 \end{itemize}
-\begin{center}
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=1\columnwidth]{images/chap4/profile.png}
-    \end{figure}
-\end{center}
+\begin{figure}[!htb]
+\minipage{0.325\textwidth}
+  \includegraphics[width=\linewidth]{images/chap4/profile_mb.jpg}
+\endminipage\hfill
+\minipage{0.05\textwidth}
+\endminipage\hfill
+\minipage{0.625\textwidth}
+  \includegraphics[width=\linewidth]{images/chap4/profile.png}
+\endminipage
+\end{figure}
+\cleardoublepage
 \textbf{Administration}
 \\
 Administration consists of 5 tabs:
@@ -449,24 +492,28 @@ Administration consists of 5 tabs:
 \item Reported posts: To review reports and decide whether to delete post.
 \end{itemize}
 There is also an "Add person" button to add new person with name for system to identify in the future. An unidentified person is shown as "unknown".
-\begin{center}
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=1\columnwidth]{images/chap4/admin.png}
-    \end{figure}
-\end{center}
+\begin{figure}[!htb]
+\minipage{0.325\textwidth}
+  \includegraphics[width=\linewidth]{images/chap4/admin_mb.jpg}
+\endminipage\hfill
+\minipage{0.05\textwidth}
+\endminipage\hfill
+\minipage{0.625\textwidth}
+  \includegraphics[width=\linewidth]{images/chap4/admin.png}
+\endminipage
+\end{figure}
 \subsection{Back-end}
 In MVC pattern, the Controller receives user input, manipulates Model, and then responds to the user (cite). Following is the list of implemented controllers in this thesis.
 \begin{itemize}
-	\item Authentication Controller: manages the flow of user sign in and sign up. A user can choose either traditional or social login. With the classical way, the user has to provide his/her email and password. If the user prefers social login, this website currently supports sign in via Facebook and Google+.
+	\item Authentication Controller: manages the flow of user sign in and sign up. A user can choose either to login with traditional account or social account. With the classical way, the user has to provide his/her email and password. If the user prefers social login, the website currently supports sign in via Facebook and Google+.
 	\item Dataset Collector: downloads dataset (a collection of labeled videos) as the input for the training process.
-	\item Email Controller: One way to interact with users is sending emails. This controller sends email using SendGrid, an email delivery service.
-	\item Face Controller: The core of Face Recognition Module is Microsoft Azure Face API, a cognitive service that provides algorithms for recognizing human faces in images (cite). Face Controller contains a bunch of function to request Microsoft Azure Face API.
-	\item Identify Controller
-	\item Location Controller: 
-	\item Notification Controller
-	\item Person Controller
-	\item Post Controller
+	\item Email Controller: One way to interact with users is sending emails. This controller sends email about a notification via SendGrid, an email delivery service.
+	\item Face Controller: The core of Face Recognition Module is Microsoft Azure Face API, a cognitive service that provides algorithms for recognizing human faces in images (cite). Face Controller contains a collection of functions to request Microsoft Azure Face API.
+	\item Identify Controller: 
+	\item Location Controller: This controller has two purposes: manipulate location and location subscriber. It controls in which condition a location will be created. Additionally, Each location has a list of subscriber who  will be notified about suspicious activity.
+	\item Notification Controller:  take care of creating notification and send to correct users; Checking status of notification whether it has been seen by the user.
+	\item Person Controller: This controller takes responsibility for managing Person and synchronizing with Person of Microsoft Azure Face API.
+	\item Post Controller: is one of the essential controllers in this system. This controller together with Upload Controller, manage the flow of post creating.
 	\item Record Controller
 	\item Upload Controller
 	\item User Controller
