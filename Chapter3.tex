@@ -60,9 +60,14 @@ For the CNN layer of the proposal model, a VGG16 \cite{DBLP:journals/corr/Simony
 \subsubsection{LSTM for sequence learning}
 Output of VGG16 is passed through LSTM cells for prediction. LSTM are effective at predicting sequences of data. 
 \subsection{Dataset}
-\textbf{UCF101} \footnotetext{Source: \url{http://crcv.ucf.edu/data/UCF101.php}} was used to evaluate this model. It is a standard dataset used for testing action recognition models. This dataset comprise of 13320 videos divided into 101 action categories collected from the Youtube website.
+\textbf{UCF101}\footnotetext{Source: \url{http://crcv.ucf.edu/data/UCF101.php}} was used to evaluate this model. It is a standard dataset used for testing action recognition models. This dataset comprise of 13320 videos divided into 101 action categories collected from the Youtube website.
 \subsection{Evaluating}
 \subsection{Preprocessing}
+As mentioned before, videos would mostly come from smartphones. A video came from a smartphone could come in many orientations. Because of that, it would have \textbf{metadata} containing orientation data, making it rotate. Despite that, traditional computer vision libraries like OpenCV cannot read metadata from videos, making those videos inaccurate for training. Because of that, \textbf{FFprobe}\footnotetext{Source: \url{https://www.ffmpeg.org/ffprobe.html}} is used to extract metadata from videos.\\
+For every video, a subprocess with the following command below would launch to extract the rotational info :\\
+\textit{ffprobe -loglevel error -select\_streams v:0 -show\_entries stream\_tags=rotate -of  default=nw=1:nk=1 video\_file\_name}
+
+After that, depending on the orientation of the video is 0, 90, 180 or 270, each frame would be rotated by the corresponding angle before inputting into the CNN for extracting feature. 
 \subsection{Hyperparameter}
 \subsection{Training method}
 \subsection{Result}
