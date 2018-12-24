@@ -268,9 +268,6 @@ In the scope of a thesis, the system has to acquire these requirements to perfor
 \end{tabular}
 \caption{View records}
 \end{table}
-\subsection{System overview}
-Figure \ref{chap3:system_overview_basic} shows a concise overview of how the system operates. Users interact with the website through front-end. The input of users can come in the form of images, videos or label contribution. Back-end receives input and stores in the database. Concurrently, inputs are sent to analysis server . Outputs from analysis server are sent back to back-end and then stored in database. The back-end is also responsible for obtaining appropriate contents from the database to display to users through front-end.
-
 \subsubsection{Main function of the system: Notify users about suspicious activity using data from posts.}
 
 \begin{center}
@@ -308,14 +305,14 @@ Google Cloud Storage is chosen for its advantages:
 Objects needed to be stored are image and video. Before being stored, data is renamed to a unique ID for later retrieval. Additionally, image is resized to reduce capacity for better performance.
 \subsection{NoSQL database}
 NoSQL databases were created in response to the limitations of traditional relational database technology. When compared against relational databases, NoSQL databases are more scalable and provide superior performance, and their data model addresses several shortcomings of the the relational model.
-
 The advantages of NoSQL include being able to handle:
-
-Large volumes of structured, semi-structured, and unstructured data
-Agile sprints, quick iteration, and frequent code pushes
-Object-oriented programming that is easy to use and flexible
-Efficient, scale-out architecture instead of expensive, monolithic architecture
-Hence, \textbf{MongoDB} is used to implement the database in this project
+\begin{itemize}
+\item Large volumes of structured, semi-structured, and unstructured data
+\item Agile sprints, quick iteration, and frequent code pushes.
+\item Object-oriented programming that is easy to use and flexible.
+\item Efficient, scale-out architecture instead of expensive, monolithic architecture.
+\end{itemize}
+Hence, \textbf{MongoDB} is used to implement the database in this project.
 \subsubsection{Database overview}
 Figure \ref{chap4:database_overview} displays the structure of the database which includes collections and relationships between them.
 There are a total of 8 collections in the database: User, Visual data, Location, Notification, Person, Post, Record, Role. 
@@ -454,11 +451,13 @@ To implement the website, Model-View-Controller (MVC) pattern is used for its ad
 In the MVC development, controller receives all requests for the application and then control the model to prepare any necessary information for the view. The view uses that data prepared by the controller to bring the final output.
 \subsection{Front-end}
 \subsubsection{Overview}
+Figure \ref{chap4:sitemap} display the overview of pages of the front-end and corresponding function can be found in each page.
 \begin{center}
     \begin{figure}[H]
     \centering
     \includegraphics[width=5cm,height=20cm]{images/chap4/sitemap.png}
     \caption{Sitemap}
+    \label{chap4:sitemap}
     \end{figure}
 \end{center}
 \subsubsection{Views}
