@@ -43,7 +43,8 @@ In the scope of a thesis, the system has to acquire these requirements to perfor
 	\item Scalability: The website is able to handle many concurrent connections and manage a large amount of posts and store into NoSQL database .
 	\item Usability: The website uses modern UI developed in HTML5. The user can use that UI easily to navigate between each page. It also has a fresh and well-designed interface for user to interact with
 \end{itemize} 
-\subsection{Use Cases}
+\subsubsection{Use Cases}
+\label{chap4:usecases}
 \begin{center}
 	\begin{figure}[H]
 		\centering
@@ -326,7 +327,9 @@ There are a total of 8 collections in the database: User, Visual data, Location,
 \end{center}
 \cleardoublepage
 \subsubsection{Collections}
-\textbf{User}
+This section contains descriptions of collections along with their schema.\\
+\textbf{User}\\
+The \textbf{User} collection contains basic information of users.
 \begin{center}
 	\begin{figure}[H]
 		\centering
@@ -335,7 +338,9 @@ There are a total of 8 collections in the database: User, Visual data, Location,
 	\end{figure}
 \end{center}
 \cleardoublepage
-\textbf{Visual data}
+\textbf{Visual data}\\
+\textbf{Visual data} contains information of files. This collection is synchronized with the file storage upon upload, update or deletion of files.
+
 \begin{center}
 	\begin{figure}[H]
 		\centering
@@ -344,7 +349,8 @@ There are a total of 8 collections in the database: User, Visual data, Location,
 	\end{figure}
 \end{center}
 \cleardoublepage
-\textbf{Location}
+\textbf{Location}\\
+\textbf{Location} contains information of locations. This collection utilizes Geospatial Query feature of MongoDB. Geospatial store each location as a point on the map with their longitude and latitude. Spatial queries such as finding locations near a point or finding locations within a certain radius of a point can be made.
 \begin{center}
 	\begin{figure}[H]
 		\centering
@@ -353,16 +359,18 @@ There are a total of 8 collections in the database: User, Visual data, Location,
 	\end{figure}
 \end{center}
 \cleardoublepage
-\textbf{Notification}
+\textbf{Notification}\\
+\textbf{Notification} contains notifications to users. 
 \begin{center}
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.7\columnwidth]{images/chap4/Notification.png}
+		\includegraphics[width=0.6\columnwidth]{images/chap4/Notification.png}
 		\caption{Notification collection}
 	\end{figure}
 \end{center}
 \cleardoublepage
-\textbf{Person}
+\textbf{Person}\\
+\textbf{Person} store identification of images data. Each time a new person is identified, that person is stored into the collection.
 \begin{center}
 	\begin{figure}[H]
 		\centering
@@ -371,7 +379,8 @@ There are a total of 8 collections in the database: User, Visual data, Location,
 	\end{figure}
 \end{center}
 \cleardoublepage
-\textbf{Post}
+\textbf{Post}\\
+\textbf{Post} stores posts of users.
 \begin{center}
 	\begin{figure}[H]
 		\centering
@@ -380,7 +389,8 @@ There are a total of 8 collections in the database: User, Visual data, Location,
 	\end{figure}
 \end{center}
 \cleardoublepage
-\textbf{Record}
+\textbf{Record}\\
+\textbf{Record} collection logs every occurrences of a person identified by the system with timestamps and locations.
 \begin{center}
 	\begin{figure}[H]
 		\centering
@@ -389,7 +399,8 @@ There are a total of 8 collections in the database: User, Visual data, Location,
 	\end{figure}
 \end{center}
 \cleardoublepage
-\textbf{Role}
+\textbf{Role}\\
+\textbf{Role} collection stores roles of users in the system.
 \begin{center}
 	\begin{figure}[H]
 		\centering
@@ -399,6 +410,7 @@ There are a total of 8 collections in the database: User, Visual data, Location,
 \end{center}
 \cleardoublepage
 \subsubsection{Relationships}
+The following table contains the relationship between collections.
 \begin{table}[H]
 	\begin{tabular}{|l|l|}
 		\hline
@@ -600,6 +612,7 @@ There is also an "Add person" button to add new person with name for system to i
 \endminipage
 \end{figure}
 \subsection{Back-end}
+\subsubsection{Controllers}
 In MVC pattern, the Controller receives user input, manipulates Model, and then responds to the user (cite). Following is the list of implemented controllers in this thesis.
 \begin{itemize}
 	\item Authentication Controller: manages the flow of user sign in and sign up. A user can choose either to login with traditional account or social account. With the classical way, the user has to provide his/her email and password. If the user prefers social login, the website currently supports sign in via Facebook and Google+.
@@ -616,6 +629,43 @@ In MVC pattern, the Controller receives user input, manipulates Model, and then 
 	\item User Controller: is in charge of controlling users: ban, unban user; subscribe, unsubscribe a location; phone number verification.
 	\item Visual Data Controller: For each image or video uploaded to the Google Cloud Storage, this controller will create a comparable visual data with related data (location, public URL, …). Verified users can be able to decide whether a video is suspicious or not. This controller also take the identified result of visual data after analyzed by Microsoft Azure Face API.    
 \end{itemize}
+\subsubsection{Operation}
+This section describe the operation of use cases defined in section \ref{chap4:usecases}.
+\begin{itemize}
+	\item \textbf{Login} (UC01)
+	\begin{center}
+		\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.75\columnwidth]{images/chap4/login_sequence.png}
+		\caption{Sequence diagram for Login operation}
+		\end{figure}
+	\end{center}
+	\item \textbf{View Post} (UC02)
+	\begin{center}
+		\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.75\columnwidth]{images/chap4/post_sequence.png}
+		\caption{Sequence diagram for viewing Posts}
+		\end{figure}
+	\end{center}
+	\item \textbf{Create Post} (UC03)
+	\begin{center}
+		\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\columnwidth]{images/chap4/createpost_sequence.png}
+		\caption{Sequence diagram for Post creation with images}
+		\end{figure}
+	\end{center}
+	\begin{center}
+		\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\columnwidth]{images/chap4/createpost_sequence_video.png}
+		\caption{Sequence diagram for Post creation with videos}
+		\end{figure}
+	\end{center}
+
+\end{itemize}
+
 \section{Visual data analysis modules}
 The project requires two systems for analysis: A face recognition system and a video classifier system. The facial recognition system takes pictures of human faces as input and returns their identification. The video classifier system analyzes videos to find out actions in them. The remaining of this section describes in detail about the two analysis system.
 \subsection{Face recognition module}
