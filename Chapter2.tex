@@ -78,9 +78,9 @@ Many non-linear functions can be used with neurons. Currently, there is no theor
 	\end{center}
 \end{itemize}
 \vspace{-1cm}
-\subsubsection{Softmax}
+\subsection{Softmax}
 
-With classification problems, the \textbf{Output layer} is often a \textbf{Softmax Regression} layer that calculates the probability that a data point falls into each class. Softmax has a simple fomula:\\
+With classification problems, the \textbf{Output layer} is often a \textbf{Softmax Regression} layer that calculates the probability that a data point falls into each class. Softmax has a simple formula:\\
 \begin{center}
 	$ softmax(x) = $\scalebox{1.4}{$\frac{e^{x_{j}}}{\sum\limits_{j=1}^k e^{x_{j}}} $}$, \forall X = [x_{1},x_{2},...x_{k}]$
 \end{center}
@@ -96,10 +96,10 @@ With classification problems, the \textbf{Output layer} is often a \textbf{Softm
 	\end{figure}
 \end{center}
 \vspace{-1cm}
-\subsubsection{Loss function}
+\subsection{Loss function}
 When training an artificial neural network, the loss function needs to be defined, L ($\hat{y}, y$) showing the difference between the predicted $\hat{y}$ result and the correct value y. This function always has a non-negative value and is only 0 when $\hat{y}$ equals y.
 
-The normal training process will be to adjust the model parameters (Weight W and bias b) so that the loss function value is as small as possible.
+The training process will be to adjust the model parameters (Weight W and bias b) so that the \textbf{Loss function} value is as small as possible.
 
 A loss function is any function that takes two vectors and returns a scalar value. For optimization purposes, the loss function is often defined so that it is easy to calculate the derivative
 
@@ -109,11 +109,14 @@ With $y$ is one-hot encode vector representing the correct class of input and $\
 \begin{center}
 	$L_{cross-entropy}(\hat{y},\hat{y}) = - \sum\limits_{i}y_{i}\log(\hat{y}_{i})$
 \end{center}
-\subsection{Convolution Neural Network (CNN)}
-\subsubsection{Overview}
+\subsection{Dropout}
+Dropout \cite{Srivastava:2014:DSW:2627435.2670313} is a simple but effective method to reduce overfitting for neural network models.
+At the output of each layer in the network, some neurons will be retained with the probability $p$, the remaining neurons are assigned a value of 0, during the back propagation, only the neurons are used to calculate derivative. Finally, in the validation process, we retain all neurons to produce predictable results
+\section{Convolution Neural Network (CNN)}
+\subsection{Overview}
 The CNN is inspired by the visual nerve system in animals, which is responsible for processing brain imaging data. Within this system, specific neurons only emit signals when a specific feature appear in the visual area. The human brain processes images through each layer with increasing complexity. The first layer distinguishes essential characteristics such as straight lines or curves. On the next layer, the brain will recognize the current arrangement of lines and colors that represent a dog or a cat. Similarly, CNN also processes images using multiple weight matrices called filters to detect features such as edges, lines... When going to higher layers, filters will be able to identify complex properties.
 
-\subsubsection{Convolution Neural Network Architechture}
+\subsection{Convolution Neural Network Architechture}
 Simple architecture for Convolution Neural Network could be [INPUT - CONV - RELU - POOL - FC]. In more detail:
 
 \begin{itemize}
@@ -137,7 +140,7 @@ Convolution layer is the core building block of a Convolution Network that does 
 \end{center}
 
 \vspace{-1cm}
-\subsubsection{Convolution Layer}
+\subsection{Convolution Layer}
 \begin{itemize}
 	\item Overview:\\ 
 	The convolution layer's parameter consists of a set of learnable filters. Every filter is small spatially [ Width x Height], but extends through the full depth of the input volume (in standard image, the depth is equal 3). For example, a typical filter on the first layer of a CNN might have a size [5x5x3] (5 pixels width and height, and depth = 3). In the calculating process, slide each filter across the width and height of the input and compute dot-product between input and filter in every position. The result of dot-product is a 2-dimensional matrix called activation map of a filter. With layer has 12 filters, each of them produces one activation map, then stack these maps along the depth dimension and produce the output volume.
@@ -194,7 +197,7 @@ For example, with input (W) = 7x7, filter (F) = 3x3, stride (F) = 1, Zero-paddin
 	\end{align*}
 \end{itemize}
 
-\subsubsection{Pooling Layer:}
+\subsection{Pooling Layer:}
 Pooling Layer's function is to progressively reduce the spatial size of the representation to reduce the number of parameters and computation in the network, and control overfitting too. Pooling Layer operates independently on every depth slice of the input and resizes it spatially, using MAX, AVERAGE, SUM operation. The most common form is a pooling with MAX operation, filters of size 2x2 applied with a stride of 2, it will downsample every depth slice in the input by two along both width and height (depth is remaining).\\
 \begin{center}
   \begin{figure}[H]
@@ -223,10 +226,10 @@ Pooling Layer's function is to progressively reduce the spatial size of the repr
 
 
 
-\subsubsection{Fully-Connected Layer:}
+\subsection{Fully-Connected Layer:}
 Same as Fully Connected in ANN, neurons in a fully connected layer have full connections to all activation functions in the previous layer. 
 
-\subsubsection{Some well-known CNN architecture:}
+\subsection{Some well-known CNN architecture:}
 \textbf{LeNet (1998):} Yann LeCun developed LeNet first successful applications of Convolutional Network in the 1990s. LeNet is used to reading zip code, digits.
 \begin{center}
   \begin{figure}[H]
