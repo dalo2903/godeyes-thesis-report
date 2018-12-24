@@ -2,6 +2,73 @@
 This chapter presents the process of evaluating the effectiveness of the whole system and its features. At the same time, self-assessment of the work done by the group, from which the development direction of the topic
 \section{Social media website}
 \subsection{Evaluation metric}
+\subsubsection{Website Grader powered by HubSpot}
+This tool evaluate a website based on 4 criteria: performance, mobile, SEO, security.\\
+\textbf{Overall}\\
+The social media website is scored:
+\begin{itemize}
+\item Performance: 22/30
+\item Mobile: 30/30
+\item SEO: 10/30
+\item Security: 10/10
+\end{itemize}
+Compared to \textit{9gag} which is a well known social media for entertainment. 
+\begin{table}[H]
+\begin{tabular}{|l|c|l|}
+\hline
+            & \multicolumn{1}{l|}{The social media website} & 9gag  \\ \hline
+Performance & 22/30                                         & 24/30 \\ \hline
+Mobile      & 30/30                                         & 30/30 \\ \hline
+SEO         & 10/20                                         & 30/30 \\ \hline
+Security    & 10/10                                         & 10/10 \\ \hline
+\end{tabular}
+\end{table}
+This result is acceptable because 9gag has grown and improved for a lengthy duration since it first launched in 2008. In contrast, the social media website has just been developed for a short amount of time.\\
+\textbf{Performance}\\
+\begin{itemize}
+\item Page size: The heavier the site page, the slower the load.
+\item Page request: The more HTTP requests your website makes, the slower it becomes.
+\item Page speed: Load time
+\item Browser caching: Browser caching speeds up your website by storing frequently used content in local memory.
+\item Page redirect: Page redirects add an additional loading cycle, increasing the time to display the page.
+\item Compression: When your JavaScript and CSS are properly compressed, it makes your website run much faster.
+\item Render blocking: Remove or defer JavaScript and CSS that interferes with loading above-the-fold content.
+\begin{table}[H]
+\begin{tabular}{|c|c|c|}
+\hline
+                & The social media website & 9gag              \\ \hline
+Page size       & 715 KB                   & 337 KB            \\ \hline
+Page requests   & 34                       & 74                \\ \hline
+Page speed      & 0.4                      & 0.5               \\ \hline
+Browser caching & \checkmark               & \checkmark        \\ \hline
+Page redirects  & No page redirects        & No page redirects \\ \hline
+Compression     & $\times$                 & \checkmark        \\ \hline
+Render blocking & $\times$                 & $\times$            \\ \hline
+\end{tabular}
+\end{table}
+\end{itemize}
+\textbf{Mobile}\\
+Responsive design gives the social media the ability to scale on different device types which also enable mobile friendliness.\\
+\textbf{SEO}\\
+\begin{itemize}
+\item Page title: Page titles should be no longer than 70 characters in length and not repeat keywords.
+\item Meta description: Meta descriptions should be no longer than 300 characters in length and should be relevant to the page.
+\item Headings: Heading tags distinguish headings from core page content.
+\item Sitemap: Site maps help users navigate your site quickly and easily.
+\end{itemize}
+\begin{table}[H]
+\begin{tabular}{|c|c|c|}
+\hline
+                 & The social media website & 9gag \\ \hline
+Page titles      & \checkmark               & \checkmark  \\ \hline
+Meta description & $\times$                 & \checkmark  \\ \hline
+Headings         & $\times$                 & \checkmark  \\ \hline
+Sitemap          & $\times$                 & \checkmark  \\ \hline
+\end{tabular}
+\end{table}
+In this project, marketing is not focused on, this result is inevitable.
+\textbf{Security}\\
+SSL certificates protect the social media website from attacks and give visitors confidence that your site is authentic and trustworthy.
 \subsection{Result}
 \section{Video classifier}
 \subsection{Evaluation metric}
