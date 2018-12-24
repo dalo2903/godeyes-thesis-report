@@ -43,8 +43,12 @@ In the scope of a thesis, the system has to acquire these requirements to perfor
 	\item Scalability: The website is able to handle many concurrent connections and manage a large amount of posts and store into NoSQL database .
 	\item Usability: The website uses modern UI developed in HTML5. The user can use that UI easily to navigate between each page. It also has a fresh and well-designed interface for user to interact with
 \end{itemize} 
+<<<<<<< HEAD
 \subsubsection{Use Cases}
 \label{chap4:usecases}
+=======
+\subsection{Use Cases}
+>>>>>>> 307ff0ce21e1149500cfea7cbbe71ef3ad2dd7ce
 \begin{center}
 	\begin{figure}[H]
 		\centering
@@ -62,17 +66,17 @@ In the scope of a thesis, the system has to acquire these requirements to perfor
 \begin{table}[]
 \begin{tabular}{|P{5cm}|L{10cm}|}
 		\hline
-	Name							&   UC01 - Log in website     \\ \hline
+	Name							&   UC01 -   Log in website   \\ \hline
 	Description 	 				&   Users will be prompted to login with their account information before they can use the system.   \\ \hline
 	Actor 							&  User and Admin       \\ \hline
 \multirow{3}{*}{Preconditions} 		&\tabitem The user has an website account \\ \
-									&\tabitem The user is trying to log in with their account \\ \
+									&\tabitem The user is trying to log in with their account  \\ \
 									&\tabitem The user is not already logged in with website  \\ \hline
 \multirow{2}{*}{Postconditions}	 	&\tabitem The user is logged in to the system     \\ 
 									&\tabitem The user has access to the functions of the
 									system\\ \hline
 \multirow{9}{*}{Path} 				&\tabitem Primary path:    \\
-									& 1.User accesses the URL \\ 
+									& 1.User accesses the page \\ 
 									& 1.1 The system prompts the user for their 
 									account sign up. \\
 									& 1.2 The user enters their username and
@@ -84,12 +88,14 @@ In the scope of a thesis, the system has to acquire these requirements to perfor
 									&\tabitem Alternate path  \\
 									& 2. Invalid account user or banned \\
 									& 2.1 User already logged in with website \\ \hline
+									
 	\end{tabular}
+\caption{Log in website }
 \end{table}
 \begin{table}[]
 	\begin{tabular}{|P{5cm}|L{10cm}|}
 		\hline
-		Name						&   UC02 - View all posts in website     \\ \hline
+		Name						&   UC02 - View post in website     \\ \hline
 		Description 	 			&   Users can view detail in posts   \\ \hline
 		Actor 						&  	User and Admin       \\ \hline
 		Preconditions 				& 	System check the role of the user to provide the following function 						 \\ \hline
@@ -106,6 +112,7 @@ In the scope of a thesis, the system has to acquire these requirements to perfor
 									&\tabitem Alternate path  \\
 									& 3. View post by tab My Posts in Profile user\\ \hline
 	\end{tabular}
+\caption{View post in website}
 \end{table}
 \begin{table}[]
 	\begin{tabular}{|P{5cm}|L{10cm}|}
@@ -119,11 +126,12 @@ In the scope of a thesis, the system has to acquire these requirements to perfor
 									&   \tabitem Send a request api to video classification service to analyze data and get a result to notify user					 \\ \hline 
 									
 \multirow{4}{*}{Path} 				&\tabitem Primary path:    \\
-									& 1.Verified-user and Admin access post creation's URL    \\ 
+									& 1.Verified-user and Admin access post creation page    \\ 
 									& 1.1 The system inquires the user for their roles 
 									account and user’s phone number. \\
 									& 1.2 The user fills in post's title,  pictures/video, location when user capture that data  \\  \hline
 	\end{tabular}
+\caption{Create new post}
 \end{table}
 \begin{table}[]
 	\begin{tabular}{|P{5cm}|L{10cm}|}
@@ -135,11 +143,12 @@ In the scope of a thesis, the system has to acquire these requirements to perfor
 \multirow{2}{*}{Postconditions} 	&	\tabitem Server updates the user's vote \\
 									&   \tabitem Server stores id of the user \\ \hline 									
 \multirow{4}{*}{Path} 				&	\tabitem Primary path:    \\
-									& 1.Verified-user and Admin access post labeling's URL    \\ 
+									& 1.Verified-user and Admin access post labeling page    \\ 
 									& 1.1 The system inquires the user for their roles 
 									account and user’s phone number. \\
 									& 1.2 The user clicks available label button \\  \hline
 	\end{tabular}
+\caption{Contribute label of videos}
 \end{table}
 \begin{table}[]
 	\begin{tabular}{|P{5cm}|L{10cm}|}
@@ -148,21 +157,122 @@ In the scope of a thesis, the system has to acquire these requirements to perfor
 		Description 	 			&   Users can delete their videos  \\ \hline
 		Actor 						&  	Verified-user and Admin       \\ \hline
 		Preconditions 				& 	The system checks role of the user  	 \\ \hline	
-\multirow{2}{*}{Postconditions} 	&	\tabitem Server delete information in database \\
-									&   \tabitem Server delete image/video in cloud storage \\ \hline 									
+\multirow{2}{*}{Postconditions} 	&	\tabitem Server deletes information of post in database \\
+									&   \tabitem Server deletes image/video in cloud storage \\ \hline 									
 \multirow{9}{*}{Path} 				&	\tabitem Primary path:    \\
-									& 1.Verified-user access profile of user URL    \\ 
+									& 1.Verified-user access profile of user page    \\ 
 									& 1.1 The system inquires the user for their roles 
 		account. \\
-									& 1.2 The user clicks on "My Posts" tab \\ 
-									& 1.3 The user clicks on "Delete" button \\
+									& 1.2 The user clicks on "MY POSTS" tab \\ 
+									& 1.3 The user clicks on "DELETE" button \\
 									& 2.The moderator access admin's page\\
 									& 2.1. The system check authorization of admin \\
-									& 2.2  The admin clicks on "Reported Posts" tab \\
+									& 2.2  The admin clicks on "REPORTED POSTS" tab \\
 									& 2.3. The admin clicks "Delete Post" button\\ \hline
 	\end{tabular}
+\caption{Delete post }
+\end{table}
+\begin{table}[]
+	\begin{tabular}{|P{5cm}|L{10cm}|}
+		\hline
+		Name						&   UC06 -Subscribe location       \\ \hline
+		Description 	 			&   Users can subscribe location to get notifications   \\ \hline
+		Actor 						&  	Verified-user and Admin       \\ \hline
+		Preconditions 				& 	The system checks role of the user  	 \\ \hline	
+\multirow{3}{*}{Postconditions} 	&	\tabitem Server stores information of that user to location's collection in database \\
+									&   \tabitem Server saves information of the location to user's collection in database \\ 
+									& 	\tabitem The user receives notification after server analyze data	\\ \hline								
+\multirow{5}{*}{Path} 				&	\tabitem Primary path:    \\
+									& 1.Verified-user accesses profile of user  page   \\ 
+									& 1.1 The system inquires the user for their roles 
+									account. \\
+									& 1.2 The user clicks on "All LOCATION" tab \\ 
+									& 1.3 The user clicks on "SUBSCRIBE" button \\ \hline
+
+	\end{tabular}
+\caption{Subscribe location}
+\end{table}
+\begin{table}[]
+	\begin{tabular}{|P{5cm}|L{10cm}|}
+		\hline
+		Name						&   UC07 -Unsubscribe location       \\ \hline
+		Description 	 			&   Users can unsubscribe location to stop getting notifications \\ \hline
+		Actor 						&  	Verified-user and Admin       \\ \hline
+		Preconditions 				& 	The system checks role of the user  	 \\ \hline	
+\multirow{3}{*}{Postconditions} 	&	\tabitem Server deletes information of that user in location's collection in database \\
+									&   \tabitem Server deletes information of the location in user's collection in database \\ 
+									& 	\tabitem the user stop receiving notifications from that location	\\ \hline								
+\multirow{7}{*}{Path} 				&	\tabitem Primary path:    \\
+									& 1.Verified-user accesses profile of user page  \\ 
+									& 1.1. The system inquires the user for their roles 
+									account. \\
+									& 1.2. The user clicks on "SUBSCRIBED LOCATION" tab \\ 
+									& 1.3. The user clicks on "UNSUBSCRIBE" button \\ \cline{2-2}
+									&   \tabitem Alternate path: \\
+									& 1.4. The user clicks on "All LOCATION" tab \\
+									& 1.5. The user clicks on "UNSUBSCRIBE" tab\\ \hline
+
+	\end{tabular}
+	\caption{Unsubscribe location}
+\end{table}
+\begin{table}[]
+	\begin{tabular}{|P{5cm}|L{10cm}|}
+		\hline
+		Name						&   UC08 -View notification       \\ \hline
+		Description 	 			&   Users can view notifications of subscribed locations \\ \hline
+		Actor 						&  	Verified-user and Admin       \\ \hline
+		Preconditions 				& 	The system checks role of the user  	 \\ \hline	
+		Postconditions 				&	\\ \hline								
+		\multirow{10}{*}{Path} 		&	\tabitem Primary path:    \\
+									& 1.Verified-user clicks on bell icon on header     \\ 
+									& 1.1. The system inquires the user for their roles 
+									account. \\
+									& 1.2. Header shows notification box dropdown\\
+									& 1.3. The user clicks on notification \\
+									& 1.4. The website navigates user's view to notification's detail\\
+									& 2.Verified-user accesses profile of user page \\
+									& 2.1. User clicks on "NOTIFICATIONS" tab\\
+									& 2.2. The user clicks on notification \\
+									& 2.3. The website navigates user's view to notification's detail\\ \hline
+	\end{tabular}
+	\caption{View notification}
+\end{table}
+\begin{table}[]
+	\begin{tabular}{|P{5cm}|L{10cm}|}
+		\hline
+		Name						&   UC09 -Report post       \\ \hline
+		Description 	 			&   Users can report posts with incorrect information \\ \hline
+		Actor 						&  	Verified-user and Admin       \\ \hline
+		\multirow{2}{*}{Preconditions} 				& 	\tabitem The system checks role of the user  	 \\ 
+									&   \tabitem The system checks whether the user yet to report the post  \\
+									\hline	
+		\multirow{2}{*}{Postconditions} &\tabitem	The system saves id of user to post's collection    \\   								
+									&  \tabitem The system saves comment about that report to post's collection\\ \hline								
+		\multirow{5}{*}{Path} 		&	\tabitem Primary path:    \\
+									& 1.Verified-user clicks on report button of each post in news feed     \\ 
+									& 1.1. Comment pop up appear for user to notify admin. \\
+									& 2.Verified-user access post detail page \\
+									& 2.1 The user clicks on report button \\ \hline
+									
+	\end{tabular}
+	\caption{Report post}
 \end{table}
 
+\begin{table}[]
+\begin{tabular}{|P{5cm}|L{10cm}|}
+	\hline
+	Name						&   UC10 -View record       \\ \hline
+	Description 	 			&  Admin can view record of all recognized person   \\ \hline
+	Actor 						&  Admin       \\ \hline
+	Preconditions 				& The system checks role of the user  	 \\ \hline	
+	Postconditions 				&    \\ \hline								
+	\multirow{2}{*}{Path} 		&	\tabitem Primary path:    \\
+								& 1.  Admin accesses admin's page\\
+								& 1.1 Admin clicks on "RECORDS" tab    \\ \hline
+	
+\end{tabular}
+\caption{View records}
+\end{table}
 \subsubsection{Main function of the system: Notify users about suspicious activity using data from posts.}
 
 \begin{center}
@@ -200,14 +310,14 @@ Google Cloud Storage is chosen for its advantages:
 Objects needed to be stored are image and video. Before being stored, data is renamed to a unique ID for later retrieval. Additionally, image is resized to reduce capacity for better performance.
 \subsection{NoSQL database}
 NoSQL databases were created in response to the limitations of traditional relational database technology. When compared against relational databases, NoSQL databases are more scalable and provide superior performance, and their data model addresses several shortcomings of the the relational model.
-
 The advantages of NoSQL include being able to handle:
-
-Large volumes of structured, semi-structured, and unstructured data
-Agile sprints, quick iteration, and frequent code pushes
-Object-oriented programming that is easy to use and flexible
-Efficient, scale-out architecture instead of expensive, monolithic architecture
-Hence, \textbf{MongoDB} is used to implement the database in this project
+\begin{itemize}
+\item Large volumes of structured, semi-structured, and unstructured data
+\item Agile sprints, quick iteration, and frequent code pushes.
+\item Object-oriented programming that is easy to use and flexible.
+\item Efficient, scale-out architecture instead of expensive, monolithic architecture.
+\end{itemize}
+Hence, \textbf{MongoDB} is used to implement the database in this project.
 \subsubsection{Database overview}
 Figure \ref{chap4:database_overview} displays the structure of the database which includes collections and relationships between them.
 There are a total of 8 collections in the database: User, Visual data, Location, Notification, Person, Post, Record, Role. 
@@ -357,11 +467,13 @@ To implement the website, Model-View-Controller (MVC) pattern is used for its ad
 In the MVC development, controller receives all requests for the application and then control the model to prepare any necessary information for the view. The view uses that data prepared by the controller to bring the final output.
 \subsection{Front-end}
 \subsubsection{Overview}
+Figure \ref{chap4:sitemap} display the overview of pages of the front-end and corresponding function can be found in each page.
 \begin{center}
     \begin{figure}[H]
     \centering
     \includegraphics[width=5cm,height=20cm]{images/chap4/sitemap.png}
     \caption{Sitemap}
+    \label{chap4:sitemap}
     \end{figure}
 \end{center}
 \subsubsection{Views}
