@@ -269,17 +269,17 @@ In the scope of a thesis, the system has to acquire these requirements to perfor
 \end{tabular}
 \caption{View records}
 \end{table}
-\subsubsection{Main function of the system: Notify users about suspicious activity using data from posts.}
+% \subsubsection{Main function of the system: Notify users about suspicious activity using data from posts.}
 
-\begin{center}
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width=0.7\columnwidth]{images/chap4/createpostflowchart.png}
-		\caption{Create post flowchart.}
-	\end{figure}
-\end{center}
+% \begin{center}
+% 	\begin{figure}[H]
+% 		\centering
+% 		\includegraphics[width=0.7\columnwidth]{images/chap4/createpostflowchart.png}
+% 		\caption{Create post flowchart.}
+% 	\end{figure}
+% \end{center}
 
-Specifically, users create post with image/video to provide data to back-end. Post also contains other information such as author, location, time. Back-end save all information from post and then deliver data to relevant module to analyze. When suspicious activity detected after analyzing, back-end notify users who subscribe to the exact location and users who subscribe to locations that are in a diameter of 1 kilometer from that location.
+% Specifically, users create post with image/video to provide data to back-end. Post also contains other information such as author, location, time. Back-end save all information from post and then deliver data to relevant module to analyze. When suspicious activity detected after analyzing, back-end notify users who subscribe to the exact location and users who subscribe to locations that are in a diameter of 1 kilometer from that location.
 
 \section{Technologies}
 \subsection{Node.js and Node Package Manager (npm)}
@@ -613,18 +613,18 @@ There is also an "Add person" button to add new person with name for system to i
 \end{figure}
 \subsection{Back-end}
 \subsubsection{Controllers}
-In MVC pattern, the Controller receives user input, manipulates Model, and then responds to the user (cite). Following is the list of implemented controllers in this thesis.
+In MVC pattern, the Controller receives user input, manipulates Model, and then responds to the user. Following is the list of implemented controllers in this thesis.
 \begin{itemize}
 	\item Authentication Controller: manages the flow of user sign in and sign up. A user can choose either to login with traditional account or social account. With the classical way, the user has to provide his/her email and password. If the user prefers social login, the website currently supports sign in via Facebook and Google+.
 	\item Dataset Collector: downloads dataset (a collection of labeled videos) as the input for the training process.
 	\item Email Controller: One way to interact with users is sending emails. This controller sends email about a notification via SendGrid, an email delivery service.
 	\item Face Controller: The core of Face Recognition Module is Microsoft Azure Face API, a cognitive service that provides algorithms for recognizing human faces in images (cite). Face Controller contains a collection of functions to request Microsoft Azure Face API.
-	\item Identify Controller: (Kha)
+	\item Identify Controller: This controller utilize Face Controller to combine basic features of Face API to do more complicated jobs. For example, to identify faces from an image, \textit{Detect} API first has to be called to generate faceids. Those faceids can then be used to identify images.
 	\item Location Controller: This controller has two purposes: manipulate location and location subscriber. It controls in which condition a location will be created. Additionally, Each location has a list of subscriber who  will be notified about suspicious activity.
 	\item Notification Controller:  take care of creating notification and send to correct users; Checking status of notification whether it has been seen by the user.
 	\item Person Controller: This controller takes responsibility for managing Person and synchronizing with Person of Microsoft Azure Face API.
 	\item Post Controller: is one of the essential controllers in this system. This controller together with Upload Controller, manage the flow of post creating.
-	\item Record Controller: (Kha)
+	\item Record Controller: This controller store every occurrences of a person along the timestamps and location into the database.
 	\item Upload Controller: When a user creates a post, this controller takes a picture, or video then uploads to Google Cloud Storage and finally returns public URL of that resource.
 	\item User Controller: is in charge of controlling users: ban, unban user; subscribe, unsubscribe a location; phone number verification.
 	\item Visual Data Controller: For each image or video uploaded to the Google Cloud Storage, this controller will create a comparable visual data with related data (location, public URL, …). Verified users can be able to decide whether a video is suspicious or not. This controller also take the identified result of visual data after analyzed by Microsoft Azure Face API.    
@@ -666,10 +666,9 @@ This section describe the operation of use cases defined in section \ref{chap4:u
 
 \end{itemize}
 
-\section{Visual data analysis modules}
-The project requires two systems for analysis: A face recognition system and a video classifier system. The facial recognition system takes pictures of human faces as input and returns their identification. The video classifier system analyzes videos to find out actions in them. The remaining of this section describes in detail about the two analysis system.
-\subsection{Face recognition module}
-The facial recognition module uses Microsoft Azure Face API as its core. “Azure Face API is a cognitive service that provides algorithms for detecting, recognizing, and analyzing human faces in images.” (cite + paraphase)
+
+\section{Face recognition module}
+The facial recognition module does the job of identifying faces inside images, uses Microsoft Azure Face API as its core.
 \begin{center}
     \begin{figure}[H]
     \centering
@@ -677,6 +676,7 @@ The facial recognition module uses Microsoft Azure Face API as its core. “Azur
     \caption{Microsoft Azure Face API hompage}
     \end{figure}
 \end{center}
+\subsection{Face API}
 There is two way to use Azure Face Service: client Face SDK and Azure Face REST API. This thesis applies the second one. Both ways require a Face API subscription key in order to communicate with Microsoft Cognitive Server. This thesis applies the second one. The Face endpoint URL will be in the following format:
 \begin{center}
 \textit{https://[location].api.cognitive.microsoft.com/face/v1.0}
@@ -702,8 +702,20 @@ Let take a look of some basic concepts for Face API from its \textit{Glossary} (
 \item Face - Detect: This API accepts image (in binary data or image’s URL) as input, detects human faces in that picture; returns face coordinates and attributes. It can detect up to 64 faces in a photo, and best for frontal and near-frontal faces. Each detected face will be assigned a unique Face ID and will be used in Face - Identify.
 \item Face - Identify: This API takes an array of Face ID (query faces), compute similarities with all Faces in that Person Group. After that, it returns identified results, which is a set of Persons with confidence.
 \end{itemize}
-\subsection{Video classifier module}
-\subsubsection{Deploying the video classifier system}
+\subsection{Operation}
+As mentioned above, HTTP requests are sent to Face REST API to be able to use the service. The main usage of Face API would be to Identify faces within images. Figure \ref{chap4:face_identify} describe the sequence for identifying faces.
+\begin{center}
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\columnwidth]{images/chap4/face_identify.png}
+	\caption{Sequence diagram for face identification. }
+	\label{chap4:face_identify}
+    \end{figure}
+\end{center}
+
+\section{Video classifier module}
+Video classifier module takes URL of videos and return their classification. This section describe the deployment of this module as well as the running environment.
+\subsection{Deploying the video classifier system}
 After training the model and saving the weights, to use the model for prediction, this thesis proposes building an HTTP server and provide an API for other components to send requests and receive the result. \\
 Flask framework is used to implement this HTTP server because of its fast performance and is written in Python which helps communication with Keras APIs easier.
 \begin{center}
@@ -713,7 +725,7 @@ Flask framework is used to implement this HTTP server because of its fast perfor
     \caption{Sequence diagram of the HTTP server}
     \end{figure}
 \end{center}
-\subsubsection{Environment}
+\subsection{Environment}
 The classifier system was deployed using Google Compute Service. This service allows users to host virtual computers with customizable hardware for many purposes. The deployed server runs on the Ubuntu operating system because of its high performance, stability and its compatibility with deep learning codes. The server has the following hardware specification:
 
 \begin{itemize}

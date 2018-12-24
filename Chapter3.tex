@@ -43,29 +43,40 @@ However, with the limitations of the thesis and the applicability to fulfill dem
 
 
 \section{Extracting information from videos}
-For the video analyzing problem, this thesis proposes using a two-phased video classification model to find out if there are suspicious behaviors within a video. This model processes videos by passing frames through a Convolutional Neural Network to extract features, then pass the output to a Recurrent Neural Network using LSTM cells, similar to the approach of \cite{DBLP:journals/corr/DonahueHGRVSD14}. This model was trained and test using UCF-101 dataset\footnotetext{Source: url:{http://crcv.ucf.edu/data/UCF101.php}} - A standard dataset commonly used for benchmarking action recognition models - and achieved a moderate result.
+For the video analyzing problem, this thesis proposes using a two-phased video classification model to find out if there are suspicious behaviors within a video. This model processes videos by passing frames through a Convolutional Neural Network to extract features, then pass the output to a Recurrent Neural Network using LSTM cells, similar to the approach of \cite{DBLP:journals/corr/DonahueHGRVSD14}. This model was trained and test using UCF-101 dataset\footnotetext{Source: url:{http://crcv.ucf.edu/data/UCF101.php}} - A standard dataset commonly used for benchmarking action recognition models - and achieved a moderate result. Figure \ref{chap3:model_architecture} shows the overview of this approach.
+\begin{center}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\columnwidth]{images/chap3/model_architecture.png}
+		\caption{Overview of the approach. Videos are separated in to frames and each frame is pass through a pretrained CNN to extract features. Then those features is pass into a LSTM for prediction.}
+		\label{chap3:model_architecture}
+	\end{figure}
+\end{center}
 \subsection{Proposed Architecture}
 \subsubsection{CNN architecture for feature extraction}
 In \cite{DBLP:journals/corr/ZhouKLOT14}, the authors suggest that pretrained CNNs are incredibly effective in extracting feature for other classification tasks.
-For the CNN layer of the proposal model, a VGG16 \cite{DBLP:journals/corr/SimonyanZ14a} architecture pretrained on ImageNet \footnotetext{Source: \url:{http://www.image-net.org/challenges/LSVRC/}} is chosen to extract features from video frames. Figure \ref{chap3:vgg16_architecture} shows the architecture of this model. Input of VGG16 is an 224x224x3 RGB image. The image is then pass through a stack of convolutional layers. All of hidden layers are equipped with a ReLU.  
+For the CNN layer of the proposal model, a VGG16 \cite{DBLP:journals/corr/SimonyanZ14a} architecture pretrained on ImageNet \footnotetext{Source: \url:{http://www.image-net.org/challenges/LSVRC/}} is chosen to extract features from video frames. Figure \ref{chap3:vgg16_architecture} shows the architecture of this model. Input of VGG16 is an 224x224x3 RGB image. The image is then pass through a stack of convolutional layers. All of hidden layers are equipped with a ReLU.\\
+Each video will be split into frames, these frames will go through VGG16 for the purpose of extracting features. After passing the network, extracted features are tensors with the shape (7x7x512).
 \begin{center}
     \begin{figure}[H]
     \centering
     \includegraphics[width=1\columnwidth]{images/chap3/vgg16_architecture.png}
-    \footcaption{}
+    \footcaption{Architecture of the VGG16 CNN}
     \label{chap3:vgg16_architecture}
     \end{figure}
 \end{center}
 \footnotetext{Source: \url:{https://blog.heuritech.com/2016/02/29/a-brief-report-of-the-heuritech-deep-learning-meetup-5/}}
 
-Each video will be split into frames, these frames will go through vgg16 for the purpose of extracting features, after passing vgg16, these features take shape (7x7x512)
+
 
 \subsubsection{LSTM for sequence learning}
-Output of VGG16 is passed through LSTM cells for prediction.\\
-LSTM in Keras take input with shape (number-of-sample, number-timesteps, number-features) which:\\
-Number of sample could be any positive number
-Number timesteps is the number of sequential data (frame) as a single sample
-Number features is a shape of features extract from VGG16, in here it's equal to 25088 = 7x7x512\\
+Output of VGG16 is passed through LSTM cells for prediction.
+LSTM in Keras takes input with shape (\textit{number-of-sample, number-timesteps, number-features}).
+\begin{itemize}
+	\item Number of sample could be any positive number.
+	\item Number timesteps is the number of sequential data (frame) as a single sample.
+	\item Number features is a shape of features extract from VGG16. In this case, it's equal to 25088 = 7x7x512.
+\end{itemize}
 
 \begin{center}
 	\begin{figure}[H]
@@ -95,7 +106,7 @@ There are some summary about UCF-101 Dataset:
 		\label{chap3:ucf-sum-chart-2}
 	\end{figure}
 \end{center}
-\subsection{Evaluating}
+% \subsection{Evaluating}
 
 \subsection{Preprocessing}
 As mentioned before, videos would mostly come from smartphones. A video came from a smartphone could come in many orientations. Because of that, it would have \textbf{metadata} containing orientation data, making it rotate. Despite that, traditional computer vision libraries like OpenCV cannot read metadata from videos, making those videos inaccurate for training. Because of that, \textbf{FFprobe}\footnotetext{Source: \url{https://www.ffmpeg.org/ffprobe.html}} is used to extract metadata from videos.\\
@@ -103,17 +114,17 @@ For every video, a subprocess with the following command below would launch to e
 \textit{ffprobe -loglevel error -select\_streams v:0 -show\_entries stream\_tags=rotate -of  default=nw=1:nk=1 video\_file\_name}
 
 After that, depending on the orientation of the video is 0, 90, 180 or 270, each frame would be rotated by the corresponding angle before inputting into the CNN for extracting feature. 
-\subsection{Hyperparameter}
+% \subsection{Hyperparameter}
 
 \subsection{Training method}
-For training model, we using RMSprop optimizer \cite{} with Learning Rate is 0.001. On the other hand, we are using Dropout with 0.5 proportion for avoiding an overfiting problem. We divide the dataset into 3 part, 80\% for training and validation and 20\% for testing. We train model for 50 epochs and apply early stopping method \cite{}. The chosen model is model which has the highest accuracy in the validation set.  
+For training this model,\textbf{RMSprop} optimizer is used \cite{} with Learning Rate is 0.001. On the other hand, a Dropout layer is used with 0.5 proportion for avoiding an overfitting problem. The dataset is divided into 2 part: 80\% for training and validation, 20\% for testing. For training and validation, an 8 to 2 porpotion is also applied. The model is trained for 50 epochs and apply early stopping. The chosen model is model which has the highest accuracy in the validation set.  
 
 \subsection{Result}
-There are many ways to evaluate a classification model. Depending on the different problems we use different methods. Commonly used methods are: accuracy score, confusion matrix, Curve Under Area, Precision and Recall, F1 score. For multi-class classification problems, if the data is relatively uniformly distributed, the two well-known methods commonly used are Matrix and Accuracy.\\
-Each \textbf{row} is the value of the \textbf{correct label} and each \textbf{column} is the label \textbf{predicted} by our model.\\
-Each number at the intersection between each row and column is the proportion that the video has the label as the value at the row predicted to be the label at the column.\\
-For example, there are 82\% IceDancing videos is predicted as IceDancing, 9\% of IceDancing videos is predicted as Haircut.\\
-Furthermore, the intersection cells are also indicated in red color, with the value increasing gradually from 0 to 1, the density of the color will change accordingly, from lightness red to dark red\\
+There are many methods to evaluate classification models depending on the problem. Commonly used methods are: accuracy score, confusion matrix, Curve Under Area, Precision and Recall, F1 score. For multi-class classification problems, if the data is relatively uniformly distributed, the two well-known methods commonly used are \textbf{Confusion matrix} and \textbf{Accuracy}. 
+Accuracy is the amount of correct predictions over the total number of prediction.\\
+In a Confusion matrix, each \textbf{row} is the value of the \textbf{correct label} and each \textbf{column} is the label \textbf{predicted} by the model. Each number at the intersection between each row and column is the proportion that the video has the label as the value at the row predicted to be the label at the column.
+For example, there are 82\% IceDancing videos is predicted as IceDancing, 9\% of IceDancing videos is predicted as Haircut.
+Furthermore, the intersection cells are also indicated in red color, with the value increasing gradually from 0 to 1, the density of the color will change accordingly, from light red to dark red.\\
 A good model that will give a confusion matrix has elements on the main diagonal line that have a large value, the remaining elements have small values. In other words, when representing Confusion Matrix in color, a good model will have a main diagonal that will be darker than other areas.
 
 
