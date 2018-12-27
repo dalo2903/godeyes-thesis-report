@@ -329,8 +329,8 @@ There are a total of 8 collections in the database: User, Visual data, Location,
 \cleardoublepage
 \subsubsection{Collections}
 This section contains descriptions of collections along with their schema.\\
-\textbf{User}\\
-The \textbf{User} collection contains basic information of users.
+
+\textbf{User} collection contains basic information of users.
 \begin{center}
 	\begin{figure}[H]
 		\centering
@@ -339,7 +339,7 @@ The \textbf{User} collection contains basic information of users.
 	\end{figure}
 \end{center}
 \cleardoublepage
-\textbf{Visual data}\\
+
 \textbf{Visual data} contains information of files. This collection is synchronized with the file storage upon upload, update or deletion of files.
 
 \begin{center}
@@ -350,7 +350,7 @@ The \textbf{User} collection contains basic information of users.
 	\end{figure}
 \end{center}
 \cleardoublepage
-\textbf{Location}\\
+
 \textbf{Location} contains information of locations. This collection utilizes Geospatial Query feature of MongoDB. Geospatial store each location as a point on the map with their longitude and latitude. Spatial queries such as finding locations near a point or finding locations within a certain radius of a point can be made.
 \begin{center}
 	\begin{figure}[H]
@@ -360,7 +360,7 @@ The \textbf{User} collection contains basic information of users.
 	\end{figure}
 \end{center}
 \cleardoublepage
-\textbf{Notification}\\
+
 \textbf{Notification} contains notifications to users. 
 \begin{center}
 	\begin{figure}[H]
@@ -370,7 +370,7 @@ The \textbf{User} collection contains basic information of users.
 	\end{figure}
 \end{center}
 \cleardoublepage
-\textbf{Person}\\
+
 \textbf{Person} store identification of images data. Each time a new person is identified, that person is stored into the collection.
 \begin{center}
 	\begin{figure}[H]
@@ -380,7 +380,7 @@ The \textbf{User} collection contains basic information of users.
 	\end{figure}
 \end{center}
 \cleardoublepage
-\textbf{Post}\\
+
 \textbf{Post} stores posts of users.
 \begin{center}
 	\begin{figure}[H]
@@ -390,7 +390,7 @@ The \textbf{User} collection contains basic information of users.
 	\end{figure}
 \end{center}
 \cleardoublepage
-\textbf{Record}\\
+
 \textbf{Record} collection logs every occurrences of a person identified by the system with timestamps and locations.
 \begin{center}
 	\begin{figure}[H]
@@ -400,7 +400,7 @@ The \textbf{User} collection contains basic information of users.
 	\end{figure}
 \end{center}
 \cleardoublepage
-\textbf{Role}\\
+
 \textbf{Role} collection stores roles of users in the system.
 \begin{center}
 	\begin{figure}[H]
@@ -730,9 +730,9 @@ Flask framework is used to implement this HTTP server because of its fast perfor
 The classifier system was deployed using Google Compute Service. This service allows users to host virtual computers with customizable hardware for many purposes. The deployed server runs on the Ubuntu operating system because of its high performance, stability and its compatibility with deep learning codes. The server has the following hardware specification:
 
 \begin{itemize}
-	\item \textbf{CPU}:Intel Xeon CPU @ 2.00GHz (4 cores) Skylake architech
-	\item \textbf{RAM}:16GB ECC DDR3
-	\item \textbf{GPU}:K80 12GB
+	\item \textbf{CPU}: Intel Xeon CPU @ 2.00GHz (4 cores) Skylake Architech
+	\item \textbf{RAM}: 16GB ECC 
+	\item \textbf{GPU}: NVIDIA K80 with 12GB VRAM
 \end{itemize}
 \textbf{NGINX} was used as the web server. It accepts any request from the default ports 80, 8080, then forward those request to a specified socket created by Gunicorn.\\
 \textbf{Gunicorn} was used to serve the application. Gunicorn creates a socket so that web server could forward requests to, it then sends those request to the Python application. The Gunicorn process was set up as a system service so that it starts everytime the server boot up. Thec config file of this system service is in /etc/systemd/system/classifier-server.conf (Figure \ref{chap4:server_config}).
