@@ -47,7 +47,7 @@ For more detail, in Figure \ref{chap2:neural_net_detail}. A blue circular node i
 There is $L$ of matrix in a FC with $L$ layers. These matrices are denoted by $W^{(l)}$,with $l = 1,2 ..., L$ where $W^{(l)}$ represents connections from layer $l-1$ to the $l^{th}$ layer (if we consider input layer is the layer $0$). More specifically, the element $w_{ij}^{(l)}$ represents the connection from the $i$ node of the second layer ($ l-1 $) to the node from $j$ of the $l^{th}$ layer. The biases of $(l)$ layer are denoted by $b^{l}$. These weights are denoted as in Figure \ref{chap2:neural_net_detail}. When optimizes an \textbf{MLP} for a certain work, these weights and these biases need to be found.If the weights and biases is set correctly, the \textbf{MLP} can be used to estimate numerous complex mathematical problems.\\
 The set of weights and biases is denoted by $W$ and $b$ respectively.
 
-\subsection{Activation Function:}
+\subsection{Activation Function}
 Each output of a unit (except for input units) is calculated based on the formula:
 \begin{center}
 	$a_{i}^{(l)} = $ $f(w_{i}^{(l)T}a^{(l-1)} + b_{(i)}^{(l)} )$
