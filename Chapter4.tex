@@ -726,6 +726,8 @@ Flask framework is used to implement this HTTP server because of its fast perfor
     \caption{Sequence diagram of the HTTP server}
     \end{figure}
 \end{center}
+\subsection{Identifying faces in videos}
+Faces can also be identified from video. For each frame, a Haar Cascade classifier is used to detect if there are faces within that frame. Those frames is then sent to the Facial recognition module for identification. Results from that module  would then be composed into a unique list of faceId and store into the system.
 \subsection{Environment}
 The classifier system was deployed using Google Compute Service. This service allows users to host virtual computers with customizable hardware for many purposes. The deployed server runs on the Ubuntu operating system because of its high performance, stability and its compatibility with deep learning codes. The server has the following hardware specification:
 
