@@ -57,10 +57,10 @@ In which $f()$ is a (nonlinear) activation function. In vector form, the above e
 	$a_{i}^{(l)} = $ $f(W_{i}^{(l)T}a^{(l-1)} + b_{(i)}^{(l)} )$
 \end{center}
 When $f()$ activation is applied to a matrix (or vector), we understand that it is applied to each element of that matrix (element-wise operation). Then these components are rearranged in the correct order to get a matrix of the same size as the input matrix.
-There are many non-linear functions can be used with neurons. Currently, there is no theory about the use of non-linear functions in any case, and the selection of suitable nonlinear functions for a particular task in the experiment. In nonlinear functions, the following functions are most commonly used: Tanh, Sigmoid, ReLU
+There are many non-linear functions can be used with neurons. Currently, there is no theory about the use of non-linear functions in any case, and the selection of suitable nonlinear functions for a particular task in the experiment. In nonlinear functions, the following functions are most commonly used: Tanh, Sigmoid, ReLU.
 \begin{itemize}
 	\item \textbf{Tanh}\\
-	Tanh function has a formula:  $\tanh(x) = \frac{e^{2x-1}}{e^{2x+1}}$ has an S-shaped graph, and takes the value of x to [-1,1]
+	Tanh function has a formula:  $\tanh(x) = \frac{e^{2x-1}}{e^{2x+1}}$ has an S-shaped graph, and takes the value of x to [-1,1].
 	\begin{center}
 		\begin{figure}[H]
 			\centering
@@ -71,7 +71,7 @@ There are many non-linear functions can be used with neurons. Currently, there i
 	\end{center}
 
 	\item \textbf{Sigmoid}\\
-	Sigmoid function has a formula: $ \sigma(x) = \frac{1}{1+\exp e^{-x}}$ has an S-shaped graph, and takes the value of x to [-1,1]
+	Sigmoid function has a formula: $ \sigma(x) = \frac{1}{1+\exp e^{-x}}$ has an S-shaped graph, and takes the value of x to [-1,1].
 	\begin{center}
 		\begin{figure}[H]
 			\centering
@@ -81,7 +81,7 @@ There are many non-linear functions can be used with neurons. Currently, there i
 		\end{figure}
 	\end{center}
 	\item \textbf{ReLU}\\
-	Rectified linear Unit is a simple nonlinear function but has very good results in experiments, it's has formula $ReLU(x) = max (0,x)$
+	Rectified linear Unit is a simple nonlinear function but has very good results in experiments, it's has formula $ReLU(x) = max (0,x)$.
 		\begin{center}
 		\begin{figure}[H]
 			\centering
@@ -115,7 +115,7 @@ When training an artificial neural network, the loss function needs to be define
 
 The training process will be to adjust the model parameters (Weight W and bias b) so that the \textbf{Loss function} value is as small as possible.
 
-A loss function is any function that takes two vectors and returns a scalar value. For optimization purposes, the loss function is often defined so that it is easy to calculate the derivative
+A loss function is any function that takes two vectors and returns a scalar value. For optimization purposes, the loss function is often defined so that it is easy to calculate the derivative.
 
 For multi-layer classification, the commonly used loss function is categorical cross-entropy
 \textbf{Categorical cross-entropy} is used when expect outputs to be a probability.
@@ -144,11 +144,11 @@ The CNN is inspired by the visual nerve system in animals, which is responsible 
 Simple architecture for Convolution Neural Network could be [INPUT - CONV - RELU - POOL - FC]. In more detail:
 
 \begin{itemize}
-	\item Input: [width-heigth-channel] for example in CIFAR -10 classifications, the input is [32x32x3] which hold the raw pixel values of the image, in this case, an image of width 32, height 32, and with three color channels Red, Blue, Green ( [32x32x3])
-	\item CONV layer is the most important layer, will compute the output of neurons that are connected to local regions in the input, the returned result could be [32x32x12] if 12 filters are decided to be used 
-	\item RELU layer (Rectified linear unit) will apply an elements wise activation function (it is also the most commonly used activation function in deep learning models). The function returns 0 if it receives any negative input, but for any positive value x, it returns x back. F(x) = max(0,x)\\
-	\item POOL (Pooling) layer will perform a downsampling operation along the spatial dimensions (Width, Height), result in volume such as [16 x 16 x 12]
-	\item FC (Fully-connected) layer will compute the score of classes, resulting in a volume of size [1 x 1 x number of class] in Cifar-10, it returns [1x1x10]
+	\item Input: [width-heigth-channel] for example in CIFAR -10 classifications, the input is [32x32x3] which hold the raw pixel values of the image, in this case, an image of width 32, height 32, and with three color channels Red, Blue, Green ( [32x32x3]).
+	\item CONV layer is the most important layer, will compute the output of neurons that are connected to local regions in the input, the returned result could be [32x32x12] if 12 filters are decided to be used.
+	\item RELU layer (Rectified linear unit) will apply an elements wise activation function (it is also the most commonly used activation function in deep learning models). The function returns 0 if it receives any negative input, but for any positive value x, it returns x back. F(x) = max(0,x).
+	\item POOL (Pooling) layer will perform a downsampling operation along the spatial dimensions (Width, Height), result in volume such as [16 x 16 x 12].
+	\item FC (Fully-connected) layer will compute the score of classes, resulting in a volume of size [1 x 1 x number of class] in Cifar-10, it returns [1x1x10].
 \end{itemize}
 By this way, CNN transforms the original image layer by layer from raw pixel values to the final class score. Note that some layers contain parameters, and others do not. For instance, CONV and FC layers contain not only the activation but also weight and the biases of the neurons. On the other hand, the RELU/POOL layers will implement a fixed function. The parameters in the CONV/FC layers will be trained with the gradient descent algorithm so that the class scores that the CNN computes are consistent with the labels in training set for each image.\\
 \begin{center}
