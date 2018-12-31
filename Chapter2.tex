@@ -26,24 +26,38 @@ The human brain consists of many computational units called neuron. The \textbf{
 		\includegraphics[width=0.75\columnwidth]{images/chap2/NeuralNetwork.jpg}
 		\caption{A 2-layer Neural Network (one hidden layer of 4 neurons (or units) and one output layer with 2 neurons), and three inputs.}
 		\label{chap2:neural_net}
+		%https://www.researchgate.net/publication/302595416_Artificial_Neural_Network_Model_for_Rainfall-Runoff_-A_Case_Study
 	\end{figure}
 \end{center}
 \footnotetext{Source: \url:{ https://devblogs.nvidia.com/mocha-jl-deep-learning-julia/}}
 \vspace{-1cm}
-Figure \ref{chap2:neural_net} represents a simple artificial neural network, where each circle is an artificial neuron, inward and outward arrows are the inputs and outputs of that neuron. The first layer where there is no input is called the “input layer”. Similarly, the last layer where there is no output is called the ‘output layer’. Layers that are either input or output are called “hidden layers”. In the figure, every neuron of one layer is connected to all neuron in the next layer, so it every layer is a “fully-connected layer”. A Network which only have Fully-connected layer(s) is also called as Multi Layer Perceptron (MLP). A connection between two artificial neurons is called an ‘edge’. Artificial neurons and edges will have a ‘weight’ value \boldmath$W$ to adjust the learning process. Increasing or decreasing the weight value will affect the strength of the signal between two neurons. A typical artificial neuron will take each input, multiply it with the corresponding weight \boldmath$W$, take the sum of its input and apply some non-linear function (activation function \boldmath$\varphi$ to get the output. Many connections of artificial neuron form a neural network, where the output of a neuron is the input of another artificial neuron. Typically, an artificial neuron network will have many layers. If the weight is set correctly, the ANN can be used to estimate numerous complex mathematical problems.
-
+Figure \ref{chap2:neural_net} represents a simple artificial neural network, where each circle is an artificial neuron, which is also called \textbf{Unit}, inward and outward arrows are the inputs and outputs of that neuron. The first layer where there is no input is called the \textbf{input layer}. Similarly, the last layer where there is no output is called the \textbf{output layer}. Layers that are either input or output are called \textbf{hidden layer}. In the figure, every neuron of one layer is connected to all neuron in the next layer, so it every layer is a “fully-connected layer”. A Network which only have \textbf{Fully-connected layer(s)} is also called as Multi Layer Perceptron (\textbf{MLP}).
 \begin{center}
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.75\columnwidth]{images/chap2/ANN_detail.png}
+		\includegraphics[width=0.75\columnwidth]{images/chap2/mlp_notation.png}
 		\caption{Detail of processing in ANN}
 		\label{chap2:neural_net_detail}
-		
+		%https://machinelearningcoban.com/2017/02/24/mlp/
 	\end{figure}
 \end{center}
 \vspace{-1cm}
+For more detail, in Figure \ref{chap2:neural_net_detail}. A blue circular node is called a \textbf{Unit}. Input of hidden layers is denoted by $z$, the output of each \textbf{Unit} is usually denoted by $a$
+(shows the activation value, ie the value of each unit after we apply the activation function to $z$) The output of the $i^{th}$ unit in the $l^{th}$ layer is denoted by $a_{i}^{(l)}$, Suppose to add that the number of units in the $l^{th}$ layer) (without bias $b$) is $d^{(l)}$. The vector representing the output of the $l^{th}$ layer is denoted by $a^{(l)}$
+There is $L$ of matrix in a FC with $L$ layers. These matrices are denoted by $W^{(l)}$,with $l = 1,2 ..., L$ where $W^{(l)}$ represents connections from layer $l-1$ to the $l^{th}$ layer (if we consider input layer is the layer $0$). More specifically, the element $w_{ij}^{(l)}$ represents the connection from the $i$ node of the second layer ($ l-1 $) to the node from $j$ of the $l^{th}$ layer. The biases of $(l)$ layer are denoted by $b^{l}$. These weights are denoted as in Figure \ref{chap2:neural_net_detail}. When optimizes an \textbf{MLP} for a certain work, these weights and these biases need to be found.If the weights and biases is set correctly, the \textbf{MLP} can be used to estimate numerous complex mathematical problems.\\
+The set of weights and biases is denoted by $W$ and $b$ respectively.
+
 \subsection{Activation Function:}
-Many non-linear functions can be used with neurons. Currently, there is no theory about the use of non-linear functions in any case, and the selection of suitable nonlinear functions for a particular task in the experiment. In nonlinear functions, the following functions are most commonly used: Tanh, Sigmoid, ReLU
+Each output of a unit (except for input units) is calculated based on the formula:
+\begin{center}
+	$a_{i}^{(l)} = $ $f(w_{i}^{(l)T}a^{(l-1)} + b_{(i)}^{(l)} )$
+\end{center}
+In which $f()$ is a (nonlinear) activation function. In vector form, the above expression is written as:
+\begin{center}
+	$a_{i}^{(l)} = $ $f(W_{i}^{(l)T}a^{(l-1)} + b_{(i)}^{(l)} )$
+\end{center}
+When $f()$ activation is applied to a matrix (or vector), we understand that it is applied to each element of that matrix (element-wise operation). Then these components are rearranged in the correct order to get a matrix of the same size as the input matrix.
+There are many non-linear functions can be used with neurons. Currently, there is no theory about the use of non-linear functions in any case, and the selection of suitable nonlinear functions for a particular task in the experiment. In nonlinear functions, the following functions are most commonly used: Tanh, Sigmoid, ReLU
 \begin{itemize}
 	\item \textbf{Tanh}\\
 	Tanh function has a formula:  $\tanh(x) = \frac{e^{2x-1}}{e^{2x+1}}$ has an S-shaped graph, and takes the value of x to [-1,1]
@@ -92,7 +106,7 @@ With classification problems, the \textbf{Output layer} is often a \textbf{Softm
 		\includegraphics[width=0.75\columnwidth]{images/chap2/Softmax.png}
 		\caption{Some examples of Softmax input and output}
 		\label{chap2:softmax}
-		
+		%https://machinelearningcoban.com/2017/02/17/softmax/
 	\end{figure}
 \end{center}
 \vspace{-1cm}
@@ -112,6 +126,16 @@ With $y$ is one-hot encode vector representing the correct class of input and $\
 \subsection{Dropout}
 Dropout \cite{Srivastava:2014:DSW:2627435.2670313} is a simple but effective method to reduce overfitting for neural network models.
 At the output of each layer in the network, some neurons will be retained with the probability $p$, the remaining neurons are assigned a value of 0, during the back propagation, only the neurons are used to calculate derivative. Finally, in the validation process, we retain all neurons to produce predictable results
+\begin{center}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.75\columnwidth]{images/chap2/dropout.jpg}
+		\caption{\textbf{Left:} Standard Neural Network with 2 hidden Layers. \textbf{Right:} An example of Dropout}
+		%https://hackernoon.com/is-the-braess-paradox-related-to-dropout-in-neural-nets-270ecb97cdeb
+		\label{chap2:dropout}
+	\end{figure}
+\end{center}
+\vspace{-1cm}
 \section{Convolution Neural Network (CNN)}
 \subsection{Overview}
 The CNN is inspired by the visual nerve system in animals, which is responsible for processing brain imaging data. Within this system, specific neurons only emit signals when a specific feature appear in the visual area. The human brain processes images through each layer with increasing complexity. The first layer distinguishes essential characteristics such as straight lines or curves. On the next layer, the brain will recognize the current arrangement of lines and colors that represent a dog or a cat. Similarly, CNN also processes images using multiple weight matrices called filters to detect features such as edges, lines... When going to higher layers, filters will be able to identify complex properties.
@@ -126,10 +150,7 @@ Simple architecture for Convolution Neural Network could be [INPUT - CONV - RELU
 	\item POOL (Pooling) layer will perform a downsampling operation along the spatial dimensions (Width, Height), result in volume such as [16 x 16 x 12]
 	\item FC (Fully-connected) layer will compute the score of classes, resulting in a volume of size [1 x 1 x number of class] in Cifar-10, it returns [1x1x10]
 \end{itemize}
-
 By this way, CNN transforms the original image layer by layer from raw pixel values to the final class score. Note that some layers contain parameters, and others do not. For instance, CONV and FC layers contain not only the activation but also weight and the biases of the neurons. On the other hand, the RELU/POOL layers will implement a fixed function. The parameters in the CONV/FC layers will be trained with the gradient descent algorithm so that the class scores that the CNN computes are consistent with the labels in training set for each image.\\
-
-Convolution layer is the core building block of a Convolution Network that does the most critical computations in the Network.
 \begin{center}
   \begin{figure}[H]
   \centering
@@ -141,6 +162,7 @@ Convolution layer is the core building block of a Convolution Network that does 
 
 \vspace{-1cm}
 \subsection{Convolution Layer}
+Convolution layer is the core building block of a Convolution Network that does the most critical computations in the Network.
 \begin{itemize}
 	\item Overview:\\ 
 	The convolution layer's parameter consists of a set of learnable filters. Every filter is small spatially [ Width x Height], but extends through the full depth of the input volume (in standard image, the depth is equal 3). For example, a typical filter on the first layer of a CNN might have a size [5x5x3] (5 pixels width and height, and depth = 3). In the calculating process, slide each filter across the width and height of the input and compute dot-product between input and filter in every position. The result of dot-product is a 2-dimensional matrix called activation map of a filter. With layer has 12 filters, each of them produces one activation map, then stack these maps along the depth dimension and produce the output volume.
@@ -163,7 +185,6 @@ Convolution layer is the core building block of a Convolution Network that does 
 		
 	\end{enumerate}
 \end{itemize}
-
 Output volume can be computed by using input volume size (W), the receptive field size of the Convolution Layer neurons (F), the stride value (S), and the amount of zero padding used (P) on the border. The formula for calculating how many neurons "fit" is given by:
 \begin{center}
 	\[ \scalebox{1.5}{$\frac{W_{1} - F + 2P }{S} + 1$} \]
@@ -288,14 +309,12 @@ Traditional neural networks cannot do the task above. For example, if a traditio
 
 \subsubsection{Recurrent Neural Network - RNN}
 \textbf{Recurrent Neural Network} is a type of neural network effective for processing sequential data. Recurrent Neural Network (RNN) was first introduced by Rumelhart et al. In 1986 \cite{Rumelhart:1986:PDP:104279} as a family of neural networks suitable for processing of chain data. Unlike others neural networks, which can only handle input of a given size, RNN can handle any input of any length, and it is possible to model the dependency of the latter component. With preceding components in the output. First, the RNN stores a hidden state vector that is updated at each processing step (timestep) based on the value of this vector at the pre-processing stage and the value of the input component at this step. Second, the rules for hidden status updates, expressed through a set of corresponding functions and weights, are shared between processing steps. These features allow the RNN network to be generalizable even to any size input chain and have achieved the best results in processing string data such as text and sound.
-
 Let x = $[x_{0}, x_{1}, ..., x_{n}]$ be an input sequence of $n + 1$ components with each component $x_{t}$ $(t = 0..n)$ is a vector of a certain size. Let $h_{t}$, $y_{t}$ denote the latent state and output of RNN in step t. An original RNN (Vanilla RNN) is represented by the following mathematical formula:
 \begin{align}
 h_{o} &= \sigma_{h}(W_{xh}x_{t})\\
 h_{t} &= \sigma_{h}(W_{hh}h_{t-1} + W_{xh}x_{t})\\
 y_{t} &= \sigma_{t}(W_{hy}h_{t})
 \end{align}
-
 In the above formula, $W_{hh}, W_{xh}$ and $W_{hy}$ are respectively the weight matrices between $h_{t-1}$ and $h_{t}, x_{t}$ and $h_{t}, h_{t}$ and $y_{t}$. $\sigma_{h}$ and $\sigma_{y}$ are activation functions, where the $\tanh$ function is usually used for $\sigma_{h}$.
 \subsubsection{Long Short-Term Memory - LSTM}
 
