@@ -56,7 +56,7 @@ For the video analyzing problem, this thesis proposes using a two-phased video c
 \subsection{Proposed Architecture}
 \subsubsection{CNN architecture for feature extraction}
 In \cite{DBLP:journals/corr/ZhouKLOT14}, the authors suggest that pretrained CNNs are incredibly effective in extracting feature for other classification tasks.
-For the CNN layer of the proposal model, a VGG16 \cite{DBLP:journals/corr/SimonyanZ14a} architecture pretrained on ImageNet \footnotetext{Source: \url:{http://www.image-net.org/challenges/LSVRC/}} is chosen to extract features from video frames. Figure \ref{chap3:vgg16_architecture} shows the architecture of this model. Input of VGG16 is an 224x224x3 RGB image. The image is then pass through a stack of convolutional layers. All of hidden layers are equipped with a ReLU.\\
+For the CNN layer of the proposal model, VGG16 \cite{DBLP:journals/corr/SimonyanZ14a} architecture and Resnet50 architecture pretrained on ImageNet \footnotetext{Source: \url:{http://www.image-net.org/challenges/LSVRC/}} is chosen to extract features from video frames. Figure \ref{chap3:vgg16_architecture} shows the architecture of VGG16 model. Input of VGG16 is an 224x224x3 RGB image. The image is then pass through a stack of convolutional layers. All of hidden layers are equipped with a ReLU.\\
 Each video will be split into frames, these frames will go through VGG16 for the purpose of extracting features. After passing the network, extracted features are tensors with the shape (7x7x512).
 \begin{center}
     \begin{figure}[H]
@@ -121,18 +121,35 @@ The table below shows hyperparameters used in the model.
 		\hline
 		\textbf{Name}				&  \textbf{Value}
 		\\ \hline
-		Hidden units in LSTM		&   512
+		Hidden units in LSTM		&   1024
 		\\ \hline
 		Dropout	in LSTM				&  	0.6      
 		\\ \hline
 		Dropout after Dense layer	&	0.5
 		\\ \hline
+		Number of frames			&   14
+		\\ \hline
+		Batch size					&   256
+		\\ \hline
+		Epochs						&   20
+		\\ \hline
+		Learning rate				&   0.001
+		\\ \hline
 	\end{tabular}
 \caption{Hyperparameters used}
+Accuracy of the model achieved an acceptable result after 20 epochs.
 \end{table}
 \subsection{Training method}
-For training this model,\textbf{RMSprop} optimizer is used \cite{} with Learning Rate is 0.001. On the other hand, a Dropout layer is used with 0.5 proportion for avoiding an overfitting problem. The dataset is divided into 2 part: 80\% for training and validation, 20\% for testing. For training and validation, an 8 to 2 porpotion is also applied. The model is trained for 50 epochs and apply early stopping. The chosen model is model which has the highest accuracy in the validation set.  
-
+For training this model,\textbf{RMSprop} optimizer is used \cite{} with Learning Rate is 0.001. On the other hand, a Dropout layer is used with 0.5 proportion for avoiding an overfitting problem. The dataset is divided into 2 part: 80\% for training and validation, 20\% for testing. For training and validation, an 8 to 2 porpotion is also applied. The model is trained for 20 epochs and apply early stopping. The chosen model is model which has the highest accuracy in the validation set.The figure below shows the training process of the chosen model. For the optimization of a model which is not overfit or underfit, both Train Accuracy and Validation Accuracy have the tendency of increasing, while Train Loss and Validation Loss have tendency of decreasing.
+ 
+\begin{center}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\columnwidth]{images/chap3/acc-and-loss.png}
+		\footcaption{Training process of}
+		\label{chap3:acc-and-loss}
+	\end{figure}
+\end{center}
 \subsection{Result}
 There are many methods to evaluate classification models depending on the problem. Commonly used methods are: accuracy score, confusion matrix, Curve Under Area, Precision and Recall, F1 score. For multi-class classification problems, if the data is relatively uniformly distributed, the two well-known methods commonly used are \textbf{Confusion matrix} and \textbf{Accuracy}.\\ 
 Accuracy is the amount of correct predictions over the total number of prediction.\\
@@ -162,9 +179,9 @@ The table below show accuracy of tested models.
 \begin{table}[H]
 	\begin{tabular}{|P{5cm}|L{5cm}|}
 		\hline
-		\textbf{Model name}			&  \textbf{Accuracy}(After 50 epochs)
+		\textbf{Model name}			&  \textbf{Accuracy}(After 20 epochs)
 		\\ \hline
-		VGG16+LSTM	 	&   90\%  
+		VGG16+LSTM	 	&   ~91.8\%  
 		\\ \hline
 		Resnet+LSTM 	&  	90.2\%       
 		\\ \hline
