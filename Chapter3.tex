@@ -140,7 +140,7 @@ The table below shows hyperparameters used in the model.
 Accuracy of the model achieved an acceptable result after 20 epochs.
 \end{table}
 \subsection{Training method}
-For training this model,\textbf{RMSprop} optimizer is used \cite{} with Learning Rate is 0.001. On the other hand, a Dropout layer is used with 0.5 proportion for avoiding an overfitting problem. The dataset is divided into 2 part: 80\% for training and validation, 20\% for testing. For training and validation, an 8 to 2 porpotion is also applied. The model is trained for 20 epochs and apply early stopping. The chosen model is model which has the highest accuracy in the validation set.The figure below shows the training process of the chosen model. For the optimization of a model which is not overfit or underfit, both Train Accuracy and Validation Accuracy have the tendency of increasing, while Train Loss and Validation Loss have tendency of decreasing.
+For training this model,\textbf{RMSprop} optimizer is used with Learning Rate is 0.001. On the other hand, a Dropout layer is used with 0.5 proportion for avoiding an overfitting problem. The dataset is divided into 2 part: 80\% for training and validation, 20\% for testing. For training and validation, an 8 to 2 porpotion is also applied. The model is trained for 20 epochs and apply early stopping. The chosen model is model which has the highest accuracy in the validation set.The figure below shows the training process of the chosen model. For the optimization of a model which is not overfit or underfit, both Train Accuracy and Validation Accuracy have the tendency of increasing, while Train Loss and Validation Loss have tendency of decreasing.
  
 \begin{center}
 	\begin{figure}[H]
@@ -152,7 +152,7 @@ For training this model,\textbf{RMSprop} optimizer is used \cite{} with Learning
 \end{center}
 \subsection{Result}
 There are many methods to evaluate classification models depending on the problem. Commonly used methods are: accuracy score, confusion matrix, Curve Under Area, Precision and Recall, F1 score. For multi-class classification problems, if the data is relatively uniformly distributed, the two well-known methods commonly used are \textbf{Confusion matrix} and \textbf{Accuracy}.\\ 
-Accuracy is the amount of correct predictions over the total number of prediction.\\
+\textbf{Accuracy} is the amount of correct predictions over the total number of prediction.\\
 In a Confusion matrix, each \textbf{row} is the value of the \textbf{correct label} and each \textbf{column} is the label \textbf{predicted} by the model. Each number at the intersection between each row and column is the proportion that the video has the label as the value at the row predicted to be the label at the column.\\
 \begin{center}
 	\begin{figure}[H]
