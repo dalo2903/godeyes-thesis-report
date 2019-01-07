@@ -1,4 +1,5 @@
 \chapter{EVALUATION}
+
 This chapter presents the process of evaluating the effectiveness of the whole system and its features. At the same time, self-assessment of the work done by the group, from which the development direction of the topic
 \section{Social media website}
 There are many ways to evaluate a website. This project decides to use 3 well known evaluating tools: Website Grader, GTmetrix, PageSpeed Insight.
@@ -121,7 +122,7 @@ The website uses the simulation runtime settings and slow 4G internet connection
 	\item Network throttling: 150 ms TCP RTT, 1,638.4 Kbps throughput (Simulated)
 	\item CPU throttling: 4x slowdown (Simulated)
 	\item User agent (host): Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36
-	\item User agent (network): Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3559.0 Mobile Safari/537.36
+	\item User agent (network): Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3559.0 Mobile Safari/537.36c
 	\item CPU/Memory Power: 472
 \end{itemize}
 \begin{center}
@@ -147,6 +148,13 @@ The website uses the simulation runtime settings and slow 4G internet connection
 \end{center}
  Therefore, the tool has evaluated its effectiveness; even it is run with 4G slow internet , it can fully operate the above criteria
 \section{Video Classifier Module}
+After training the classifier with the configuration proposed in chapter \ref{chap:solution} on 50 selected videos, with some minor changes, the classifier achieved the following results. 
+	\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\columnwidth]{images/chap5/confusion_matrix.png}
+	\caption{Confusion matrix after training 50 videos}
+\end{figure}
+
 \section{Pricing}
 \begin{enumerate}
 	\item mLab: This project is currently using Free Sandbox plan with 0.5 GB capacity.
