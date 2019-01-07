@@ -153,8 +153,19 @@ The website uses the simulation runtime settings and slow 4G internet connection
 	\item Google Cloud Storage: There is 5 GB free to use forever. Extra spaces will be charged by \$0.020 per GB per month.
 	\item Google Compute Engine:
 		\begin{itemize}
-			\item Training: For training purpose, it costs \$3.098/hour (\$2,261/month), depends on the number of training time. At the time of writing, this system utilizes 4 hours each month.
-			\item Predicting: This activity requires \$126.05 per month.
+			\item Training: Because of the flexibility of the Cloud Computing Services (easy to add or remove hardware component), we will use the Google Compute Engine for training purpose.The training machine has the following hardware specification:
+			 \begin{itemize}
+			 	\item \textbf{CPU}: Intel Xeon CPU @ 2.0 Ghz 10 cores (Skylake Architecture)
+			 	\item \textbf{RAM}: 64GB ECC
+			 	\item \textbf{GPU}: 4 x NVIDIA V100 SMX2 (Volta Architecture) with 4 x 16 GB VRAM
+			 \end{itemize}
+			 \item At the time of writing this thesis, the training machine costs \$3.098/hour (\$2,261/month), and this system utilizes 4 hours each month.
+			\item Predicting: Predicting server need a lower hardware configuration than Training Machine:
+			\begin{itemize}
+				\item \textbf{CPU}: Intel Xeon CPU @ 2.0 Ghz 4 cores (Skylake Architecture)
+				\item \textbf{RAM}: 8GB ECC
+				\item \textbf{GPU}: NVIDIA K80 12 GB VRAM (Lowest tier GPU)
+			\end{itemize}
+			\item Since Predicting server must be used regularly,it is requires \$300.35 per month if using Google Cloud Platform. These cost can be dramatically reduced by self-building hardware to deploy the system.
 		\end{itemize}
 \end{enumerate}
-These cost can be dramatically reduced by self-building hardware to deploy the system.
