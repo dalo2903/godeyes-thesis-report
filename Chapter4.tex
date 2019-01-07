@@ -4,15 +4,25 @@ This chapter describes the implementation of the system which consists of: A soc
 \section{System overview and requirement analysis}
 
 \subsection{System overview}
-Figure \ref{chap3:system_overview_basic} shows a concise overview of how the system operates. Users interact with the website through front-end. The input of users can come in the form of images, videos or label contribution. Back-end receives input and stores in the database. Concurrently, inputs are sent to image processing module/video processing module . Outputs from analysis server are sent back to back-end and then stored in database. The back-end is also responsible for obtaining appropriate contents from the database to display to users through front-end.
-Figure \ref{chap3:system_architecture} describe the structure of the system architecture more specifically: Outlining the details of each component and interaction between them.
+Figure \ref{chap4:system_overview_basic} shows a concise overview of how the system operates. Users interact with the website through front-end. The input of users can come in the form of images, videos or label contribution. Back-end receives input and stores in the database. Concurrently, inputs are sent to image processing module/video processing module . Outputs from analysis server are sent back to back-end and then stored in database. The back-end is also responsible for obtaining appropriate contents from the database to display to users through front-end.
 
 \begin{center}
     \begin{figure}[H]
     \centering
-    \includegraphics[width=1\columnwidth]{images/chap3/system_overview_basic.png}
+    \includegraphics[width=1\columnwidth]{images/chap4/system_overview_basic.png}
     \caption{An overview of the system}
-    \label{chap3:system_architecture}
+    \label{chap4:system_overview_basic}
+    \end{figure}
+\end{center}
+
+Figure \ref{chap4:system_architecture} describe the structure of the system architecture more specifically: Outlining the details of each component and interaction between them.
+
+\begin{center}
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=1\columnwidth]{images/chap4/system_architecture.png}
+    \caption{System architecture}
+    \label{chap4:system_architecture}
     \end{figure}
 \end{center}
 
@@ -464,13 +474,13 @@ To implement the website, Model-View-Controller (MVC) pattern is used for its ad
 \item SEO friendly Development platform.
 \end{itemize}
 In the MVC development, controller receives all requests for the application and then control the model to prepare any necessary information for the view. The view uses that data prepared by the controller to bring the final output.
-\subsection{Front-end}
+\subsection{Front-end (Views)}
 \subsubsection{Overview}
 Figure \ref{chap4:sitemap} display the overview of pages of the front-end and corresponding function can be found in each page.
 \begin{center}
     \begin{figure}[H]
     \centering
-    \includegraphics[width=5cm,height=20cm]{images/chap4/sitemap.png}
+    \includegraphics[width=17cm,height=5cm]{images/chap4/sitemap-edit2.png}
     \caption{Sitemap}
     \label{chap4:sitemap}
     \end{figure}
@@ -614,7 +624,7 @@ There is also an "Add person" button to add new person with name for system to i
   \includegraphics[width=\linewidth]{images/chap4/admin.png}
 \endminipage
 \end{figure}
-\subsection{Back-end}
+\subsection{Backend}
 \subsubsection{Controllers}
 In MVC pattern, the Controller receives user input, manipulates Model, and then responds to the user. Following is the list of implemented controllers in this thesis.
 \begin{itemize}
@@ -632,8 +642,8 @@ In MVC pattern, the Controller receives user input, manipulates Model, and then 
 	\item User Controller: is in charge of controlling users: ban, unban user; subscribe, unsubscribe a location; phone number verification.
 	\item Visual Data Controller: For each image or video uploaded to the Google Cloud Storage, this controller will create a comparable visual data with related data (location, public URL, …). Verified users can be able to decide whether a video is suspicious or not. This controller also take the identified result of visual data after analyzed by Microsoft Azure Face API.    
 \end{itemize}
-\subsubsection{Operation}
-This section describe the operation of use cases defined in section \ref{chap4:usecases}.
+
+This section describe some sequences of use cases defined in section \ref{chap4:usecases}.
 \begin{itemize}
 	\item \textbf{Login} (UC01)
 	\begin{center}
@@ -669,6 +679,16 @@ This section describe the operation of use cases defined in section \ref{chap4:u
 
 \end{itemize}
 
+\subsubsection{Main functions}
+\textbf{Receive and save data}//
+\textbf{Label video}//
+\textbf{Notify user about anomaly}//
+\begin{center}
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=1\columnwidth]{images/chap4/createpostflowchart.png}
+    \end{figure}
+\end{center}
 
 \section{Face recognition module}
 The facial recognition module does the job of identifying faces inside images, uses Microsoft Azure Face API as its core.
