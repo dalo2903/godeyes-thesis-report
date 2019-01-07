@@ -683,6 +683,17 @@ This section describe some sequences of use cases defined in section \ref{chap4:
 \textbf{Receive and save data}//
 \textbf{Label video}//
 \textbf{Notify user about anomaly}//
+
+\subsubsection{Labeling of Videos}
+This function of the website collect labels of videos from users, then derives the final label of a videos based on what the users voted.To use this function, contributors go to a page that contains a list of video and their available labels. For each video, contributors can what it and choose the appropriate label based on the content.
+
+\textbf{Storing label of users}\\
+Labels of each video are store inside the Visual Data collection as an array of subdocuments. Each subdocument contains users' label and their id. Storing users' id prevent them from voting multiple times.
+
+\textbf{Method of getting labels of videos}\\
+Labels of videos are computed at the time of making the dataset using \textbf{Dataset Collector Controller}. For the sake of simplicity, the final labels of videos is taken by the majority. For each video, to compute its label, the system count the total amount of user voting on each label, then take the label that has the highest amount of voters. For example, if there are 4 users vote on \textit{label A} and 6 users vote on \textit{label B} for a video, then the final label of that video would be \textit{label A}. 
+
+
 \begin{center}
     \begin{figure}[H]
     \centering
