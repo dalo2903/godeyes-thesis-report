@@ -474,7 +474,7 @@ To implement the website, Model-View-Controller (MVC) pattern is used for its ad
 \item SEO friendly Development platform.
 \end{itemize}
 In the MVC development, controller receives all requests for the application and then control the model to prepare any necessary information for the view. The view uses that data prepared by the controller to bring the final output.
-\subsection{Front-end (Views)}
+\subsection{Views}
 \subsubsection{Overview}
 Figure \ref{chap4:sitemap} display the overview of pages of the front-end and corresponding function can be found in each page.
 \begin{center}
@@ -485,7 +485,7 @@ Figure \ref{chap4:sitemap} display the overview of pages of the front-end and co
     \label{chap4:sitemap}
     \end{figure}
 \end{center}
-\subsubsection{Views}
+\subsubsection{Examples}
 	\textbf{Header}
 \\
 Header is a navigation bar which is displayed in every views. Navigation bar only contains "About us", "Sign in", "Sign up" buttons by default.
@@ -624,8 +624,7 @@ There is also an "Add person" button to add new person with name for system to i
   \includegraphics[width=\linewidth]{images/chap4/admin.png}
 \endminipage
 \end{figure}
-\subsection{Backend}
-\subsubsection{Controllers}
+\subsection{Controllers}
 In MVC pattern, the Controller receives user input, manipulates Model, and then responds to the user. Following is the list of implemented controllers in this thesis.
 \begin{itemize}
 	\item Authentication Controller: manages the flow of user sign in and sign up. A user can choose either to login with traditional account or social account. With the classical way, the user has to provide his/her email and password. If the user prefers social login, the website currently supports sign in via Facebook and Google+.
@@ -679,12 +678,10 @@ This section describe some sequences of use cases defined in section \ref{chap4:
 
 \end{itemize}
 
-\subsubsection{Main functions}
-\textbf{Receive and save data}//
-\textbf{Label video}//
-\textbf{Notify user about anomaly}//
-
-\subsubsection{Labeling of Videos}
+\subsection{Main functions}
+\subsubsection{Receive and save data}
+After a user is verified, he/she a has a right to create a new post. First, he/she will provide the required information for a new post: title, location, and videos or images. Next, post's create form will be sent to the Social Media Website.  After the Social Media Website receiving the request, it takes out visual data, uploads to a pre-defined bucket of Google Cloud Storage, and returns its public URL. Then, it will insert new visual data in NoSQL Database on mLab with that URL. Finally, a new post will be created and be labeled by other users or be analyzed later.
+\subsubsection{Label video}
 This function of the website collect labels of videos from users, then derives the final label of a videos based on what the users voted.To use this function, contributors go to a page that contains a list of video and their available labels. For each video, contributors can what it and choose the appropriate label based on the content.
 
 \textbf{Storing label of users}\\
@@ -693,14 +690,14 @@ Labels of each video are store inside the Visual Data collection as an array of 
 \textbf{Method of getting labels of videos}\\
 Labels of videos are computed at the time of making the dataset using \textbf{Dataset Collector Controller}. For the sake of simplicity, the final labels of videos is taken by the majority. For each video, to compute its label, the system count the total amount of user voting on each label, then take the label that has the highest amount of voters. For example, if there are 4 users vote on \textit{label A} and 6 users vote on \textit{label B} for a video, then the final label of that video would be \textit{label A}. 
 
-
+\subsubsection{Notify user about anomaly}
 \begin{center}
     \begin{figure}[H]
     \centering
-    \includegraphics[width=1\columnwidth]{images/chap4/createpostflowchart.png}
+    \includegraphics[width=0.7\columnwidth]{images/chap4/createpostflowchart.png}
     \end{figure}
 \end{center}
-
+Only posts have video data are used to notify users. Suppose there is a user A who subscribe location called "1". When any user creates post with location which is exactly "1" or in a diameter of 1 kilometer from "1" and video data from that post is classified as "Suspicious", the system is going to notify user A.
 \section{Face recognition module}
 The facial recognition module does the job of identifying faces inside images, uses Microsoft Azure Face API as its core.
 \begin{center}
