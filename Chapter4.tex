@@ -1,7 +1,7 @@
 \chapter{SYSTEM DESIGN AND IMPLEMENTATION}
 
 This chapter describes the implementation of the system which consists of: A social media website, an image processing module, a video processing module, a database. In \textit{System overview and requirement analysis} section, everything is briefly described as a whole. In other sections, structure and details of each component are defined more comprehensively.
-\section{System overview and requirement analysis}
+ \section{System overview and requirement analysis}
 
 \subsection{System overview}
 Figure \ref{chap4:system_overview_basic} shows a concise overview of how the system operates. Users interact with the website through front-end. The input of users can come in the form of images, videos or label contribution. Back-end receives input and stores in the database. Concurrently, inputs are sent to image processing module/video processing module . Outputs from analysis server are sent back to back-end and then stored in database. The back-end is also responsible for obtaining appropriate contents from the database to display to users through front-end.
@@ -767,7 +767,31 @@ Extracted frames are frames that are the multiple of $interval$. For example, wh
 \subsubsection{Detecting faces in videos}
 The server also has to send frames of videos back to the web server for further identification. To save resources, only frames that contain faces within would be sent. For each frame, a Haar Cascade classifier is used to detect if there are faces within that frame, then compile them into a list of frames. Those frames would be send back to the web server along with the classification result.
 \subsubsection{Classifying videos}
-Videos are classified using the proposed method in Chapter \ref{chap:solution}.
+Videos are classified using the proposed method in Chapter \ref{chap:solution}, modified to predict only 2 classes: \textit{normal} and \textit{abnormal}. The classifier is trained 50 on real-life videos selected from the UCF-Crime dataset, as well as video from the internet and achieved moderated result. As more and more video added for training, the classifier would expectantly classify video more accurately.
+\begin{figure}[!htb]
+	\minipage{0.5\textwidth}
+	\includegraphics[width=\linewidth]{images/chap4/suspicious-2.png}
+	\endminipage\hfill
+	\minipage{0.05\textwidth}
+	\endminipage\hfill
+	\minipage{0.5\textwidth}
+	\includegraphics[width=\linewidth]{images/chap4/suspicious-1.png}
+	\endminipage
+	\caption{Some abnormal videos for of training the classifier}
+\end{figure}
+\begin{figure}[!htb]
+	\minipage{0.5\textwidth}
+	\includegraphics[width=\linewidth]{images/chap4/normal-1.png}
+	\endminipage\hfill
+	\minipage{0.05\textwidth}
+	\endminipage\hfill
+	\minipage{0.5\textwidth}
+	\includegraphics[width=\linewidth]{images/chap4/normal-2.jpg}
+	\endminipage
+	\caption{Some normal videos for training the classifier}
+\end{figure}
+
+
 \subsection{Environment}
 The classifier system was deployed using Google Compute Service. This service allows users to host virtual computers with customizable hardware for many purposes. The deployed server runs on the Ubuntu operating system because of its high performance, stability and its compatibility with deep learning codes. The server has the following hardware specification:
 
@@ -786,4 +810,3 @@ The classifier system was deployed using Google Compute Service. This service al
 	\label{chap4:server_config}
     \end{figure}
 \end{center}
-
