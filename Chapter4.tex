@@ -5,15 +5,6 @@ This chapter describes the implementation of the system which consists of: A soc
 
 \subsection{System overview}
 Figure \ref{chap3:system_overview_basic} shows a concise overview of how the system operates. Users interact with the website through front-end. The input of users can come in the form of images, videos or label contribution. Back-end receives input and stores in the database. Concurrently, inputs are sent to image processing module/video processing module . Outputs from analysis server are sent back to back-end and then stored in database. The back-end is also responsible for obtaining appropriate contents from the database to display to users through front-end.
-
-\begin{center}
-    \begin{figure}[H]
-    \centering
-    \includegraphics[width=1\columnwidth]{images/chap3/system_overview_basic.png}
-    \caption{An overview of the system}
-    \label{chap3:system_overview_basic}
-    \end{figure}
-\end{center}
 Figure \ref{chap3:system_architecture} describe the structure of the system architecture more specifically: Outlining the details of each component and interaction between them.
 
 \begin{center}
@@ -729,7 +720,8 @@ As mentioned above, HTTP requests are sent to Face REST API to be able to use th
 Video classifier module takes URL of videos and return their classification. This section describe the deployment of this module as well as the running environment.
 \subsection{Deploying the video classifier system}
 After training the model and saving the weights, to use the model for prediction, this thesis proposes building an HTTP server and provide an API for other components to send requests and receive the result. \\
-Flask framework is used to implement this HTTP server because of its fast performance and is written in Python which helps communication with Keras APIs easier.
+Flask framework is used to implement this HTTP server because of its fast performance and is written in Python which helps communication with Keras APIs easier. \\
+The HTTP server does the following jobs or every coming video: Extracting frames from the video, detecting frames that has people faces in it, classify that video, send classification results along with frames containing faces to the web server.
 \begin{center}
     \begin{figure}[H]
     \centering
@@ -737,8 +729,17 @@ Flask framework is used to implement this HTTP server because of its fast perfor
     \caption{Sequence diagram of the HTTP server}
     \end{figure}
 \end{center}
-\subsection{Identifying faces in videos}
-Faces can also be identified from video. For each frame, a Haar Cascade classifier is used to detect if there are faces within that frame. Those frames is then sent to the Facial recognition module for identification. Results from that module  would then be composed into a unique list of faceId and store into the system.
+\subsubsection{Extracting frames}
+For every video, approximately 14 frames is extracted using OpenCV. First, the total number of frame and taken from the video. Then, interval of frames is calculated using the following formula:
+\begin{center}
+$interval = \frac{total\_frames}{frames\_to\_extract}$
+\end{center}
+Extracted frames are frames that are the multiple of $interval$. For example, when there are a total of
+42 frames and there are 14 frames to extract, extracted frames are the multiple of 3, i.e.,the 3rd, 6th, 9th, .. frame. Each frames would then be passed through a pretrained VGG16 network to extract features. Using this method, frames would be extracted uniformly across the video.
+\subsubsection{Detecting faces in videos}
+The server also has to send frames of videos back to the web server for further identification. To save resources, only frames that contain faces within would be sent. For each frame, a Haar Cascade classifier is used to detect if there are faces within that frame, then compile them into a list of frames. Those frames would be send back to the web server along with the classification result.
+\subsubsection{Classifying videos}
+Videos are classified using the proposed method in Chapter \ref{chap:solution}.
 \subsection{Environment}
 The classifier system was deployed using Google Compute Service. This service allows users to host virtual computers with customizable hardware for many purposes. The deployed server runs on the Ubuntu operating system because of its high performance, stability and its compatibility with deep learning codes. The server has the following hardware specification:
 
