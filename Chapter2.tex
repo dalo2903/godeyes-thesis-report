@@ -24,23 +24,24 @@ The human brain consists of many computational units called neuron. The \textbf{
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.75\columnwidth]{images/chap2/NeuralNetwork.jpg}
-		\caption{A 2-layer Neural Network (one hidden layer of 4 neurons (or units) and one output layer with 2 neurons), and three inputs.}
+		\footcaption{A 2-layer Neural Network (one hidden layer of 4 neurons (or units) and one output layer with 2 neurons), and three inputs.}
 		\label{chap2:neural_net}
 		%https://www.researchgate.net/publication/302595416_Artificial_Neural_Network_Model_for_Rainfall-Runoff_-A_Case_Study
 	\end{figure}
 \end{center}
-\footnotetext{Source: \url:{ https://devblogs.nvidia.com/mocha-jl-deep-learning-julia/}}
+\footnotetext{Source:\url{https://www.researchgate.net/publication/302595416-Artificial-Neural-Network-Model-for-Rainfall-Runoff--A-Case-Study}}
 \vspace{-1cm}
 Figure \ref{chap2:neural_net} represents a simple artificial neural network, where each circle is an artificial neuron, which is also called \textbf{Unit}, inward and outward arrows are the inputs and outputs of that neuron. The first layer where there is no input is called the \textbf{input layer}. Similarly, the last layer where there is no output is called the \textbf{output layer}. Layers that are either input or output are called \textbf{hidden layer}. In the figure, every neuron of one layer is connected to all neuron in the next layer, so it every layer is a “fully-connected layer”. A Network which only have \textbf{Fully-connected layer(s)} is also called as Multi Layer Perceptron (\textbf{MLP}).
 \begin{center}
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.75\columnwidth]{images/chap2/mlp_notation.png}
-		\caption{Detail of processing in ANN}
+		\footcaption{Detail of processing in ANN}
 		\label{chap2:neural_net_detail}
 		%https://machinelearningcoban.com/2017/02/24/mlp/
 	\end{figure}
 \end{center}
+\footnotetext{Source: \url{https://machinelearningcoban.com/2017/02/24/mlp/}}
 \vspace{-1cm}
 For more detail, in Figure \ref{chap2:neural_net_detail}. A blue circular node is called a \textbf{Unit}. Input of hidden layers is denoted by $z$, the output of each \textbf{Unit} is usually denoted by $a$
 (shows the activation value, ie the value of each unit after we apply the activation function to $z$) The output of the $i^{th}$ unit in the $l^{th}$ layer is denoted by $a_{i}^{(l)}$, Suppose to add that the number of units in the $l^{th}$ layer) (without bias $b$) is $d^{(l)}$. The vector representing the output of the $l^{th}$ layer is denoted by $a^{(l)}$
@@ -69,7 +70,7 @@ There are many non-linear functions can be used with neurons. Currently, there i
 			\label{chap2:tanh}
 		\end{figure}
 	\end{center}
-
+\vspace{-1cm}
 	\item \textbf{Sigmoid}\\
 	Sigmoid function has a formula: $ \sigma(x) = \frac{1}{1+\exp e^{-x}}$ has an S-shaped graph, and takes the value of x to [-1,1].
 	\begin{center}
@@ -80,6 +81,7 @@ There are many non-linear functions can be used with neurons. Currently, there i
 			\label{chap2:sigmoid}
 		\end{figure}
 	\end{center}
+\vspace{-1cm}
 	\item \textbf{ReLU}\\
 	Rectified linear Unit is a simple nonlinear function but has very good results in experiments, it's has formula $ReLU(x) = max (0,x)$.
 		\begin{center}
@@ -104,11 +106,12 @@ With classification problems, the \textbf{Output layer} is often a \textbf{Softm
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.75\columnwidth]{images/chap2/Softmax.png}
-		\caption{Some examples of Softmax input and output}
+		\footcaption{Some examples of Softmax input and output}
 		\label{chap2:softmax}
 		%https://machinelearningcoban.com/2017/02/17/softmax/
 	\end{figure}
 \end{center}
+\footnotetext{Source: \url{https://machinelearningcoban.com/2017/02/17/softmax}}
 \vspace{-1cm}
 \subsection{Loss function}
 When training an artificial neural network, the loss function needs to be defined, L ($\hat{y}, y$) showing the difference between the predicted $\hat{y}$ result and the correct value y. This function always has a non-negative value and is only 0 when $\hat{y}$ equals y.
@@ -130,11 +133,12 @@ At the output of each layer in the network, some neurons will be retained with t
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.75\columnwidth]{images/chap2/dropout.jpg}
-		\caption{\textbf{Left:} Standard Neural Network with 2 hidden Layers. \textbf{Right:} An example of Dropout}
+		\footcaption{\textbf{Left:} Standard Neural Network with 2 hidden Layers. \textbf{Right:} An example of Dropout}
 		%https://hackernoon.com/is-the-braess-paradox-related-to-dropout-in-neural-nets-270ecb97cdeb
 		\label{chap2:dropout}
 	\end{figure}
 \end{center}
+\footnotetext{Source:\url{https://hackernoon.com/is-the-braess-paradox-related-to-dropout-in-neural-nets-270ecb97cdeb}}
 \vspace{-1cm}
 \section{Convolution Neural Network (CNN)}
 \subsection{Overview}
@@ -155,11 +159,11 @@ By this way, CNN transforms the original image layer by layer from raw pixel val
   \begin{figure}[H]
   \centering
   \includegraphics[width=1\columnwidth]{images/chap2/Intro_CNN.png}
-  \caption{Simple Convolution Neural Network Architecture}
+  \footcaption{Simple Convolution Neural Network Architecture}
   \label{chap2:CNN arch}
   \end{figure}
 \end{center}
-
+\footnotetext{Source:\url{https://web.math.princeton.edu/~mw25/files/MWeber-PICSciE-talk.pdf}}
 \vspace{-1cm}
 \subsection{Convolution Layer}
 Convolution layer is the core building block of a Convolution Network that does the most critical computations in the Network.
@@ -172,10 +176,11 @@ Convolution layer is the core building block of a Convolution Network that does 
 		\begin{figure}[H]
 			\centering
 			\includegraphics[width=1\columnwidth]{images/chap2/LocalConnectivity.png}
-			\caption{Local connectivity in Convolution Neural Network}
+			\footcaption{Local connectivity in Convolution Neural Network}
 			\label{chap2:LocalConnectivity}
 		\end{figure}
 	\end{center}
+\footnotetext{Source: \url:{http://cs231n.stanford.edu/slides/2018/cs231n-2018-lecture05.pdf}}
 	\vspace{-1cm}
 	\item Output volume: There is three hyperparameters affect the output volume: the depth, stride, and zero-padding.\\
 	\begin{enumerate}
@@ -198,10 +203,12 @@ For example, with input (W) = 7x7, filter (F) = 3x3, stride (F) = 1, Zero-paddin
   \begin{figure}[H]
   \centering
   \includegraphics[width=1\columnwidth]{images/chap2/Output_volume_WSP.png}
-  \caption{Output volume with F = 3, W = 5, S = 1 and Zero-Padding P = 1 }
+  \footcaption{Output volume with F = 3, W = 5, S = 1 and Zero-Padding P = 1 }
   \label{chap2:Outputvolume_example}
   \end{figure}
 \end{center}
+\footnotetext{Source: \url:{http://cs231n.stanford.edu/slides/2018/cs231n-2018-lecture05.pdf}}
+\vspace{-1cm}
 \textbf{Summary Convolution Layer:}
 \begin{itemize}
 	\item Accept a volume size $W_{1}$ x $H_{1}$ x $D_{1}$ as input
@@ -224,11 +231,13 @@ Pooling Layer's function is to progressively reduce the spatial size of the repr
   \begin{figure}[H]
   \centering
   \includegraphics[width=1\columnwidth]{images/chap2/Pooling.png}
-  \caption{Max Pooling and Average Pooling}
+  \footcaption{Max Pooling and Average Pooling}
   \label{chap2:MaxPooling and Average Polling}
   \end{figure}
 \end{center}
 
+\footnotetext{Source: \url:{https://towardsdatascience.com/a-deeper-understanding-of-nnets-part-1-cnns-263a6e3ac61}}
+\vspace{-1cm}
 \textbf{Summary Pooling layer:}
 \begin{itemize}
 	\item Accept a volume size $W_{1}$ x $H_{1}$ x $D_{1}$ as input
@@ -256,40 +265,47 @@ Same as Fully Connected in ANN, neurons in a fully connected layer have full con
   \begin{figure}[H]
   \centering
   \includegraphics[width=1\columnwidth]{images/chap2/LeNet.png}
-  \caption{LeNet Architecture}
+  \footcaption{LeNet Architecture}
   \label{chap2:WSP}
   \end{figure}
 \end{center}
+\footnotetext{Source: \url:{https://www.coursera.org/lecture/convolutional-neural-networks/classic-networks-MmYe2}}
 \vspace{-1cm}
 \textbf{AlexNet (2012):} The first work that popularized Convolutional Networks in Computer Vision was the AlexNEt, developed by Alex Krizhevsky. The AlexNet got the first prize in ImageNet ILSVRC challenge 2012 and significantly outperformed the second (top 5 error of 16\% compared to runner-up with 26\% error).  
 \begin{center}
   \begin{figure}[H]
   \centering
   \includegraphics[width=1\columnwidth]{images/chap2/AlexNet.png}
-  \caption{AlexNet Architecture}
+  \footcaption{AlexNet Architecture}
   \label{chap2:WSP}
   \end{figure}
 \end{center}
+\footnotetext{Source: \url:{https://www.coursera.org/lecture/convolutional-neural-networks/classic-networks-MmYe2}}
+
 \vspace{-1cm}
 \textbf{GoogLeNet (Inception - 2014):} The ILSVRC 2014 winner was a Convolutional Network from Szegedy from Google. Its the main contribution was the development of an Inception Module that dramatically reduced the number of parameters in the network (4 million, compared to AlexNet with 60M). Besides that, Average Pooling instead of Fully Connected at the top layer of the model, eliminating a large number of parameters that do not seem to matter much.
 \begin{center}
   \begin{figure}[H]
   \centering
   \includegraphics[width=1\columnwidth]{images/chap2/GoogleNet1.png}
-  \caption{GoogleNet Architecture}
+  \footcaption{GoogleNet Architecture}
   \label{chap2:WSP}
   \end{figure}
 \end{center}
+
+\footnotetext{Source: \url:{https://medium.com/@sidereal/cnns-architectures-lenet-alexnet-vgg-googlenet-resnet-and-more-666091488df5}}
 \vspace{-1cm}
+
 \textbf{VGGNet (2014):} The runner-up in ILSVRC 2014 is invented by VGG (Visual Geometry Group) from the University of Oxford. Its main contribution was in showing that depth of the network is a critical component for good performance. 
 \begin{center}
   \begin{figure}[H]
   \centering
   \includegraphics[width=1\columnwidth]{images/chap2/VGG_arch.png}
-  \caption{VGG Architecture}
+  \footcaption{VGG Architecture}
   \label{chap2:WSP}
   \end{figure}
 \end{center}
+\footnotetext{Source: \url:{http://cs231n.stanford.edu/slides/2017/cs231n-2017-lecture9.pdf}}
 \vspace{-1cm}
 \textbf{ResNet(2015):} at the ILSVRC 2015, the so-called Residual Neural Network (ResNet) by Kaiming He introduced architecture with “skip connections” and features heavy batch normalization. Such skip connections are also known as gated units or gated recurrent units and have a strong similarity to recent successful elements applied in RNNs, this technique able to train a Neural Network with 152 layers while still having lower complexity than VGGNet. It achieves a top-5 error rate of 3.57\% which beats human-level performance on this dataset.
 \begin{center}
@@ -300,6 +316,7 @@ Same as Fully Connected in ANN, neurons in a fully connected layer have full con
   \label{chap2:WSP}
   \end{figure}
 \end{center}
+\footnotetext{Source: \url:{https://towardsdatascience.com/an-overview-of-resnet-and-its-variants-5281e2f56035}}
 \vspace{-1cm}
 \subsection{Recurrent Neural Network (RNN)}
 Human understanding does not come from scratch for every new input. When a man is reading a paragraph, his understanding of each word is based on his knowledge of previous words. That is why a human brain is persistent.\\
@@ -344,11 +361,12 @@ $i$, $f$ and $o$ are respectively called \textbf{input gate}, \textbf{forget gat
   \begin{figure}[H]
   \centering
   \includegraphics[width=0.8\columnwidth]{images/chap2/Hadamard.png}
-  \caption{Hadamard multiplication}
+  \footcaption{Hadamard multiplication}
   \label{chap2:WSP}
   \end{figure}
 \end{center}
-
+\footnotetext{Source: \url{https://towardsdatascience.com/linear-algebra-cheat-sheet-for-deep-learning-cd67aba4526c}}
+\vspace{-1cm}
 $g$ contains the combination of the hidden state of the previous step and the input component of the current step. In the pure RNN (Vanilla RNN), $g$ will be considered a new hidden state of the model. In the LSTM, the input gate will determine how much information from $g$ is used in the new hidden state.
 
 $c_{t}$ is the internal memory of one unit. This is the memory combination between the memory value in the previous step $c_{t-1}$, multiplied by the \textbf{forget gate} and the value of $g$ multiplied by the input gate. So it can understand how internal memory is calculated by determining how much memory information is retained and how much information is added.

@@ -14,7 +14,7 @@ Figure \ref{chap4:system_overview_basic} shows a concise overview of how the sys
     \label{chap4:system_overview_basic}
     \end{figure}
 \end{center}
-
+\vspace{-1cm}
 Figure \ref{chap4:system_architecture} describe the structure of the system architecture more specifically: Outlining the details of each component and interaction between them.
 
 \begin{center}
@@ -25,7 +25,7 @@ Figure \ref{chap4:system_architecture} describe the structure of the system arch
     \label{chap4:system_architecture}
     \end{figure}
 \end{center}
-
+\vspace{-1cm}
 \subsection{Requirement analysis}
 A requirements analysis is essential to any system. In this section, this thesis defines functional as well as non-function requirements for the system. Use cases and a system overview is also outlined in the following subsections.
 \subsubsection{Types of users}
@@ -65,6 +65,7 @@ In the scope of a thesis, the system has to acquire these requirements to perfor
 		\label{chap4:user_case_diagram}
 	\end{figure}
 \end{center}
+\vspace{-1cm}
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
 % Please add the following required packages to your document preamble:
@@ -683,10 +684,8 @@ This section describe some sequences of use cases defined in section \ref{chap4:
 After a user is verified, he/she a has a right to create a new post. First, he/she will provide the required information for a new post: title, location, and videos or images. Next, post's create form will be sent to the Social Media Website.  After the Social Media Website receiving the request, it takes out visual data, uploads to a pre-defined bucket of Google Cloud Storage, and returns its public URL. Then, it will insert new visual data in NoSQL Database on mLab with that URL. Finally, a new post will be created and be labeled by other users or be analyzed later.
 \subsubsection{Label video}
 This function of the website collect labels of videos from users, then derives the final label of a videos based on what the users voted.To use this function, contributors go to a page that contains a list of video and their available labels. For each video, contributors can what it and choose the appropriate label based on the content.
-
 \textbf{Storing label of users}\\
 Labels of each video are store inside the Visual Data collection as an array of subdocuments. Each subdocument contains users' label and their id. Storing users' id prevent them from voting multiple times.
-
 \textbf{Method of getting labels of videos}\\
 Labels of videos are computed at the time of making the dataset using \textbf{Dataset Collector Controller}. For the sake of simplicity, the final labels of videos is taken by the majority. For each video, to compute its label, the system count the total amount of user voting on each label, then take the label that has the highest amount of voters. For example, if there are 4 users vote on \textit{label A} and 6 users vote on \textit{label B} for a video, then the final label of that video would be \textit{label A}. 
 
@@ -707,6 +706,7 @@ The facial recognition module does the job of identifying faces inside images, u
     \caption{Microsoft Azure Face API hompage}
     \end{figure}
 \end{center}
+\vspace{-1cm}
 \subsection{Face API}
 There is two way to use Azure Face Service: client Face SDK and Azure Face REST API. This thesis applies the second one. Both ways require a Face API subscription key in order to communicate with Microsoft Cognitive Server. This thesis applies the second one. The Face endpoint URL will be in the following format:
 \begin{center}
@@ -726,6 +726,7 @@ Let take a look of some basic concepts for Face API from its \textit{Glossary} (
     \caption{An example of Person Group}
     \end{figure}
 \end{center}
+\vspace{-1cm}
 \item Person Group - Create: This API will create a new Person Group with a unique Person Group ID, name, and user-provided user data (optional). This Person Group will contain uploaded person data, including face images and face recognition features.
 \item Person Group - Train: In order to perform a face identification from a Person Group, that Person Group should be trained by calling this API. This API will pre-process the Person Group to ensure Identification performance.
 \item Person Group Person – Create: This API will create a Person in a Person Group. It requires Person Name and Person Group ID. If a Person created successfully, it would return a new Person ID.
@@ -767,7 +768,7 @@ Extracted frames are frames that are the multiple of $interval$. For example, wh
 \subsubsection{Detecting faces in videos}
 The server also has to send frames of videos back to the web server for further identification. To save resources, only frames that contain faces within would be sent. For each frame, a Haar Cascade classifier is used to detect if there are faces within that frame, then compile them into a list of frames. Those frames would be send back to the web server along with the classification result.
 \subsubsection{Classifying videos}
-Videos are classified using the proposed method in Chapter \ref{chap:solution}, modified to predict only 2 classes: \textit{normal} and \textit{abnormal}. The classifier is trained 50 on real-life videos selected from the UCF-Crime\footnotetext{Source: \url{http://crcv.ucf.edu/cchen/}} dataset, as well as videos from the internet and achieved moderated result. As more and more video added for training, the classifier would expectantly classify video more accurately.
+Videos are classified using the proposed method in Chapter \ref{chap:solution}, modified to predict only 2 classes: \textit{normal} and \textit{abnormal}. The classifier is trained 50 on real-life videos selected from the UCF-Crime \footnote{Source: \url{http://crcv.ucf.edu/cchen/}} dataset, as well as videos from the internet and achieved moderated result. As more and more video added for training, the classifier would expectantly classify video more accurately.
 \begin{figure}[!htb]
 	\minipage{0.5\textwidth}
 	\includegraphics[width=\linewidth]{images/chap4/suspicious-2.png}
