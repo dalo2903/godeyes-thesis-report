@@ -151,8 +151,19 @@ The website uses the simulation runtime settings and slow 4G internet connection
 After training the classifier with the configuration proposed in chapter \ref{chap:solution} on 50 selected videos, with some minor changes, the classifier achieved the following results. 
 	\begin{figure}[H]
 	\centering
-	\includegraphics[width=1\columnwidth]{images/chap5/confusion_matrix.png}
+	\includegraphics[width=1\columnwidth]{images/chap5/confusion_matrix_detail.png}
 	\caption{Confusion matrix after training 50 videos}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\columnwidth]{images/chap5/normalize_confusion_matrix_detail.png}
+	\caption{Normalize Confusion matrix after training 50 videos}
+\end{figure}
+Unlike UCF-101 Dataset, which is a balanced dataset, your data is imbalanced, data with normal labels are more often than data with suspicious labels. With imbalance dataset, some commonly used metrics are \textbf{Precision}, \textbf{ReCall} and \textbf{F1-Score}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\columnwidth]{images/chap5/evaluate.png}
+	\caption{Precision, Recall, and F1-Score for each class using confusion matrix}
 \end{figure}
 
 \section{Pricing}
