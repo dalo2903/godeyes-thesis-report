@@ -157,6 +157,7 @@ After training the classifier with the configuration proposed in chapter \ref{ch
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\columnwidth]{images/chap5/normalize_confusion_matrix_detail.png}
+	\label{chap5:Norm-CFM}
 	\caption{Normalize Confusion matrix after training 50 videos}
 \end{figure}
 Unlike UCF-101 Dataset, which is a balanced dataset, your data is imbalanced, data with normal labels are more often than data with suspicious labels. With imbalance dataset, some commonly used metrics are \textbf{Precision}, \textbf{ReCall} and \textbf{F1-Score}
@@ -165,7 +166,7 @@ Unlike UCF-101 Dataset, which is a balanced dataset, your data is imbalanced, da
 	\includegraphics[width=0.7\columnwidth]{images/chap5/evaluate.png}
 	\caption{Precision, Recall, and F1-Score for each class using confusion matrix}
 \end{figure}
-
+Since the main purpose is to send notify to users, there are two important results need to be consider: Miss Detection Rate and False Alarm Rate, according to Normalize Confusion Matrix figure above, they are 0.17 and 0.14 respectively.
 \section{Pricing}
 \begin{enumerate}
 	\item mLab: This project is currently using Free Sandbox plan with 0.5 GB capacity.
